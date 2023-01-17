@@ -9,7 +9,6 @@ export class CalendarController {
 
     @Get()
     create(){
-        console.log("hello")
         return "hello"
     }
 
@@ -40,7 +39,6 @@ export class CalendarController {
 
     @Put('setstatus/:id')
     async updateStatus(@Param() id: number, @Body() calendar: Calendar){
-        console.log(id)
         return this.calendarService.changeStatus(id,calendar)
     }
 

@@ -5,9 +5,11 @@ import { AppService } from './app.service';
 import { CalendarController } from './calendar/calendar.controller';
 import { Calendar } from './calendar/calendar.entity';
 import { CalendarModule } from './calendar/calendar.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
         type: 'sqlite',
         database: './test.sqlite',

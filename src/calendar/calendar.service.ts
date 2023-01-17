@@ -12,7 +12,6 @@ export class CalendarService {
     ){}
     
     async createCalendar(calendar: Calendar): Promise<Calendar>{
-        console.log(calendar);
         return this.calendarRepository.save(calendar)
     }
 
@@ -29,7 +28,6 @@ export class CalendarService {
     }
 
     async changeStatus(id: number,calendar: Calendar){
-        console.log(id,calendar)
         return await this.calendarRepository.update(id,calendar)
     }
     async update(id: number, calendar: Calendar){
@@ -46,5 +44,9 @@ export class CalendarService {
 
     async resotreDelete(id: number){
         return await this.calendarRepository.restore(id)
+    }
+
+    async duplicateCalendar(){
+        return await this.calendarRepository.create()
     }
 }
