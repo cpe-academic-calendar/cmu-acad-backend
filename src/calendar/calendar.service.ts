@@ -1,52 +1,72 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { throws } from 'assert';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Calendar } from './calendar.entity';
+import { escapeRegExp } from 'lodash'
 
 @Injectable()
 export class CalendarService {
     constructor(
         @InjectRepository(Calendar)
         private readonly calendarRepository: Repository<Calendar>,
-    ){}
-    
-    async createCalendar(calendar: Calendar): Promise<Calendar>{
+    ) { }
+
+    async createCalendar(calendar: Calendar) {
+        console.log(calendar)
         return this.calendarRepository.save(calendar)
     }
 
-    async findAll(){
+    async findAll() {
         return this.calendarRepository.find()
     }
 
-    async findById(id){
-        return await this.calendarRepository.findOneBy({id : id})
+    async findById(id: number) {
+        console.log(id)
+        return await this.calendarRepository.findOneBy({ id})
     }
 
-    async findDelete(id){
-        return await this.calendarRepository.find({where: {id}, withDeleted: true})
+    async sortByDate(queryType) {
+        return await this.calendarRepository.find({
+            order: {
+                'create_at': `${queryType}`
+            }
+        })
     }
 
-    async changeStatus(id: number,calendar: Calendar){
-        return await this.calendarRepository.update(id,calendar)
-    }
-    async update(id: number, calendar: Calendar){
-        return await this.calendarRepository.update(id,calendar)
+    async findByName(query) {
+        return await this.calendarRepository.find({
+            where: {
+                'name' : ILike(`%${query}%`)
+            }
+        })
     }
 
-    async deleteCalendar(id: number){
+
+    async findDelete(id) {
+        return await this.calendarRepository.find({ where: { id }, withDeleted: true })
+    }
+
+    async changeStatus(id: number, calendar: Calendar) {
+        return await this.calendarRepository.update(id, calendar)
+    }
+    async update(id: number, calendar: Calendar) {
+        return await this.calendarRepository.update(id, calendar)
+    }
+
+    async deleteCalendar(id: number) {
         return await this.calendarRepository.delete(id)
     }
 
-    async softDelete(id: number){
+    async softDelete(id: number) {
         return await this.calendarRepository.softDelete(id)
     }
 
-    async resotreDelete(id: number){
+    async resotreDelete(id: number) {
         return await this.calendarRepository.restore(id)
     }
 
-    async duplicateCalendar(){
+    async duplicateCalendar() {
         return await this.calendarRepository.create()
     }
 }
+

@@ -3,13 +3,13 @@ import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ColumnTypeUnde
 @Entity()
 export class Calendar {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;
 
     @Column()
-    semester: number;
+    date_semester: number;
 
     @Column()
     calendar_status: string;
