@@ -9,6 +9,9 @@ export class Calendar {
     name: string;
 
     @Column()
+    start_semester: string;
+
+    @Column()
     date_semester: number;
 
     @Column()

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Calendar } from './calendar.entity';
-import { escapeRegExp } from 'lodash'
 
 @Injectable()
 export class CalendarService {
@@ -20,9 +19,10 @@ export class CalendarService {
         return this.calendarRepository.find()
     }
 
-    async findById(id: number) {
-        console.log(id)
-        return await this.calendarRepository.findOneBy({ id})
+    async findById(id) {
+        const item = await this.calendarRepository.findOneBy({ id: id })
+        console.log(item)
+        return await this.calendarRepository.findOneBy({ id: id })
     }
 
     async sortByDate(queryType) {
@@ -61,7 +61,7 @@ export class CalendarService {
         return await this.calendarRepository.softDelete(id)
     }
 
-    async resotreDelete(id: number) {
+    async restoreDelete(id: number) {
         return await this.calendarRepository.restore(id)
     }
 

@@ -19,6 +19,7 @@ export class CalendarController {
         newCalendar.name = calendar.name
         newCalendar.date_semester = calendar.date_semester
         newCalendar.calendar_status = calendar.calendar_status
+        newCalendar.start_semester = calendar.start_semester
         return  await this.calendarService.createCalendar(newCalendar)
     }
 
@@ -27,6 +28,7 @@ export class CalendarController {
         const  oldCalendar = await this.calendarService.findById(id)
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
+        newCalendar.start_semester = oldCalendar.start_semester
         newCalendar.date_semester = oldCalendar.date_semester
         newCalendar.calendar_status = oldCalendar.calendar_status
         return await this.calendarService.createCalendar(newCalendar)
@@ -68,19 +70,19 @@ export class CalendarController {
         return this.calendarService.update(id,calendar)
     }
 
-    @Delete('/delete/:id')
+    @Delete('/delete-real/:id')
     async delete(@Param() id:number){
         return await this.calendarService.deleteCalendar(id)
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     async softDelete(@Param()  id: number){
         console.log(id)
         return await this.calendarService.softDelete(id)
     }
 
-    @Put(':id')
+    @Put('restore/:id')
     async restore(@Param() id: number){
-        return await   this.calendarService.resotreDelete(id)
+        return await   this.calendarService.restoreDelete(id)
     }
 }
