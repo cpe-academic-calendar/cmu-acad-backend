@@ -6,6 +6,8 @@ import { CalendarModule } from './calendar/calendar.module';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { Calendar } from './calendar/calendar.entity';
+import { Event } from './event/event.entity';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -17,10 +19,12 @@ import { Calendar } from './calendar/calendar.entity';
       username: 'root',
       password: '',
       database: 'calendar',
-      entities: [Calendar],
+      entities: [Calendar,Event],
       synchronize: true,
+      autoLoadEntities: true
     }),
-    CalendarModule
+    CalendarModule,
+    EventModule
   ],
   controllers: [AppController],
   providers: [AppService],

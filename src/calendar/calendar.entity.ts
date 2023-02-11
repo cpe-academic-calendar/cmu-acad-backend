@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ColumnTypeUndefinedError, DeleteDateColumn} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ColumnTypeUndefinedError, DeleteDateColumn, OneToMany} from 'typeorm'
+import { Event } from '../event/event.entity';
 
 @Entity()
 export class Calendar {
@@ -12,7 +13,7 @@ export class Calendar {
     start_semester: string;
 
     @Column()
-    date_semester: number;
+    semester: number;
 
     @Column()
     calendar_status: string;
@@ -25,4 +26,7 @@ export class Calendar {
 
     @DeleteDateColumn()
     delete_at: Date;
+
+    @OneToMany(type => Event, events => events.calendar)
+    events : Event[]
 }

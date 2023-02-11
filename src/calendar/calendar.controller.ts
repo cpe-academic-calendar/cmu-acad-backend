@@ -1,11 +1,17 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { timeStamp } from 'console';
 import { query } from 'express';
 import { CalendarDto, CreateCalendarDto } from './calendar.dto';
 import { Calendar } from './calendar.entity';
 import { CalendarService } from './calendar.service';
+import { Event } from 'src/event/event.entity';
+import *  as fs from 'fs'
+import *  as path  from  'path'
+
 
 @Controller('calendar')
 export class CalendarController {
+
     constructor(private readonly calendarService: CalendarService){}
 
     @Get()
@@ -13,30 +19,44 @@ export class CalendarController {
         return "hello"
     }
 
+
     @Post('/create')
     async createCalendar(@Body() calendar: CreateCalendarDto): Promise<Calendar>{
+        const data =  fs.readFileSync('C:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json','utf-8')
+        const jsonData = JSON.parse(data)
         const newCalendar = new Calendar()
+        let arr: Event[] = []
+        Object.keys(jsonData).forEach((key)=> {
+            arr.push(jsonData[key])
+        })
         newCalendar.name = calendar.name
-        newCalendar.date_semester = calendar.date_semester
+        newCalendar.semester = calendar.semester
         newCalendar.calendar_status = calendar.calendar_status
         newCalendar.start_semester = calendar.start_semester
-        return  await this.calendarService.createCalendar(newCalendar)
+        return  await this.calendarService.createCalendar(newCalendar,arr)
     }
 
     @Post('duplicate/:id')
     async duplicateClanedar(@Param() id:number,@Body('calendar_name') calendar_name: string): Promise<Calendar>{
         const  oldCalendar = await this.calendarService.findById(id)
+        console.log(oldCalendar)
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.date_semester = oldCalendar.date_semester
+        newCalendar.semester = oldCalendar.semester
         newCalendar.calendar_status = oldCalendar.calendar_status
-        return await this.calendarService.createCalendar(newCalendar)
+        newCalendar.events = oldCalendar.events
+        return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
     @Get('/findAll')
     async findCalendar(){
         return this.calendarService.findAll()
+    }
+
+    @Get('/findArchive')
+    async findArchieveCalendar(){
+        return this.calendarService.findArchive()
     }
 
     @Get('/findByName')
@@ -62,6 +82,7 @@ export class CalendarController {
 
     @Put('setstatus/:id')
     async updateStatus(@Param() id: number, @Body() calendar: Calendar){
+        console.log(id)
         return this.calendarService.changeStatus(id,calendar)
     }
 
@@ -76,7 +97,7 @@ export class CalendarController {
     }
 
     @Delete('/delete/:id')
-    async softDelete(@Param()  id: number){
+    async softDelete(@Param()  id: number[]){
         console.log(id)
         return await this.calendarService.softDelete(id)
     }
