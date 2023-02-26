@@ -15,7 +15,7 @@ export class CalendarController {
 
     @Post('/create')
     async createCalendar(@Body() calendar: CreateCalendarDto) {
-        const data = fs.readFileSync('C:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
+        const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
         // const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
         // const event = JSON.parse(dataEvent)
         const jsonData = JSON.parse(data)
