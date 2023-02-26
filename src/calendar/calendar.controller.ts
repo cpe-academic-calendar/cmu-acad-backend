@@ -18,8 +18,15 @@ export class CalendarController {
         private readonly eventService: EventService) { }
 
     @Post('/create')
+<<<<<<< HEAD
     async createCalendar(@Body() calendar: Calendar) {
         const data = fs.readFileSync(process.cwd()+'/src/asset/holiday.json', 'utf-8')
+=======
+    async createCalendar(@Body() calendar: CreateCalendarDto) {
+        const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
+        // const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
+        // const event = JSON.parse(dataEvent)
+>>>>>>> 2671bc1 (fix: database entity)
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
@@ -53,7 +60,11 @@ export class CalendarController {
         // })
         const year = Number(calendar.year) - 543
         Object.keys(jsonData).forEach((key) => {
+<<<<<<< HEAD
             jsonData[key].date = new Date(new Date(jsonData[key].date).setFullYear(year))
+=======
+            console.log(new Date(new Date(jsonData[key].date).setFullYear(2024)).toISOString())
+>>>>>>> 2671bc1 (fix: database entity)
             arr.push(jsonData[key])
         })
         const newCalendar = new Calendar()
@@ -61,7 +72,10 @@ export class CalendarController {
         newCalendar.year = calendar.year
         newCalendar.calendar_status = calendar.calendar_status
         return await this.calendarService.createCalendar(newCalendar, arr)
+<<<<<<< HEAD
 >>>>>>> c0660fe (feat: generate holiday)
+=======
+>>>>>>> 2671bc1 (fix: database entity)
     }
 
     @Post('duplicate/:id')
@@ -71,9 +85,13 @@ export class CalendarController {
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         newCalendar.year = oldCalendar.year
 >>>>>>> c0660fe (feat: generate holiday)
+=======
+        newCalendar.year = oldCalendar.year
+>>>>>>> 2671bc1 (fix: database entity)
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
         newCalendar.year = oldCalendar.year
