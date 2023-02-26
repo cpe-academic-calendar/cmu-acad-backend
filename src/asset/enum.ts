@@ -1,5 +1,6 @@
 export enum EventType {
     holiday = 'วันหยุด',
     study   = 'วันเรียน',
-    exam = 'วันสอบ'
+    exam = 'วันสอบ',
+    event=  'กำหนดการ'
 }

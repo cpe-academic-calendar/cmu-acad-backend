@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Calendar } from './calendar.entity';
 import { Event } from 'src/event/event.entity';
-import { EventType } from 'src/event/enum';
-import { EventModule } from 'src/event/event.module';
+import { EventType } from 'src/asset/enum';
 
 @Injectable()
 export class CalendarService {
@@ -16,11 +15,46 @@ export class CalendarService {
     async createCalendar(calendar: Calendar, event: any) {
         const calendarData = this.calendarRepository.create(calendar)
         await this.calendarRepository.save(calendarData)
+        console.log(event)
         const eventData = this.eventRepository.create(event)
+        Object.keys(eventData).forEach((key) =>{
+            eventData[key].type = EventType[event[key].type]
+        })
         await this.eventRepository.save(eventData)
         calendarData.events = [...eventData]
         return await this.calendarRepository.save(calendarData)
 
+    }
+
+
+    async  findHolidayEvent(){
+        return  await this.calendarRepository.find({
+            relations: ['events'],
+            where:{
+                events:{
+                    "type": EventType.holiday
+                }
+            }
+                        
+                    
+        })
+    }
+
+    async  findEventType(){
+        return  await this.calendarRepository.find({
+            relations: ['events'],
+            where:{
+                events:{
+                    "type": EventType.event
+                }
+            }
+                        
+                    
+        })
+    }
+
+    async findEvent(){
+        return await this.calendarRepository.find({relations: ['event']})
     }
 
     async duplicateCalendar(calendar: Calendar) {
@@ -29,19 +63,15 @@ export class CalendarService {
 
     async findAll() {
         return this.calendarRepository.find({
+            relations:['events'],
             where: {
                 'calendar_status': 'Active'
+                
             }
         })
     }
 
-    // async find(event){
-    //     return this.calendarRepository.find({where:  {event}})
-    // }
-
     async findById(id) {
-        const item = await this.calendarRepository.findOneBy({ id: id })
-        console.log(item)
         return await this.calendarRepository.findOneBy({ id: id })
     }
 
