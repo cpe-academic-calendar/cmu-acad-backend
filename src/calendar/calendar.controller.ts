@@ -23,25 +23,25 @@ export class CalendarController {
         // Object.keys(event).forEach((key) => {
             // arr.push(event[key])
         // })
+        const year = Number(calendar.year) - 543
         Object.keys(jsonData).forEach((key) => {
-            console.log(new Date(new Date(jsonData[key].date).setFullYear(2024)).toISOString())
-            // arr.push(jsonData[key])
+            jsonData[key].date = new Date(new Date(jsonData[key].date).setFullYear(year))
+            arr.push(jsonData[key])
         })
-        // const newCalendar = new Calendar()
-        // newCalendar.name = calendar.name
-        // newCalendar.semester = calendar.semester
-        // newCalendar.calendar_status = calendar.calendar_status
-        // return await this.calendarService.createCalendar(newCalendar, arr)
+        const newCalendar = new Calendar()
+        newCalendar.name = calendar.name
+        newCalendar.year = calendar.year
+        newCalendar.calendar_status = calendar.calendar_status
+        return await this.calendarService.createCalendar(newCalendar, arr)
     }
 
     @Post('duplicate/:id')
     async duplicateClanedar(@Param() id: number, @Body('calendar_name') calendar_name: string): Promise<Calendar> {
         const oldCalendar = await this.calendarService.findById(id)
-        console.log(oldCalendar)
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.semester = oldCalendar.semester
+        newCalendar.year = oldCalendar.year
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
         return await this.calendarService.duplicateCalendar(newCalendar)

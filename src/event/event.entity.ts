@@ -17,8 +17,10 @@ export class Event {
     })
     type: EventType
 
-    @CreateDateColumn()
-    date: Date;
+    @Column({
+        default: null
+    })
+    date: string;
 
     @Column({
         default: "#352829"

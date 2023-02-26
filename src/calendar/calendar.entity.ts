@@ -13,7 +13,7 @@ export class Calendar {
     start_semester: Date;
 
     @Column()
-    semester: number;
+    year: number;
 
     @Column()
     calendar_status: string;

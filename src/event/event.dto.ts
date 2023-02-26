@@ -1,6 +1,6 @@
 export class EventDto {
     event_name: string;
-    date: Date;
+    date: string;
     color: string;
     reference_event: number;
     start_date: Date;
