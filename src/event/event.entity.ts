@@ -22,9 +22,16 @@ export class Event {
     })
     type: EventType
 
+<<<<<<< HEAD
     @CreateDateColumn()
     date: Date;
 >>>>>>> f478532 (feat: auto-gen)
+=======
+    @Column({
+        default: null
+    })
+    date: string;
+>>>>>>> c0660fe (feat: generate holiday)
 
     @Column({
         default: "#352829"

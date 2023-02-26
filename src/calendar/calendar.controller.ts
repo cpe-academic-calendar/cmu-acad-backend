@@ -23,6 +23,7 @@ export class CalendarController {
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
+<<<<<<< HEAD
 
         Object.keys(eventData).forEach((key) => {
             arr.push(eventData[key])
@@ -46,6 +47,21 @@ export class CalendarController {
         }
         return this.eventService.countWeek(arr)
 
+=======
+        // Object.keys(event).forEach((key) => {
+            // arr.push(event[key])
+        // })
+        const year = Number(calendar.year) - 543
+        Object.keys(jsonData).forEach((key) => {
+            jsonData[key].date = new Date(new Date(jsonData[key].date).setFullYear(year))
+            arr.push(jsonData[key])
+        })
+        const newCalendar = new Calendar()
+        newCalendar.name = calendar.name
+        newCalendar.year = calendar.year
+        newCalendar.calendar_status = calendar.calendar_status
+        return await this.calendarService.createCalendar(newCalendar, arr)
+>>>>>>> c0660fe (feat: generate holiday)
     }
 
     @Post('duplicate/:id')
@@ -54,6 +70,10 @@ export class CalendarController {
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
+<<<<<<< HEAD
+=======
+        newCalendar.year = oldCalendar.year
+>>>>>>> c0660fe (feat: generate holiday)
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
         newCalendar.year = oldCalendar.year
