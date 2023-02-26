@@ -266,7 +266,6 @@ export class EventService {
         return await this.eventRepository.delete(id)
     }
 
-
 }
 
 

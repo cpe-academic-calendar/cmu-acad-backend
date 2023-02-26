@@ -14,6 +14,11 @@ export class EventController {
         return await this.eventService.findAll();
     }
 
+    @Get('/')
+    async  findAll(){
+        return await this.eventService.findAll();
+    }
+
     @Post('/create')
     async createEvent(@Body() event: Event) {
         const newEvent = new Event()
