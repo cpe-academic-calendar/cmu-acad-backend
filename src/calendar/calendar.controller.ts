@@ -15,7 +15,7 @@ export class CalendarController {
 
     @Post('/create')
     async createCalendar(@Body() calendar: CreateCalendarDto) {
-        const data = fs.readFileSync('C:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
+        const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
         // const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
         // const event = JSON.parse(dataEvent)
         const jsonData = JSON.parse(data)
@@ -25,13 +25,13 @@ export class CalendarController {
         // })
         Object.keys(jsonData).forEach((key) => {
             console.log(new Date(new Date(jsonData[key].date).setFullYear(2024)).toISOString())
-            // arr.push(jsonData[key])
+            arr.push(jsonData[key])
         })
-        // const newCalendar = new Calendar()
-        // newCalendar.name = calendar.name
-        // newCalendar.semester = calendar.semester
-        // newCalendar.calendar_status = calendar.calendar_status
-        // return await this.calendarService.createCalendar(newCalendar, arr)
+        const newCalendar = new Calendar()
+        newCalendar.name = calendar.name
+        newCalendar.year = calendar.year
+        newCalendar.calendar_status = calendar.calendar_status
+        return await this.calendarService.createCalendar(newCalendar, arr)
     }
 
     @Post('duplicate/:id')
@@ -41,7 +41,7 @@ export class CalendarController {
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.semester = oldCalendar.semester
+        newCalendar.year = oldCalendar.year
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
         return await this.calendarService.duplicateCalendar(newCalendar)
