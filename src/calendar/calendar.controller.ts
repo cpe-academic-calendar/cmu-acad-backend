@@ -14,7 +14,7 @@ export class CalendarController {
         private readonly eventService: EventService ) {}
 
     @Post('/create')
-    async createCalendar(@Body() calendar: CreateCalendarDto) {
+    async createCalendar(@Body() calendar: Calendar) {
         const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
         // const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
         // const event = JSON.parse(dataEvent)
@@ -28,12 +28,7 @@ export class CalendarController {
             jsonData[key].date = new Date(new Date(jsonData[key].date).setFullYear(year))
             arr.push(jsonData[key])
         })
-        const newCalendar = new Calendar()
-        newCalendar.name = calendar.name
-        newCalendar.year = calendar.year
-        newCalendar.start_semester = calendar.start_semester
-        newCalendar.calendar_status = calendar.calendar_status
-        return await this.calendarService.createCalendar(newCalendar, arr)
+        return await this.calendarService.createCalendar(calendar, arr)
     }
 
     @Post('duplicate/:id')
