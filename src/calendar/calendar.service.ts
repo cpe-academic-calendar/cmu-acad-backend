@@ -14,25 +14,13 @@ export class CalendarService {
 
     async createCalendar(calendar: Calendar, event: any) {
         const calendarData = this.calendarRepository.create(calendar)
-<<<<<<< HEAD
         this.calendarRepository.save(calendarData) 
         await this.eventRepository.save(event)
         calendarData.events = [...event]
-=======
-        await this.calendarRepository.save(calendarData)
-        console.log(event)
-        const eventData = this.eventRepository.create(event)
-        Object.keys(eventData).forEach((key) =>{
-            eventData[key].type = EventType[event[key].type]
-        })
-        await this.eventRepository.save(eventData)
-        calendarData.events = [...eventData]
->>>>>>> f478532 (feat: auto-gen)
         return await this.calendarRepository.save(calendarData)
 
     }
 
-<<<<<<< HEAD
     async findEventById(calendar_id){
         return await this.calendarRepository.find({
             relations: ['events'],
@@ -63,13 +51,6 @@ export class CalendarService {
             },
             where:{
                 id: calendar_id,
-=======
-
-    async  findHolidayEvent(){
-        return  await this.calendarRepository.find({
-            relations: ['events'],
-            where:{
->>>>>>> f478532 (feat: auto-gen)
                 events:{
                     "type": EventType.holiday
                 }
@@ -102,6 +83,7 @@ export class CalendarService {
 
     async findAll() {
         return this.calendarRepository.find({
+            // relations:['events'],
 <<<<<<< HEAD
             // relations:['events'],
 =======

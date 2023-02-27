@@ -70,6 +70,7 @@ export class CalendarController {
         const newCalendar = new Calendar()
         newCalendar.name = calendar.name
         newCalendar.year = calendar.year
+        newCalendar.start_semester = calendar.start_semester
         newCalendar.calendar_status = calendar.calendar_status
         return await this.calendarService.createCalendar(newCalendar, arr)
 <<<<<<< HEAD
