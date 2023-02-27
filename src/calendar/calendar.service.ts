@@ -63,7 +63,7 @@ export class CalendarService {
 
     async findAll() {
         return this.calendarRepository.find({
-            relations:['events'],
+            // relations:['events'],
             where: {
                 'calendar_status': 'Active'
                 
