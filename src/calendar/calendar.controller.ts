@@ -37,9 +37,10 @@ export class CalendarController {
         const newCalendar = new Calendar()
         newCalendar.name = calendar_name
         newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.year = oldCalendar.year
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
+        newCalendar.year = oldCalendar.year
+
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
