@@ -94,6 +94,7 @@ export class EventController {
                     event[i].end_date = end_date
 
                 }
+
                 if (event[i].ref_start == 'after') {
                     if (event[i].ref_end == 'before') {
                         const year = new Date(event[index].start_date).getFullYear()
