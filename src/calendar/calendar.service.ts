@@ -13,9 +13,10 @@ export class CalendarService {
     ) { }
 
     async createCalendar(calendar: Calendar, event: any) {
+        console.log(calendar)
         const calendarData = this.calendarRepository.create(calendar)
-        await this.calendarRepository.save(calendarData)
-        console.log(event)
+        this.calendarRepository.save(calendarData)
+
         const eventData = this.eventRepository.create(event)
         Object.keys(eventData).forEach((key) =>{
             eventData[key].type = EventType[event[key].type]
@@ -24,6 +25,15 @@ export class CalendarService {
         calendarData.events = [...eventData]
         return await this.calendarRepository.save(calendarData)
 
+    }
+
+    async findEventById(calendar_id){
+        return await this.calendarRepository.find({
+            relations: ['events'],
+            where:{
+                id: calendar_id
+            }
+        })
     }
 
 

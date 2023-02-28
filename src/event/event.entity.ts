@@ -18,11 +18,6 @@ export class Event {
     type: EventType
 
     @Column({
-        default: null
-    })
-    date: string;
-
-    @Column({
         default: "#352829"
     })
     color: string

@@ -40,13 +40,18 @@ export class CalendarController {
         newCalendar.calendar_status = oldCalendar.calendar_status
         newCalendar.events = oldCalendar.events
         newCalendar.year = oldCalendar.year
-
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
     @Get('/findAll')
     async findCalendar() {
         return this.calendarService.findAll()
+    }
+
+    @Get('findEventById/:id')
+    async findEventByCalendar(@Param() id){
+        console.log(id)
+        return this.calendarService.findEventById(id.id)
     }
 
     @Get('findHoliday')
