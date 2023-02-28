@@ -13,6 +13,7 @@ export class CalendarService {
     ) { }
 
     async createCalendar(calendar: Calendar, event: any) {
+        console.log(calendar)
         const calendarData = this.calendarRepository.create(calendar)
         this.calendarRepository.save(calendarData) 
         await this.eventRepository.save(event)
@@ -84,11 +85,7 @@ export class CalendarService {
     async findAll() {
         return this.calendarRepository.find({
             // relations:['events'],
-<<<<<<< HEAD
             // relations:['events'],
-=======
-            relations:['events'],
->>>>>>> f478532 (feat: auto-gen)
             where: {
                 'calendar_status': 'Active'
                 

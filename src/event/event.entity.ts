@@ -28,12 +28,15 @@ export class Event {
 >>>>>>> f478532 (feat: auto-gen)
 =======
     @Column({
+<<<<<<< HEAD
         default: null
     })
     date: string;
 >>>>>>> c0660fe (feat: generate holiday)
 
     @Column({
+=======
+>>>>>>> efcab49 (feat: find by calendar id)
         default: "#352829"
     })
     color: string
