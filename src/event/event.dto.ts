@@ -1,14 +1,6 @@
 export class EventDto {
     event_name: string;
-<<<<<<< HEAD
-<<<<<<< HEAD
     date: string;
-=======
-    date: Date;
->>>>>>> f478532 (feat: auto-gen)
-=======
-    date: string;
->>>>>>> c0660fe (feat: generate holiday)
     color: string;
     reference_event: number;
     start_date: Date;
@@ -20,12 +12,9 @@ export class EventDto {
     num_weekEnd: number;
     num_daysEnd: number;
 }
-<<<<<<< HEAD
 
 export class UpdateEventDto {
     event_name: string;
     type: string;
     start_date: Date;
 }
-=======
->>>>>>> f478532 (feat: auto-gen)

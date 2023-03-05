@@ -1,211 +1,116 @@
 [
     {
         "event_name": "วันขึ้นปีใหม่",
-<<<<<<< HEAD
         "start_date": "2023-01-01",
         "type": "วันหยุด",
-=======
-        "date": "2023-01-01",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันมาฆบูชา",
-<<<<<<< HEAD
         "start_date": "2023-03-06",
         "type": "วันหยุด",
-=======
-        "date": "2023-03-06",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันจักรี",
-<<<<<<< HEAD
         "start_date": "2023-04-06",
         "type": "วันหยุด",
-=======
-        "date": "2023-04-06",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันสงกรานต์",
-<<<<<<< HEAD
         "start_date": "2023-04-13",
         "type": "วันหยุด",
-=======
-        "date": "2023-04-13",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันสงกรานต์",
-<<<<<<< HEAD
         "start_date": "2023-04-14",
         "type": "วันหยุด",
-=======
-        "date": "2023-04-14",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันสงกรานต์",
-<<<<<<< HEAD
         "start_date": "2023-04-15",
         "type": "วันหยุด",
-=======
-        "date": "2023-04-15",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันแรงงาน",
-<<<<<<< HEAD
         "start_date": "2023-05-01",
         "type": "วันหยุด",
-=======
-        "date": "2023-05-01",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันฉัตรมงคล",
-<<<<<<< HEAD
         "start_date": "2023-05-04",
         "type": "วันหยุด",
-=======
-        "date": "2023-05-04",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันพืชมงคล",
-<<<<<<< HEAD
         "start_date": "2023-05-17",
         "type": "วันหยุด",
-=======
-        "date": "2023-05-17",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันวิสาขบูชา",
-<<<<<<< HEAD
         "start_date": "2023-06-03",
         "type": "วันหยุด",
-=======
-        "date": "2023-06-03",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันเฉลิมฯ ร.10",
-<<<<<<< HEAD
         "start_date": "2023-07-28",
         "type": "วันหยุด",
-=======
-        "date": "2023-07-28",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันอาสาฬหบูชา",
-<<<<<<< HEAD
         "start_date": "2023-08-01",
         "type": "วันหยุด",
-=======
-        "date": "2023-08-01",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันเข้าพรรษา",
-<<<<<<< HEAD
         "start_date": "2023-08-02",
         "type": "วันหยุด",
-=======
-        "date": "2023-08-02",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันเฉลิมฯ วันแม่",
-<<<<<<< HEAD
         "start_date": "2023-08-12",
         "type": "วันหยุด",
-=======
-        "date": "2023-08-12",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันคล้ายวันสวรรคต ร.9",
-<<<<<<< HEAD
         "start_date": "2023-10-13",
         "type": "วันหยุด",
-=======
-        "date": "2023-10-13",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันปิยมหาราช",
-<<<<<<< HEAD
         "start_date": "2023-10-23",
         "type": "วันหยุด",
-=======
-        "date": "2023-10-23",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันพ่อ",
-<<<<<<< HEAD
         "start_date": "2023-12-05",
         "type": "วันหยุด",
-=======
-        "date": "2023-12-05",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันรัฐธรรมนูญ",
-<<<<<<< HEAD
         "start_date": "2023-12-10",
         "type": "วันหยุด",
-=======
-        "date": "2023-12-10",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     },
     {
         "event_name": "วันสิ้นปี",
-<<<<<<< HEAD
         "start_date": "2023-12-31",
         "type": "วันหยุด",
-=======
-        "date": "2023-12-31",
-        "type": "holiday",
->>>>>>> f478532 (feat: auto-gen)
         "color": "#352829"
     }
 ]
