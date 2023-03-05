@@ -12,3 +12,9 @@ export class EventDto {
     num_weekEnd: number;
     num_daysEnd: number;
 }
+
+export class UpdateEventDto {
+    event_name: string;
+    type: string;
+    start_date: Date;
+}

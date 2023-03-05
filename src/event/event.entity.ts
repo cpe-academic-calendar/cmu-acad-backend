@@ -11,25 +11,18 @@ export class Event {
     @Column()
     event_name: string;
 
-    @Column({
-        type: 'enum',
-        enum: EventType,
-    })
-    type: EventType
+    @Column()
+    type: string
 
     @Column({
         default: "#352829"
     })
     color: string
-
-    @Column({
-        default: null
-    })
     
     @Column({
         default: null
     })
-    ref_start: String
+    ref_start: string
 
     @Column({
         default: null

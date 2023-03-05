@@ -11,24 +11,33 @@ export class CalendarController {
 
     constructor(
         private readonly calendarService: CalendarService,
-        private readonly eventService: EventService ) {}
+        private readonly eventService: EventService) { }
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
         const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
-        // const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
-        // const event = JSON.parse(dataEvent)
         const jsonData = JSON.parse(data)
+        const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
-        // Object.keys(event).forEach((key) => {
-            // arr.push(event[key])
-        // })
-        const year = Number(calendar.year) - 543
-        Object.keys(jsonData).forEach((key) => {
-            jsonData[key].date = new Date(new Date(jsonData[key].date).setFullYear(year))
-            arr.push(jsonData[key])
+        
+        Object.keys(eventData).forEach((key) => {
+            arr.push(eventData[key])
         })
+
+        Object.keys(jsonData).forEach((key) => {
+            const year = new Date(jsonData[key].start_date).setFullYear(new Date(calendar.start_semester).getFullYear())
+            jsonData[key].start_date = new Date(year)
+            arr.push(jsonData[key])
+
+        })
+
+
         return await this.calendarService.createCalendar(calendar, arr)
+    }
+
+    @Get('studyweek/:id')
+    async getStudyWeek(@Param() id) {
+        const count = await this.eventService.countWeek(id)
     }
 
     @Post('duplicate/:id')
@@ -49,8 +58,7 @@ export class CalendarController {
     }
 
     @Get('findEventById/:id')
-    async findEventByCalendar(@Param() id){
-        console.log(id)
+    async findEventByCalendar(@Param() id) {
         return this.calendarService.findEventById(id.id)
     }
 
@@ -94,6 +102,11 @@ export class CalendarController {
     async findById(@Param('id') id: number) {
         return this.calendarService.findById(id)
     }
+
+    // @Delete('/deleteArr')
+    // async DeleteArr(@Param('id') id: string[]){
+    //         return this.calendarService.deleteA()
+    // }
 
     @Put('setstatus/:id')
     async updateStatus(@Param() id: number, @Body() calendar: Calendar) {
