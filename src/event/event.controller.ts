@@ -95,6 +95,58 @@ export class EventController {
 
                 }
 
+                        const last_year = new Date(event[con_index].start_date).getFullYear()
+                        const last_month = new Date(event[con_index].start_date).getMonth()
+                        const last_day = new Date(event[con_index].start_date).getDate() - 1 // end date before ref_condition 1 days
+                        const end_date = new Date(last_year, last_month, last_day)
+
+                        event[i].start_date = start_date
+                        event[i].end_date = end_date
+
+                    } else
+                        if (event[i].ref_end == 'after') {
+                            const year = new Date(event[con_index].start_date).getFullYear()
+                            const month = new Date(event[con_index].start_date).getMonth()
+                            const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
+                            const start_date = new Date(year, month, day)
+
+                            const last_year = new Date(event[con_index].start_date).getFullYear()
+                            const last_month = new Date(event[con_index].start_date).getMonth()
+                            const last_day = new Date(event[con_index].start_date).getDate() + 1 // end date after ref_condition 1 days
+                            const end_date = new Date(last_year, last_month, last_day)
+
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        } else
+                            if (event[i].ref_end == 'after-last') {
+
+                                console.log("before and after last")
+                                const year = new Date(event[con_index].start_date).getFullYear()
+                                const month = new Date(event[con_index].start_date).getMonth()
+                                const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
+                                const start_date = new Date(year, month, day)
+
+                                const last_year = new Date(event[con_index].end_date).getFullYear()
+                                const last_month = new Date(event[con_index].end_date).getMonth()
+                                const last_day = new Date(event[con_index].end_date).getDay() + 1 // end date after last ref_condition 1 days
+                                const end_date = new Date(last_year, last_month, last_day)
+
+                                event[i].start_date = start_date
+                                event[i].end_date = end_date
+                            }
+                    //normal case have only ref_start = before
+                    const year = new Date(event[index].start_date).getFullYear()
+                    const month = new Date(event[index].start_date).getMonth()
+                    const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days)
+                    const start_date = new Date(year, month, day)
+                    const last_year = new Date(start_date).getFullYear()
+                    const last_month = new Date(start_date).getMonth()
+                    const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
+                    const end_date = new Date(last_year, last_month, last_day)
+                    event[i].start_date = start_date
+                    event[i].end_date = end_date
+
+                }
                 if (event[i].ref_start == 'after') {
                     if (event[i].ref_end == 'before') {
                         const year = new Date(event[index].start_date).getFullYear()
