@@ -8,23 +8,25 @@ import { DataSource } from 'typeorm';
 import { Calendar } from './calendar/calendar.entity';
 import { Event } from './event/event.entity';
 import { EventModule } from './event/event.module';
+import { AuthenModule } from './Auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'database-1.ceeoyl6azozm.ap-northeast-1.rds.amazonaws.com',
       port: 3306,
-      username: 'root',
-      password: '',
-      database: 'calendar',
+      username: 'admin',
+      password: 'acad.1234',
+      database: 'cmu_acad',
       entities: [Calendar,Event],
       synchronize: true,
       autoLoadEntities: true
     }),
     CalendarModule,
-    EventModule
+    EventModule,
+    AuthenModule
   ],
   controllers: [AppController],
   providers: [AppService],
