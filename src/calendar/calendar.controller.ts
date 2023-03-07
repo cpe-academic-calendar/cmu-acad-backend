@@ -7,7 +7,6 @@ import { EventService } from 'src/event/event.service';
 import * as path from 'path';
 import { response } from 'express';
 import { Header } from '@nestjs/common/decorators';
-import { dirname } from 'path';
 const csvWriter = require('csv-writer');
 
 
