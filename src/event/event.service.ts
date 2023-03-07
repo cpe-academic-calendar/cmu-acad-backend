@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+<<<<<<< HEAD
 import { Repository, UpdateEvent } from 'typeorm';
 import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { UpdateEventDto } from './event.dto';
 import * as path from 'path'
+=======
+import { Repository } from 'typeorm';
+import { Event } from './event.entity';
+import *  as fs from 'fs'
+
+>>>>>>> f478532 (feat: auto-gen)
 @Injectable()
 export class EventService {
     constructor(
@@ -13,6 +20,7 @@ export class EventService {
         private readonly eventRepository: Repository<Event>,
     ) { }
 
+<<<<<<< HEAD
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync(process.cwd()+'/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
@@ -296,6 +304,24 @@ export class EventService {
         const countArr = {term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)]}
         return countArr
     }
+=======
+    async autoGenerate() {
+        const data = fs.readFileSync('C:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
+        const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
+        const event = JSON.parse(dataEvent)
+        const jsonData = JSON.parse(data)
+        let arr = []
+        Object.keys(jsonData).forEach((key) => {
+            arr.push(jsonData[key])
+        })
+
+        Object.keys(event).forEach((key) => {
+            console.log(event[key])
+        })
+        console.log(arr)
+    }
+
+>>>>>>> f478532 (feat: auto-gen)
 
     async findAll() {
         return await this.eventRepository.find()
@@ -313,7 +339,11 @@ export class EventService {
         })
     }
 
+<<<<<<< HEAD
     async updateEvent(id: number, event: UpdateEventDto) {
+=======
+    async updateEvent(id: number, event: Event) {
+>>>>>>> f478532 (feat: auto-gen)
         return await this.eventRepository.update(id, event)
     }
 

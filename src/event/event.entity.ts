@@ -10,19 +10,42 @@ export class Event {
 
     @Column()
     event_name: string;
+<<<<<<< HEAD
 
     @Column()
     type: string
+=======
+
+    @Column({
+        type: 'enum',
+        enum: EventType,
+    })
+    type: EventType
+
+    @CreateDateColumn()
+    date: Date;
+>>>>>>> f478532 (feat: auto-gen)
 
     @Column({
         default: "#352829"
     })
     color: string
+<<<<<<< HEAD
+=======
+
+    @Column({
+        default: null
+    })
+>>>>>>> f478532 (feat: auto-gen)
     
     @Column({
         default: null
     })
+<<<<<<< HEAD
     ref_start: string
+=======
+    ref_start: String
+>>>>>>> f478532 (feat: auto-gen)
 
     @Column({
         default: null
