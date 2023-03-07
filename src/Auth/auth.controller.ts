@@ -29,9 +29,12 @@ export class AuthenController {
     @Get('/login')
     async loginCmu(@Query() token){
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         console.log(token.token)
 >>>>>>> f478532 (feat: auto-gen)
+=======
+>>>>>>> 89b722c (feat: study-count)
         return this.httpService.get(`https://misapi.cmu.ac.th/cmuitaccount/v1/api/cmuitaccount/basicinfo`,{
             headers:{
                 'Authorization' : `Bearer ${token.token}`

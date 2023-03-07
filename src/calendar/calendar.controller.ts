@@ -7,7 +7,10 @@ import { EventService } from 'src/event/event.service';
 import * as path from 'path';
 import { response } from 'express';
 import { Header } from '@nestjs/common/decorators';
+<<<<<<< HEAD
 import { dirname } from 'path';
+=======
+>>>>>>> 89b722c (feat: study-count)
 const csvWriter = require('csv-writer');
 
 
@@ -156,6 +159,10 @@ export class CalendarController {
         const jsonData = new data_exporter({ file_header })
         const csv_data = jsonData.parse(data)
         response.header("Content-Type", "text/csv")
+<<<<<<< HEAD
         response.header("Content-Disposition", "attachment; filename=sample_data.csv")
+=======
+        response.header("Content-Disposition", "attachment; filename=sample_data.csv") 
+>>>>>>> 89b722c (feat: study-count)
     }
 }

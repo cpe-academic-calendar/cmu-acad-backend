@@ -494,6 +494,9 @@
     {
         "id": 32,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันประกาศผลการศึกษา",
 =======
         "event_name": "วันสุดท้ายของการศึกษา",
@@ -735,14 +738,14 @@
         "condition_weeks": 0
     },
     {
-        "id": 34,
+        "id": 33,
         "event_name": "วันเปิดภาคเรียน เทอม 2",
         "start_date": null,
         "end_date": null,
         "num_days": 3,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 33,
+        "reference_event": 32,
         "duration_days": 0,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -750,14 +753,14 @@
         "type": "วันเรียน"
     },
     {
-        "id": 35,
+        "id": 34,
         "event_name": "วันลงทะเบียนเรียนล่วงหน้า เทอม 2",
         "start_date": null,
         "end_date": null,
         "num_days": 0,
         "ref_start": "before",
         "num_weeks": 7,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -766,14 +769,14 @@
 
     },
     {
-        "id": 36,
+        "id": 35,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite) เทอม 2",
         "start_date": null,
         "end_date": null,
         "num_days": 2,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -782,12 +785,12 @@
         
     },
     {
-        "id": 37,
+        "id": 36,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนเรียนล่วงหน้าของนักศึกษาทางระบบงานทะเบียน เทอม 2",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 1,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -795,38 +798,38 @@
         "type": "กิจกรรม"
     },
     {
-        "id": 38,
+        "id": 37,
         "event_name": "วันประกาศผลการลงทะเบียนล่วงหน้า เทอม 2",
         "num_days": 2,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 35,
+        "reference_event": 34,
         "duration_days": 0,
         "duration_weeks": 1,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "type": "กิจกรรม"
+    },
+    {
+        "id": 38,
+        "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 2",
+        "num_days": 2,
+        "ref_start": "before",
+        "num_weeks": 0,
+        "reference_event": 33,
+        "duration_days": 0,
+        "duration_weeks": 2,
         "condition_days": 0,
         "condition_weeks": 0,
         "type": "กิจกรรม"
     },
     {
         "id": 39,
-        "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 2",
-        "num_days": 2,
-        "ref_start": "before",
-        "num_weeks": 0,
-        "reference_event": 34,
-        "duration_days": 0,
-        "duration_weeks": 2,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "type": "กิจกรรม"
-    },
-    {
-        "id": 40,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 2",
         "num_days": 0,
         "ref_start": "before",
         "num_weeks": 1,
-        "reference_event": 34,
+        "reference_event": 32,
         "duration_days": 0,
         "duration_weeks": 1,
         "condition_days": 0,
@@ -834,12 +837,12 @@
         "type": "กิจกรรม"
     },
     {
-        "id": 41,
+        "id": 40,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 2,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 2,
         "condition_days": 0,
@@ -847,13 +850,26 @@
         "type": "กิจกรรม"
     },
     {
-        "id": 42,
+        "id": 41,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 2",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 2,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 5,
+        "duration_weeks": 0,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "type": "กิจกรรม"
+    },
+    {
+        "id": 42,
+        "event_name": "วันประกาศผลสรุปการลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา เทอม 2",
+        "num_days": 1,
+        "ref_start": "before",
+        "num_weeks": 0,
+        "reference_event": 41,
+        "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
         "condition_weeks": 0,
@@ -861,24 +877,11 @@
     },
     {
         "id": 43,
-        "event_name": "วันประกาศผลสรุปการลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา เทอม 2",
-        "num_days": 1,
-        "ref_start": "before",
-        "num_weeks": 0,
-        "reference_event": 42,
-        "duration_days": 1,
-        "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "type": "กิจกรรม"
-    },
-    {
-        "id": 44,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด เทอม 2",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 2,
-        "reference_event": 34,
+        "reference_event": 33,
         "duration_days": 5,
         "duration_weeks": 1,
         "condition_days": 0,
@@ -886,11 +889,11 @@
         "type": "กิจกรรม"
     },
     {
-        "id": 45,
+        "id": 44,
         "event_name": "วันสอบไล่ เทอม 2",
         "num_days": 0,
         "num_weeks": 17,
-        "reference_event": 34,
+        "reference_event": 33,
         "ref_start": "after",
         "duration_weeks": 2,
         "duration_days": 0,
@@ -899,16 +902,16 @@
         "type": "วันสอบ"
     },
     {
-        "id": 46,
+        "id": 45,
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 0,
         "ref_start": "after",
         "start_date": null,
         "end_date": null,
         "num_weeks": 2,
-        "reference_event": 34,
+        "reference_event": 33,
         "ref_end": "before",
-        "reference_condition": 45,
+        "reference_condition": 44,
         "duration_weeks": 4,
         "duration_days": 3,
         "condition_days": 0,
@@ -916,12 +919,12 @@
         "type": "กิจกรรม"
     },
     {
-        "id": 47,
+        "id": 46,
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 2",
         "num_days": 1,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 45,
+        "reference_event": 44,
         "duration_days": 5,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -932,7 +935,23 @@
         "type": "กิจกรรม"
     },
     {
+        "id": 47,
+        "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 2",
+        "num_days": 29,
+        "ref_start": "after",
+        "num_weeks": 0,
+        "reference_event": 34,
+        "duration_days": 1,
+        "duration_weeks": 0,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "start_date": null,
+        "end_date": null,
+        "type": "กิจกรรม"
+    },
+    {
         "id": 48,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันพ้นสถานภาพนักศึกษาของนักศึกษาที่ไม่มาลงทะเบียนและมิได้ลาพักการศึกษา เทอม 2",
         "num_days": 1,
@@ -946,6 +965,13 @@
         "num_weeks": 0,
         "reference_event": 35,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันพ้นสถานภาพนักศึกษาของนักศึกษาที่ไม่มาลงทะเบียนและมิได้ลาพักการศึกษา เทอม 2",
+        "num_days": 1,
+        "ref_start": "after",
+        "num_weeks": 0,
+        "reference_event": 47,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -956,6 +982,7 @@
     },
     {
         "id": 49,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2",
         "num_days": 0,
@@ -992,12 +1019,33 @@
     },
     {
         "id": 50,
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 9,
+<<<<<<< HEAD
         "reference_event": 34,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 33,
+        "duration_days": 0,
+        "duration_weeks": 1,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "start_date": null,
+        "end_date": null,
+        "type": "วันสอบ"
+    },
+    {
+        "id": 50,
+        "event_name": "วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ) เทอม 2",
+        "num_days": 0,
+        "ref_start": "before",
+        "num_weeks": 1,
+        "reference_event": 49,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 0,
         "duration_weeks": 1,
         "condition_days": 0,
@@ -1008,6 +1056,7 @@
     },
     {
         "id": 51,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันขอรับอักษรลําดับขั้น I เทอม 2",
         "num_days": 0,
@@ -1048,16 +1097,37 @@
     },
     {
         "id": 52,
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันขอรับอักษรลําดับขั้น I เทอม 2",
         "num_days": 0,
         "ref_start": "before",
         "num_weeks": 1,
-        "reference_event": 45,
+        "reference_event": 44,
         "duration_days": 0,
         "duration_weeks": 0,
         "ref_end": "after-last",
+<<<<<<< HEAD
         "reference_condition": 45,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_condition": 44,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "start_date": null,
+        "end_date": null,
+        "type": "กิจกรรม"
+    },
+    {
+        "id": 52,
+        "event_name": "วันสุดท้ายของการศึกษา เทอม 2",
+        "num_days": 3,
+        "ref_start": "before",
+        "num_weeks": 0,
+        "reference_event": 44,
+        "duration_days": 1,
+        "duration_weeks": 0,
+>>>>>>> 89b722c (feat: study-count)
         "condition_days": 0,
         "condition_weeks": 0,
         "start_date": null,
@@ -1066,6 +1136,7 @@
     },
     {
         "id": 53,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา เทอม 2",
         "num_days": 1,
@@ -1079,6 +1150,13 @@
         "num_weeks": 0,
         "reference_event": 45,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา เทอม 2",
+        "num_days": 1,
+        "ref_start": "after-last",
+        "num_weeks": 0,
+        "reference_event": 44,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1089,6 +1167,7 @@
     },
     {
         "id": 54,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล เทอม 2",
         "num_days": 1,
@@ -1102,6 +1181,13 @@
         "num_weeks": 0,
         "reference_event": 45,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล เทอม 2",
+        "num_days": 1,
+        "ref_start": "after-last",
+        "num_weeks": 0,
+        "reference_event": 44,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1112,6 +1198,7 @@
     },
     {
         "id": 55,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 2",
         "num_days": 9,
@@ -1125,6 +1212,13 @@
         "num_weeks": 0,
         "reference_event": 45,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 2",
+        "num_days": 9,
+        "ref_start": "after-last",
+        "num_weeks": 0,
+        "reference_event": 44,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1136,12 +1230,18 @@
     {
         "id": 56,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 2",
         "num_days": 9,
         "ref_start": "after-last",
+=======
+        "event_name": "วันประกาศผลการศึกษา เทอม 2",
+        "num_days": 3,
+        "ref_start": "after",
+>>>>>>> 89b722c (feat: study-count)
         "num_weeks": 0,
-        "reference_event": 45,
+        "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1152,6 +1252,7 @@
     },
     {
         "id": 57,
+<<<<<<< HEAD
 >>>>>>> a50f654 (fix: event  controller)
         "event_name": "วันประกาศผลการศึกษา เทอม 2",
         "num_days": 3,
@@ -1177,6 +1278,12 @@
         "num_days": 1,
         "ref_start": "before",
         "num_weeks": 0,
+=======
+        "event_name": "วันสุดท้ายของการส่งเอกสารการลาออก โดยได้รับอักษรลําดับขั้น W สําหรับนักศึกษาปริญญาตรี เทอม 2",
+        "num_days": 1,
+        "ref_start": "before",
+        "num_weeks": 0,
+>>>>>>> 89b722c (feat: study-count)
         "reference_event": 56,
         "duration_days": 1,
         "duration_weeks": 0,
@@ -1191,6 +1298,7 @@
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น P เทอม 2",
         "num_days": 9,
         "ref_start": "after",
+<<<<<<< HEAD
         "num_weeks": 0,
         "reference_event": 44,
 =======
@@ -1201,6 +1309,10 @@
         "num_weeks": 0,
         "reference_event": 57,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "num_weeks": 0,
+        "reference_event": 44,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1211,6 +1323,7 @@
     },
     {
         "id": 59,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันเปิดภาคเรียน เทอม 3",
         "num_days": 12,
@@ -1224,6 +1337,13 @@
         "num_weeks": 0,
         "reference_event": 45,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันเปิดภาคเรียน เทอม 3",
+        "num_days": 12,
+        "ref_start": "after",
+        "num_weeks": 0,
+        "reference_event": 56,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1234,6 +1354,7 @@
     },
     {
         "id": 60,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันลงทะเบียนเรียน เทอม 3",
         "num_days": 0,
@@ -1266,11 +1387,13 @@
         "reference_event": 59,
         "duration_days": 1,
 =======
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันลงทะเบียนเรียน เทอม 3",
         "num_days": 0,
         "ref_start": "before",
         "num_weeks": 2,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 5,
 >>>>>>> a50f654 (fix: event  controller)
         "duration_weeks": 0,
@@ -1281,6 +1404,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 62,
 <<<<<<< HEAD
         "event_name": "วันประกาศผลการลงทะเบียน เทอม 3",
@@ -1289,12 +1413,34 @@
         "num_weeks": 0,
         "reference_event": 59,
 =======
+=======
+        "id": 61,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite) เทอม 3",
         "num_days": 0,
         "ref_start": "before",
         "num_weeks": 1,
+<<<<<<< HEAD
         "reference_event": 60,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 59,
+        "duration_days": 1,
+        "duration_weeks": 0,
+        "condition_days": 0,
+        "condition_weeks": 0,
+        "start_date": null,
+        "end_date": null,
+        "type": "กิจกรรม"
+    },
+    {
+        "id": 62,
+        "event_name": "วันประกาศผลการลงทะเบียน เทอม 3",
+        "num_days": 10,
+        "ref_start": "before",
+        "num_weeks": 0,
+        "reference_event": 59,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1305,6 +1451,7 @@
     },
     {
         "id": 63,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา",
         "num_days": 10,
@@ -1320,6 +1467,14 @@
         "reference_event": 60,
         "duration_days": 1,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "event_name": "วันลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา",
+        "num_days": 10,
+        "ref_start": "before",
+        "num_weeks": 0,
+        "reference_event": 59,
+        "duration_days": 5,
+>>>>>>> 89b722c (feat: study-count)
         "duration_weeks": 0,
         "condition_days": 0,
         "condition_weeks": 0,
@@ -1329,6 +1484,7 @@
     },
     {
         "id": 64,
+<<<<<<< HEAD
 <<<<<<< HEAD
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 3",
         "num_days": 9,
@@ -1363,11 +1519,13 @@
         "duration_days": 1,
         "duration_weeks": 0,
 =======
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 3",
         "num_days": 9,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 5,
 >>>>>>> a50f654 (fix: event  controller)
@@ -1378,6 +1536,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 66,
 <<<<<<< HEAD
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 3",
@@ -1387,11 +1546,14 @@
         "reference_event": 59,
         "duration_days": 4,
 =======
+=======
+        "id": 65,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 3",
         "num_days": 10,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 1,
 >>>>>>> a50f654 (fix: event  controller)
         "duration_weeks": 0,
@@ -1402,6 +1564,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 67,
 <<<<<<< HEAD
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน เทอม 3",
@@ -1411,11 +1574,14 @@
         "reference_event": 59,
         "duration_days": 3,
 =======
+=======
+        "id": 66,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 3",
         "num_days": 2,
         "ref_start": "before",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 4,
 >>>>>>> a50f654 (fix: event  controller)
         "duration_weeks": 0,
@@ -1426,6 +1592,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 68,
 <<<<<<< HEAD
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 3",
@@ -1435,11 +1602,14 @@
         "reference_event": 59,
         "duration_days": 5,
 =======
+=======
+        "id": 67,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน เทอม 3",
         "num_days": 2,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 3,
 >>>>>>> a50f654 (fix: event  controller)
         "duration_weeks": 0,
@@ -1450,6 +1620,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 69,
 <<<<<<< HEAD
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด เทอม 3",
@@ -1459,11 +1630,14 @@
         "reference_event": 59,
         "duration_days": 12,
 =======
+=======
+        "id": 68,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 3",
         "num_days": 4,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 5,
 >>>>>>> a50f654 (fix: event  controller)
         "duration_weeks": 0,
@@ -1474,6 +1648,7 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 70,
 <<<<<<< HEAD
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W เทอม 3",
@@ -1484,11 +1659,14 @@
         "duration_days": 5,
         "duration_weeks": 2,
 =======
+=======
+        "id": 69,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด เทอม 3",
         "num_days": 4,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 12,
         "duration_weeks": 0,
 >>>>>>> a50f654 (fix: event  controller)
@@ -1499,14 +1677,18 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 71,
 <<<<<<< HEAD
 =======
+=======
+        "id": 70,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W เทอม 3",
         "num_days": 5,
         "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 60,
+        "reference_event": 59,
         "duration_days": 5,
         "duration_weeks": 2,
         "condition_days": 0,
@@ -1516,17 +1698,25 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 72,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "id": 71,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 3",
         "num_days": 2,
         "ref_start": "after",
         "num_weeks": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "reference_event": 59,
 =======
         "reference_event": 60,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 59,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 2,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1537,19 +1727,27 @@
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "id": 72,
 =======
         "id": 73,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "id": 72,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 3",
         "num_days": 5,
         "ref_start": "after",
         "num_weeks": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "reference_event": 59,
 =======
         "reference_event": 60,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 59,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1560,6 +1758,9 @@
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 89b722c (feat: study-count)
         "id": 73,
         "event_name": "วันขอรับอักษรลําดับขั้น I เทอม 3",
         "num_days": 4,
@@ -1577,6 +1778,7 @@
     {
         "id": 74,
         "event_name": "วันสุดท้ายของการศึกษา เทอม 3",
+<<<<<<< HEAD
         "num_days": 4,
         "ref_start": "after",
         "num_weeks": 0,
@@ -1589,6 +1791,12 @@
         "num_weeks": 0,
         "reference_event": 60,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "num_days": 4,
+        "ref_start": "after",
+        "num_weeks": 0,
+        "reference_event": 59,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1600,6 +1808,7 @@
     {
         "id": 75,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         "event_name": "วันสุดท้ายของการศึกษา เทอม 3",
         "num_days": 4,
@@ -1617,15 +1826,21 @@
     {
         "id": 76,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันสอบไล่ เทอม 3",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 6,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "reference_event": 59,
 =======
         "reference_event": 60,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 59,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 4,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1636,19 +1851,27 @@
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "id": 76,
 =======
         "id": 77,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "id": 76,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา เทอม 3",
         "num_days": 1,
         "ref_start": "after-last",
         "num_weeks": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "reference_event": 75,
 =======
         "reference_event": 76,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 75,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1659,6 +1882,9 @@
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 89b722c (feat: study-count)
         "id": 77,
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล เทอม 3",
         "num_days": 5,
@@ -1675,6 +1901,7 @@
     },
     {
         "id": 78,
+<<<<<<< HEAD
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 3",
         "num_days": 5,
         "ref_start": "after-last",
@@ -1701,11 +1928,13 @@
         "id": 79,
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 3",
         "num_days": 5,
         "ref_start": "after-last",
         "num_weeks": 0,
-        "reference_event": 76,
+        "reference_event": 75,
         "duration_days": 1,
         "duration_weeks": 0,
         "condition_days": 0,
@@ -1715,17 +1944,25 @@
         "type": "กิจกรรม"
     },
     {
+<<<<<<< HEAD
         "id": 80,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "id": 79,
+>>>>>>> 89b722c (feat: study-count)
         "event_name": "วันประกาศผลการศึกษา เทอม 3",
         "num_days": 2,
         "ref_start": "after",
         "num_weeks": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "reference_event": 78,
 =======
         "reference_event": 79,
 >>>>>>> a50f654 (fix: event  controller)
+=======
+        "reference_event": 78,
+>>>>>>> 89b722c (feat: study-count)
         "duration_days": 0,
         "duration_weeks": 0,
         "start_date": null,
