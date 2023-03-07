@@ -14,8 +14,7 @@ export class CalendarService {
 
     async createCalendar(calendar: Calendar, event: any) {
         const calendarData = this.calendarRepository.create(calendar)
-        this.calendarRepository.save(calendarData)
-       
+        this.calendarRepository.save(calendarData) 
         await this.eventRepository.save(event)
         calendarData.events = [...event]
         return await this.calendarRepository.save(calendarData)
@@ -26,14 +25,6 @@ export class CalendarService {
         return await this.calendarRepository.find({
             relations: ['events'],
             select:{
-                id: true,
-                name: true,
-                start_semester:true,
-                year: true,
-                calendar_status: true,
-                create_at: true,
-                update_at: true,
-                delete_at: true,
                 events:{
                     event_name: true,
                     start_date: true,
@@ -48,10 +39,18 @@ export class CalendarService {
     }
 
 
-    async  findHolidayEvent(){
+    async  findHolidayEvent(calendar_id: number){
         return  await this.calendarRepository.find({
             relations: ['events'],
+            select:{
+                events:{
+                    event_name: true,
+                    start_date: true,
+                    id: true,
+                }
+            },
             where:{
+                id: calendar_id,
                 events:{
                     "type": EventType.holiday
                 }
@@ -84,6 +83,7 @@ export class CalendarService {
 
     async findAll() {
         return this.calendarRepository.find({
+            // relations:['events'],
             // relations:['events'],
             where: {
                 'calendar_status': 'Active'
