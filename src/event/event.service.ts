@@ -5,7 +5,7 @@ import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { UpdateEventDto } from './event.dto';
-
+import * as path from 'path'
 @Injectable()
 export class EventService {
     constructor(
@@ -14,8 +14,7 @@ export class EventService {
     ) { }
 
     async autoGenerate(start_semester) {
-        const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
-        // const holiday = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
+        const dataEvent = fs.readFileSync(process.cwd()+'/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
         for (let i in event) {

@@ -7,19 +7,19 @@ import { EventService } from 'src/event/event.service';
 import * as path from 'path';
 import { response } from 'express';
 import { Header } from '@nestjs/common/decorators';
+import { dirname } from 'path';
 const csvWriter = require('csv-writer');
 
 
 @Controller('calendar')
 export class CalendarController {
-
     constructor(
         private readonly calendarService: CalendarService,
         private readonly eventService: EventService) { }
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
-        const data = fs.readFileSync('src/asset/holiday.json', 'utf-8')
+        const data = fs.readFileSync(process.cwd()+'/src/asset/holiday.json', 'utf-8')
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
@@ -156,6 +156,6 @@ export class CalendarController {
         const jsonData = new data_exporter({ file_header })
         const csv_data = jsonData.parse(data)
         response.header("Content-Type", "text/csv")
-        response.header("Content-Disposition", "attachment; filename=sample_data.csv") 
+        response.header("Content-Disposition", "attachment; filename=sample_data.csv")
     }
 }
