@@ -21,7 +21,6 @@ export class EventController {
         newEvent.type = event.type
         newEvent.calendar = event.calendar
         newEvent.start_date = event.start_date
-        console.log(newEvent)
         return await this.eventService.createEvent(newEvent)
     }
 
