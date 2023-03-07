@@ -15,7 +15,7 @@ export class EventService {
 
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/event.json', 'utf-8')
-        const holiday = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
+        // const holiday = fs.readFileSync('c:/Users/Jetsa/cmu-acad-backend/src/asset/holiday.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
         for (let i in event) {
@@ -54,7 +54,6 @@ export class EventService {
                         } else
                             if (event[i].ref_end == 'after-last') {
 
-                                console.log("before and after last")
                                 const year = new Date(event[con_index].start_date).getFullYear()
                                 const month = new Date(event[con_index].start_date).getMonth()
                                 const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
@@ -192,54 +191,111 @@ export class EventService {
         return event
     }
     async countWeek(event) {
-        let eventMap = new Map();
-        let holiday = [];
+        let start = []
+        let end = []
+        let start2 = []
+        let end2 = []
+        let start3 = []
+        let end3 = []
+        let holiday = []
+        const evnetArr = event[0].map((edt) => edt)
 
-        event.forEach(function (event) {
-            eventMap.set(event.event_name, event.start_date);
-            switch (event.event_name) {
-                case 'วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ)':
-                case 'วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ) เทอม 2':
-                case 'วันสอบกลางภาคการศึกษา (งดการสอน)':
-                case 'วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2':
-                case 'วันสอบไล่':
-                case 'วันสอบไล่ เทอม 2':
-                case 'วันสอบไล่ เทอม 3':
-                    holiday.push(event.start_date);
-                    holiday.push(event.end_date);
-                    break;
+        for (let i in evnetArr) {
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน') {
+                start.push(evnetArr[i])
             }
-        });
-        return eventMap
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา') {
+                end.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 2') {
+                start2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 2') {
+                end2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 3') {
+                start3.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 3') {
+                end3.push(evnetArr[i])
+            }
 
-    }
-
-    async groupOfDay() {
-        const first_term = []
-        const arr = { sunday: 0, monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0 }
-        for (let i in first_term) {
-            if (first_term[i].getDay() == 0) {
-                arr["sunday"] += 1
-            }
-            if (first_term[i].getDay() == 1) {
-                arr["monday"] += 1
-            }
-            if (first_term[i].getDay() == 2) {
-                arr["tuesday"] += 1
-            }
-            if (first_term[i].getDay() == 3) {
-                arr["wednesday"] += 1
-            }
-            if (first_term[i].getDay() == 4) {
-                arr["thursday"] += 1
-            }
-            if (first_term[i].getDay() == 5) {
-                arr["friday"] += 1
-            }
-            if (first_term[i].getDay() == 6) {
-                arr["saturday"] += 1
+            if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
+                holiday.push(evnetArr[i].start_date)
             }
         }
+
+
+        const dateArr1 = eachDayOfInterval({
+            start: new Date(`${start[0].start_date}`),
+            end: new Date(`${end[0].start_date}`)
+        })
+        const dateArr2 = eachDayOfInterval({
+            start: new Date(`${start2[0].start_date}`),
+            end: new Date(`${end2[0].start_date}`)
+        })
+
+
+
+        const dateArr3 = eachDayOfInterval({
+            start: new Date(`${start3[0].start_date}`),
+            end: new Date(`${end3[0].start_date}`)
+        })
+
+
+
+        const arrDate = dateArr1.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+        const arrDate2 = dateArr2.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+        const arrDate3 = dateArr3.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+
+        const arrHoliday = holiday.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+
+        const countTerm1 = arrDate.filter(value => !arrHoliday.includes(value))
+        const countTerm2 = arrDate2.filter(value => !arrHoliday.includes(value))
+        const countTerm3 = arrDate3.filter(value => !arrHoliday.includes(value))
+
+        const returnCountWeek = (week: any[]) => {
+            const arr1 = { sunday: 0, monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0 }
+            for (let i in week) {
+                if (new Date(week[i]).getDay() == 0) {
+                    arr1["sunday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 1) {
+                    arr1["monday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 2) {
+                    arr1["tuesday"] += 1
+
+                }
+                if (new Date(week[i]).getDay() == 3) {
+                    arr1["wednesday"] += 1
+
+                }
+                if (new Date(week[i]).getDay() == 4) {
+                    arr1["thursday"] += 1
+
+                }
+                if (new Date(week[i]).getDay() == 5) {
+                    arr1["friday"] += 1
+
+                }
+                if (new Date(week[i]).getDay() == 6) {
+                    arr1["saturday"] += 1
+
+                }
+            }
+            return arr1
+        }
+        const countArr = {term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)]}
+        return countArr
     }
 
     async findAll() {
@@ -265,7 +321,6 @@ export class EventService {
     async deleteEvent(id: number) {
         return await this.eventRepository.delete(id)
     }
-
 
 }
 
