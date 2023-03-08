@@ -15,7 +15,8 @@ export class AuthenController {
 
     @Get('')
     async find(@Query() auth_code,@Res() res){
-        return res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/code?auth_code=${auth_code.code}`)
+        // return res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/code?auth_code=${auth_code.code}`)    
+        return res.redirect(`http://localhost:3000/choose-calendar`)
     }
 
     @Get('/code')
