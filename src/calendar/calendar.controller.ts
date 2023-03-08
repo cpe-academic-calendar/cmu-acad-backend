@@ -26,23 +26,24 @@ export class CalendarController {
 
     @Post('duplicate/:id')
     async duplicateClanedar(@Param() id, @Body('calendar_name') calendar_name: string){
-        const oldCalendar = await this.calendarService.findById(id.id)
-        const evet = await this.calendarService.findEventById(id.id)
+        const event = await this.calendarService.findEventById(id.id)
+        const evetMaop = event.map((evt)=>{
+                return evt.events
+        })
         let arr = []
-        console.log(evet.map(ev=>{
-            return arr.push(ev.events.map((d)=>{
-                    d.event_name,
-                    d.start_date,
-                    d.type
-            }))
-        }))
-        // const newCalendar = new Calendar()
-        // newCalendar.name = calendar_name
-        // newCalendar.start_semester = oldCalendar.start_semester
-        // newCalendar.calendar_status = oldCalendar.calendar_status
-        // newCalendar.year = oldCalendar.year
-        
-        // return await this.calendarService.duplicateCalendar(newCalendar)
+        const arrEv = evetMaop[0].map((edt)=>{
+                return edt
+        })
+        const newCalendar = new Calendar()
+        const oldCalendar = await this.findById(id.id)
+        newCalendar.name = calendar_name
+        newCalendar.start_semester = oldCalendar.start_semester
+        newCalendar.calendar_status = oldCalendar.calendar_status
+        newCalendar.year = oldCalendar.year
+        const dataArr = await this.eventService.createArr(arrEv)
+        console.log(dataArr)
+        newCalendar.events = [...[dataArr]]
+        return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
     @Get('/findAll')
@@ -60,14 +61,9 @@ export class CalendarController {
         return this.calendarService.findHolidayEvent(id.id)
     }
 
-    @Get('findEventType')
-    async findEventType() {
-        return this.calendarService.findEventType()
-    }
-
-    @Get('findEvent')
-    async findEvent() {
-        return this.calendarService.findEvent()
+    @Get('findEvent/:id')
+    async findEvent(@Param() id) {
+        return this.calendarService.findEventType(id.id)
     }
 
     @Get('/findArchive')

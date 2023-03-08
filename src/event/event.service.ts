@@ -379,11 +379,11 @@ export class EventService {
         return await this.eventRepository.delete(id)
     }
     async createArr(event){
-        const newArr:[{
-            event_name: string,
-            start_date: Date,
-        }] = event
-        return await this.eventRepository.save(newArr)
+        const newOb = new Event()
+        newOb.event_name = event.event_name
+        newOb.start_date = event.start_date
+        newOb.type = event.type
+        return await this.eventRepository.save(newOb)
     }
 
 }

@@ -27,6 +27,6 @@ export class Calendar {
     @DeleteDateColumn()
     delete_at: Date;
 
-    @OneToMany(type => Event, events => events.calendar)
+    @OneToMany(() => Event, events => events.calendar)
     events : Event[]
 }

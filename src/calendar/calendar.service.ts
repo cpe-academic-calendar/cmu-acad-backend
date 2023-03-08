@@ -7,6 +7,7 @@ import { EventType } from 'src/asset/enum';
 import { EventService } from 'src/event/event.service';
 import *  as fs from 'fs'
 import { Inject } from '@nestjs/common/decorators';
+
 @Injectable()
 export class CalendarService {
     constructor(
@@ -22,7 +23,7 @@ export class CalendarService {
         let arr = []
         const calendarData = this.calendarRepository.create(calendar)
         await this.calendarRepository.save(calendarData)
-        Object.keys(eventData).forEach( (key) => {
+        Object.keys(eventData).forEach((key) => {
             arr.push(eventData[key])
         })
         Object.keys(jsonData).forEach((key) => {
@@ -52,7 +53,7 @@ export class CalendarService {
         })
     }
 
-   
+
 
     async findHolidayEvent(calendar_id: number) {
         return await this.calendarRepository.find({
@@ -69,29 +70,44 @@ export class CalendarService {
                     "type": EventType.holiday
                 }
             }
-
-
         })
     }
 
-    async findEventType() {
+    async findEventType(calendar_id) {
         return await this.calendarRepository.find({
             relations: ['events'],
-            where: {
-                events: {
-                    "type": EventType.event
+            select:{
+                events:{
+                    event_name: true,
+                    start_date: true,
+                    end_date:true
                 }
+            },
+            where: {
+                id: calendar_id,
             }
-
-
         })
     }
 
-    async findEvent() {
-        return await this.calendarRepository.find({ relations: ['event'] })
+    async findEvent(id) {
+        return await this.calendarRepository.find({
+            where: {
+                id: id,
+                events: [
+                    {
+                        type: 'กิจกรรม' 
+                    },
+                    {
+                        type: 'วันเปิดภาคเรียน'
+                    }
+                ]
+            },
+            relations: ['events']
+        })
     }
 
     async duplicateCalendar(calendar: Calendar) {
+        console.log(calendar)
         return await this.calendarRepository.save(calendar)
     }
 

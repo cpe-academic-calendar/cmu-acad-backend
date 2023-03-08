@@ -67,6 +67,6 @@ export class Event {
     reference_condition: Event
     
     @ManyToOne(() => Calendar, calendar => calendar.events, { createForeignKeyConstraints: false })
-    @JoinColumn()
+    @JoinColumn({ name: 'calendarId'})
     calendar: Calendar;
 }
