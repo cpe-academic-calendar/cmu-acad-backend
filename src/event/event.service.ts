@@ -5,16 +5,16 @@ import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { UpdateEventDto } from './event.dto';
-import * as path from 'path'
+
 @Injectable()
 export class EventService {
     constructor(
         @InjectRepository(Event)
         private readonly eventRepository: Repository<Event>,
-    ) { }
+    ) {}
 
     async autoGenerate(start_semester) {
-        const dataEvent = fs.readFileSync(process.cwd()+'/src/asset/event.json', 'utf-8')
+        const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
         for (let i in event) {
@@ -27,12 +27,10 @@ export class EventService {
                         const month = new Date(event[con_index].start_date).getMonth()
                         const day = new Date(event[con_index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days) //start date before 
                         const start_date = new Date(year, month, day)
-
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 // end date before ref_condition 1 days
                         const end_date = new Date(last_year, last_month, last_day)
-
                         event[i].start_date = start_date
                         event[i].end_date = end_date
 
@@ -42,12 +40,10 @@ export class EventService {
                             const month = new Date(event[con_index].start_date).getMonth()
                             const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
                             const start_date = new Date(year, month, day)
-
                             const last_year = new Date(event[con_index].start_date).getFullYear()
                             const last_month = new Date(event[con_index].start_date).getMonth()
                             const last_day = new Date(event[con_index].start_date).getDate() + 1 // end date after ref_condition 1 days
                             const end_date = new Date(last_year, last_month, last_day)
-
                             event[i].start_date = start_date
                             event[i].end_date = end_date
                         } else
@@ -57,12 +53,10 @@ export class EventService {
                                 const month = new Date(event[con_index].start_date).getMonth()
                                 const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
                                 const start_date = new Date(year, month, day)
-
                                 const last_year = new Date(event[con_index].end_date).getFullYear()
                                 const last_month = new Date(event[con_index].end_date).getMonth()
                                 const last_day = new Date(event[con_index].end_date).getDay() + 1 // end date after last ref_condition 1 days
                                 const end_date = new Date(last_year, last_month, last_day)
-
                                 event[i].start_date = start_date
                                 event[i].end_date = end_date
                             }
@@ -85,7 +79,6 @@ export class EventService {
                         const month = new Date(event[index].start_date).getMonth()
                         const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
                         const start_date = new Date(year, month, day)
-
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before ref_condition
@@ -98,12 +91,10 @@ export class EventService {
                         const month = new Date(event[index].start_date).getMonth()
                         const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
                         const start_date = new Date(year, month, day)
-
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
-
                         event[i].start_date = start_date
                         event[i].end_date = end_date
 
@@ -118,7 +109,6 @@ export class EventService {
                         const end_date = new Date(last_year, last_month, last_day)
                         event[i].start_date = start_date
                         event[i].end_date = end_date
-
                     }
 
                     //normal cas have only ref_start = after
@@ -132,8 +122,6 @@ export class EventService {
                     const end_date = new Date(last_year, last_month, last_day)
                     event[i].start_date = start_date
                     event[i].end_date = end_date
-
-
                 }
                 if (event[i].ref_start == 'after-last') {
                     if (event[i].ref_end == 'before') {
@@ -158,7 +146,6 @@ export class EventService {
                         const end_date = new Date(last_year, last_month, last_day)
                         event[i].start_date = start_date
                         event[i].end_date = end_date
-
                     }
                     else if (event[i].ref_end == 'after-last') {
                         const year = new Date(event[index].end_date).getFullYear()
@@ -171,7 +158,6 @@ export class EventService {
                         const end_date = new Date(last_year, last_month, last_day)
                         event[i].start_date = start_date
                         event[i].end_date = end_date
-
                     }
                     const year = new Date(event[index].end_date).getFullYear()
                     const month = new Date(event[index].end_date).getMonth()
@@ -262,38 +248,38 @@ export class EventService {
         const countTerm3 = arrDate3.filter(value => !arrHoliday.includes(value))
 
         const returnCountWeek = (week: any[]) => {
-            const arr1 = { sunday: 0, monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0 }
+            const arr1 = {monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0,sunday: 0, }
             for (let i in week) {
                 if (new Date(week[i]).getDay() == 0) {
-                    arr1["sunday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 1) {
                     arr1["monday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 2) {
+                if (new Date(week[i]).getDay() == 1) {
                     arr1["tuesday"] += 1
-
                 }
-                if (new Date(week[i]).getDay() == 3) {
+                if (new Date(week[i]).getDay() == 2) {
                     arr1["wednesday"] += 1
 
                 }
-                if (new Date(week[i]).getDay() == 4) {
+                if (new Date(week[i]).getDay() == 3) {
                     arr1["thursday"] += 1
 
                 }
-                if (new Date(week[i]).getDay() == 5) {
+                if (new Date(week[i]).getDay() == 4) {
                     arr1["friday"] += 1
 
                 }
-                if (new Date(week[i]).getDay() == 6) {
+                if (new Date(week[i]).getDay() == 5) {
                     arr1["saturday"] += 1
+
+                }
+                if (new Date(week[i]).getDay() == 6) {
+                    arr1["sunday"] += 1
 
                 }
             }
             return arr1
         }
-        const countArr = {term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)]}
+        const countArr = { term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)] }
         return countArr
     }
 
@@ -313,12 +299,91 @@ export class EventService {
         })
     }
 
-    async updateEvent(id: number, event: UpdateEventDto) {
+    async updateEvent(id, event: UpdateEventDto) {
+        const eventData = await this.eventRepository.findOne({
+            where: {
+                id: id.id
+            },
+            select: {
+                calendar: {
+                    id
+                }
+            },
+            relations: {
+                calendar: true
+            }
+        })
+        const arr = await this.eventRepository.find({
+            where: {
+                type: 'กิจกรรม',
+                calendar: {
+                    id: eventData.calendar.id
+                }
+            }
+        })
+        const changeDate = new Date(event.start_date)
+        const oldDate = new Date(eventData.start_date)
+        const type = changeDate.getTime() - oldDate.getTime()
+        const firstDate = new Date(changeDate).getDate()
+        const lastDate = new Date(oldDate).getDate()
+        
+        // if (eventData.event_name == 'วันเปิดภาคเรียน') {
+        //     return await this.eventRepository.update(arr[0].id, {
+        //         start_date: event.start_date
+        //     })
+        //     // for (let i = 1; i < arr.length; i++) {
+        //     //     if (type > 0) {
+        //     //         console.log("ok")
+        //     //         const day = new Date(`${arr[i].start_date}`).getDate() + (lastDate - firstDate)
+        //     //         const month = new Date(`${arr[i].start_date}`).getMonth()
+        //     //         const year = new Date(`${arr[i].start_date}`).getFullYear()
+        //     //         const endDay = new Date(`${arr[i].end_date}`).getDate() + (lastDate - firstDate)
+        //     //         const endMonth = new Date(`${arr[i].end_date}`).getMonth()
+        //     //         const endYear = new Date(`${arr[i].end_date}`).getFullYear()
+        //     //         const str = new Date(year, month, day)
+        //     //         const ed = new Date(endYear, endMonth, endDay)
+        //     //         console.log(str)
+        //     //         console.log(ed)
+        //     //         // await this.eventRepository.update(arr[i + ].id, {
+        //     //         //     start_date: str,
+        //     //         //     end_date: ed
+        //     //         // })
+        //     //     } else if (type < 0) {
+        //     //         const day = new Date(`${arr[i].start_date}`).getDate() - (lastDate - firstDate)
+        //     //         const month = new Date(`${arr[i].start_date}`).getMonth()
+        //     //         const year = new Date(`${arr[i].start_date}`).getFullYear()
+        //     //         const endDay = new Date(`${arr[i].end_date}`).getDate() - (lastDate - firstDate)
+        //     //         const endMonth = new Date(`${arr[i].end_date}`).getMonth()
+        //     //         const endYear = new Date(`${arr[i].end_date}`).getFullYear()
+        //     //         const str = new Date(year, month, day)
+        //     //         const ed = new Date(endYear, endMonth, endDay)
+        //     //         // await this.eventRepository.update(arr[i + 1].id, {
+        //     //         //     start_date: str,
+        //     //         //     end_date: ed
+        //     //         // })
+        //     //         console.log(str)
+        //     //         console.log(ed)
+        //     //     }
+        //     // }
+
+        // }
+
         return await this.eventRepository.update(id, event)
+
+
     }
+
+
 
     async deleteEvent(id: number) {
         return await this.eventRepository.delete(id)
+    }
+    async createArr(event){
+        const newArr:[{
+            event_name: string,
+            start_date: Date,
+        }] = event
+        return await this.eventRepository.save(newArr)
     }
 
 }

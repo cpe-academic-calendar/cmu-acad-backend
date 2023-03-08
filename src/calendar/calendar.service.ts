@@ -4,77 +4,91 @@ import { ILike, Repository } from 'typeorm';
 import { Calendar } from './calendar.entity';
 import { Event } from 'src/event/event.entity';
 import { EventType } from 'src/asset/enum';
-
+import { EventService } from 'src/event/event.service';
+import *  as fs from 'fs'
+import { Inject } from '@nestjs/common/decorators';
 @Injectable()
 export class CalendarService {
     constructor(
         @InjectRepository(Calendar) private readonly calendarRepository: Repository<Calendar>,
-        @InjectRepository(Event) private readonly eventRepository: Repository<Event>
+        @InjectRepository(Event) private readonly eventRepository: Repository<Event>,
+        @Inject(EventService) private readonly eventService: EventService
     ) { }
 
-    async createCalendar(calendar: Calendar, event: any) {
+    async createCalendar(calendar: Calendar) {
+        const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
+        const jsonData = JSON.parse(data)
+        const eventData = await this.eventService.autoGenerate(calendar.start_semester)
+        let arr = []
         const calendarData = this.calendarRepository.create(calendar)
-        this.calendarRepository.save(calendarData) 
-        await this.eventRepository.save(event)
-        calendarData.events = [...event]
+        await this.calendarRepository.save(calendarData)
+        Object.keys(eventData).forEach( (key) => {
+            arr.push(eventData[key])
+        })
+        Object.keys(jsonData).forEach((key) => {
+            const year = new Date(jsonData[key].start_date).setFullYear(new Date(calendar.start_semester).getFullYear())
+            jsonData[key].start_date = new Date(year)
+            arr.push(jsonData[key])
+        })
+        await this.eventRepository.save(arr)
+        calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
-
     }
 
-    async findEventById(calendar_id){
+    async findEventById(calendar_id) {
         return await this.calendarRepository.find({
             relations: ['events'],
-            select:{
-                events:{
+            select: {
+                events: {
                     event_name: true,
                     start_date: true,
                     id: true,
                     type: true
                 }
             },
-            where:{
+            where: {
                 id: calendar_id
             }
         })
     }
 
+   
 
-    async  findHolidayEvent(calendar_id: number){
-        return  await this.calendarRepository.find({
+    async findHolidayEvent(calendar_id: number) {
+        return await this.calendarRepository.find({
             relations: ['events'],
-            select:{
-                events:{
+            select: {
+                events: {
                     event_name: true,
                     start_date: true,
-                    id: true,
                 }
             },
-            where:{
+            where: {
                 id: calendar_id,
-                events:{
+                events: {
                     "type": EventType.holiday
                 }
             }
-                        
-                    
+
+
         })
     }
 
-    async  findEventType(){
-        return  await this.calendarRepository.find({
+    async findEventType() {
+        return await this.calendarRepository.find({
             relations: ['events'],
-            where:{
-                events:{
+            where: {
+                events: {
                     "type": EventType.event
                 }
             }
-                        
-                    
+
+
         })
     }
 
-    async findEvent(){
-        return await this.calendarRepository.find({relations: ['event']})
+    async findEvent() {
+        return await this.calendarRepository.find({ relations: ['event'] })
     }
 
     async duplicateCalendar(calendar: Calendar) {
@@ -83,11 +97,9 @@ export class CalendarService {
 
     async findAll() {
         return this.calendarRepository.find({
-            // relations:['events'],
-            // relations:['events'],
             where: {
                 'calendar_status': 'Active'
-                
+
             }
         })
     }

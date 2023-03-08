@@ -1,5 +1,5 @@
 import { EventType } from 'src/asset/enum';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,  ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,  ManyToOne, JoinColumn } from 'typeorm'
 import { Calendar } from '../calendar/calendar.entity';
 
 
@@ -10,7 +10,8 @@ export class Event {
 
     @Column()
     event_name: string;
-
+     @Column()
+    isOveride: boolean
     @Column()
     type: string
 
@@ -27,7 +28,7 @@ export class Event {
     @Column({
         default: null
     })
-    ref_end: String
+    ref_end: string
 
     @CreateDateColumn({
         default: null
@@ -65,6 +66,7 @@ export class Event {
     @ManyToOne(() =>  Event)
     reference_condition: Event
     
-    @ManyToOne(type => Calendar, calendar => calendar.events)
+    @ManyToOne(() => Calendar, calendar => calendar.events, { createForeignKeyConstraints: false })
+    @JoinColumn()
     calendar: Calendar;
 }

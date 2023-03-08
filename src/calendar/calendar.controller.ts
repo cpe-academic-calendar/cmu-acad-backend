@@ -1,13 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { CreateCalendarDto } from './calendar.dto';
 import { Calendar } from './calendar.entity';
 import { CalendarService } from './calendar.service';
-import *  as fs from 'fs'
 import { EventService } from 'src/event/event.service';
-import * as path from 'path';
-import { response } from 'express';
-import { Header } from '@nestjs/common/decorators';
-
 
 @Controller('calendar')
 export class CalendarController {
@@ -17,22 +11,7 @@ export class CalendarController {
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
-        const data = fs.readFileSync(process.cwd()+'/src/asset/holiday.json', 'utf-8')
-        const jsonData = JSON.parse(data)
-        const eventData = await this.eventService.autoGenerate(calendar.start_semester)
-        let arr = []
-
-        Object.keys(eventData).forEach((key) => {
-            arr.push(eventData[key])
-        })
-
-        Object.keys(jsonData).forEach((key) => {
-            const year = new Date(jsonData[key].start_date).setFullYear(new Date(calendar.start_semester).getFullYear())
-            jsonData[key].start_date = new Date(year)
-            arr.push(jsonData[key])
-        })
-
-        return await this.calendarService.createCalendar(calendar, arr)
+        return await this.calendarService.createCalendar(calendar)
     }
 
     @Get('studyweek/:id')
@@ -43,19 +22,27 @@ export class CalendarController {
             arr.push(event[i].events.map((edt) => edt))
         }
         return this.eventService.countWeek(arr)
-
     }
 
     @Post('duplicate/:id')
-    async duplicateClanedar(@Param() id: number, @Body('calendar_name') calendar_name: string): Promise<Calendar> {
-        const oldCalendar = await this.calendarService.findById(id)
-        const newCalendar = new Calendar()
-        newCalendar.name = calendar_name
-        newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.calendar_status = oldCalendar.calendar_status
-        newCalendar.events = oldCalendar.events
-        newCalendar.year = oldCalendar.year
-        return await this.calendarService.duplicateCalendar(newCalendar)
+    async duplicateClanedar(@Param() id, @Body('calendar_name') calendar_name: string){
+        const oldCalendar = await this.calendarService.findById(id.id)
+        const evet = await this.calendarService.findEventById(id.id)
+        let arr = []
+        console.log(evet.map(ev=>{
+            return arr.push(ev.events.map((d)=>{
+                    d.event_name,
+                    d.start_date,
+                    d.type
+            }))
+        }))
+        // const newCalendar = new Calendar()
+        // newCalendar.name = calendar_name
+        // newCalendar.start_semester = oldCalendar.start_semester
+        // newCalendar.calendar_status = oldCalendar.calendar_status
+        // newCalendar.year = oldCalendar.year
+        
+        // return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
     @Get('/findAll')
@@ -108,11 +95,6 @@ export class CalendarController {
         return this.calendarService.findById(id)
     }
 
-    // @Delete('/deleteArr')
-    // async DeleteArr(@Param('id') id: string[]){
-    //         return this.calendarService.deleteA()
-    // }
-
     @Put('setstatus/:id')
     async updateStatus(@Param() id: number, @Body() calendar: Calendar) {
         return this.calendarService.changeStatus(id, calendar)
@@ -136,24 +118,5 @@ export class CalendarController {
     @Put('restore/:id')
     async restore(@Param() id: number) {
         return await this.calendarService.restoreDelete(id)
-    }
-
-    @Get('export/:id')
-    @Header("Content-Type", "text/csv")
-    @Header("Content-Disposition", "attachment; filename=sample_data.csv")
-    async exportFile(@Param() id) {
-        const event = await this.calendarService.findHolidayEvent(id.id)
-        let arr = []
-        for (let i in event) {
-            arr.push(event[i].events.map((edt) => edt))
-        }
-        const file_header = ['ชื่อวันหยุด', 'วันที่']
-        const data = JSON.parse(JSON.stringify(arr))
-        const data_exporter = require('json2csv').Parser;
-
-        const jsonData = new data_exporter({ file_header })
-        const csv_data = jsonData.parse(data)
-        response.header("Content-Type", "text/csv")
-        response.header("Content-Disposition", "attachment; filename=sample_data.csv")
     }
 }
