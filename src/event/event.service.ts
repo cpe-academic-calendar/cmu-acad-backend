@@ -388,7 +388,7 @@ export class EventService {
         });
 
         return Promise.all(createArr)
-    }   
+    }
 }
 
 

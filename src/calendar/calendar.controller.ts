@@ -39,6 +39,7 @@ export class CalendarController {
         })
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
+
     }
 
     @Get('/findAll')
