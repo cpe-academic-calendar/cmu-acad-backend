@@ -18,6 +18,7 @@ export class EventService {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
+
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
@@ -171,7 +172,6 @@ export class EventService {
                     event[i].start_date = start_date
                     event[i].end_date = end_date
                 }
-
             }
         }
         return event
@@ -388,7 +388,7 @@ export class EventService {
         });
 
         return Promise.all(createArr)
-    }
+    }   
 }
 
 
