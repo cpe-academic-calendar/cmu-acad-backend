@@ -5,18 +5,20 @@ import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { UpdateEventDto } from './event.dto';
+import { create } from 'domain';
 
 @Injectable()
 export class EventService {
     constructor(
         @InjectRepository(Event)
         private readonly eventRepository: Repository<Event>,
-    ) {}
+    ) { }
 
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
+
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
@@ -170,7 +172,6 @@ export class EventService {
                     event[i].start_date = start_date
                     event[i].end_date = end_date
                 }
-
             }
         }
         return event
@@ -248,7 +249,7 @@ export class EventService {
         const countTerm3 = arrDate3.filter(value => !arrHoliday.includes(value))
 
         const returnCountWeek = (week: any[]) => {
-            const arr1 = {monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0,sunday: 0, }
+            const arr1 = { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0, }
             for (let i in week) {
                 if (new Date(week[i]).getDay() == 0) {
                     arr1["monday"] += 1
@@ -326,7 +327,7 @@ export class EventService {
         const type = changeDate.getTime() - oldDate.getTime()
         const firstDate = new Date(changeDate).getDate()
         const lastDate = new Date(oldDate).getDate()
-        
+
         // if (eventData.event_name == 'วันเปิดภาคเรียน') {
         //     return await this.eventRepository.update(arr[0].id, {
         //         start_date: event.start_date
@@ -378,14 +379,16 @@ export class EventService {
     async deleteEvent(id: number) {
         return await this.eventRepository.delete(id)
     }
-    async createArr(event){
-        const newOb = new Event()
-        newOb.event_name = event.event_name
-        newOb.start_date = event.start_date
-        newOb.type = event.type
-        return await this.eventRepository.save(newOb)
-    }
 
+    async createArr(event: Event[]){
+        const createArr =  event.map( async (entity: Event) => {
+            entity.id = null
+            const newEntity =  this.eventRepository.create(entity);
+            return  this.eventRepository.save(newEntity)
+        });
+
+        return Promise.all(createArr)
+    }   
 }
 
 

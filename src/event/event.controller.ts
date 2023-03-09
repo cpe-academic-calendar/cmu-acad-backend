@@ -3,12 +3,14 @@ import { EventService } from './event.service';
 import { Event } from '../event/event.entity'
 import *  as fs from 'fs'
 import { UpdateEventDto } from './event.dto';
+import { ApiTags } from '@nestjs/swagger/dist';
 
-
+@ApiTags('Event')
 @Controller('event')
 export class EventController {
     constructor(private readonly eventService: EventService) { }
-
+   
+    
     @Get('/')
     async findAll() {
         return await this.eventService.findAll();
@@ -32,12 +34,11 @@ export class EventController {
 
     @Put('/update/:id')
     async updateEvent(@Param() id: number, @Body() event: UpdateEventDto) {
-        console.log(id)
-        console.log(event)
         return await this.eventService.updateEvent(id, event)
        
     }
 
+    
     @Delete('/delete/:id')
     async deleteEvent(@Param() id: number) {
         return await this.eventService.deleteEvent(id)

@@ -2,7 +2,11 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { Calendar } from './calendar.entity';
 import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
+import { ApiTags } from '@nestjs/swagger';
+import { UpdateCalendarDto } from './calendar.dto';
+import { Event } from 'src/event/event.entity';
 
+@ApiTags('Calendar')
 @Controller('calendar')
 export class CalendarController {
     constructor(
@@ -18,31 +22,22 @@ export class CalendarController {
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
-        for (let i in event) {
-            arr.push(event[i].events.map((edt) => edt))
-        }
+        event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         return this.eventService.countWeek(arr)
     }
 
     @Post('duplicate/:id')
-    async duplicateClanedar(@Param() id, @Body('calendar_name') calendar_name: string){
-        const event = await this.calendarService.findEventById(id.id)
-        const evetMaop = event.map((evt)=>{
-                return evt.events
-        })
+    async duplicateCalendar(@Param() calendar_id: UpdateCalendarDto, @Body() calendar: Calendar) {
+        const newCalendar = new Calendar();
+        const oldCalendar = await this.calendarService.findEventById(calendar_id.id);
+        const event = oldCalendar[0].events.map((ev) => ev);
+        const eve = await this.eventService.createArr(event) 
+        newCalendar.name = calendar.name
         let arr = []
-        const arrEv = evetMaop[0].map((edt)=>{
-                return edt
+        eve.map((dt)=>{
+            arr.push(dt)
         })
-        const newCalendar = new Calendar()
-        const oldCalendar = await this.findById(id.id)
-        newCalendar.name = calendar_name
-        newCalendar.start_semester = oldCalendar.start_semester
-        newCalendar.calendar_status = oldCalendar.calendar_status
-        newCalendar.year = oldCalendar.year
-        const dataArr = await this.eventService.createArr(arrEv)
-        console.log(dataArr)
-        newCalendar.events = [...[dataArr]]
+        newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
 

@@ -944,7 +944,7 @@
     {
         "id": 59,
         "event_name": "วันเปิดภาคเรียน เทอม 3",
-        "num_days": 12,
+        "num_days": 4,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 56,
@@ -992,7 +992,7 @@
     {
         "id": 62,
         "event_name": "วันประกาศผลการลงทะเบียน เทอม 3",
-        "num_days": 10,
+        "num_days": 6,
         "ref_start": "before",
         "num_weeks": 0,
         "reference_event": 59,
@@ -1072,11 +1072,11 @@
     {
         "id": 67,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน เทอม 3",
-        "num_days": 2,
+        "num_days": 0,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 59,
-        "duration_days": 3,
+        "duration_days": 5,
         "duration_weeks": 0,
         "condition_days": 0,
         "condition_weeks": 0,
@@ -1088,7 +1088,7 @@
     {
         "id": 68,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 3",
-        "num_days": 4,
+        "num_days": 5,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 59,
