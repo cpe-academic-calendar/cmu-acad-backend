@@ -29,7 +29,7 @@ export class CalendarController {
     @Post('duplicate/:id')
     async duplicateCalendar(@Param() calendar_id: UpdateCalendarDto, @Body() calendar: Calendar) {
         const newCalendar = new Calendar();
-        const oldCalendar = await this.calendarService.findEventById(calendar_id.id);
+        const oldCalendar = await this.calendarService.findEventById(calendar_id.id).then()
         const event = oldCalendar[0].events.map((ev) => ev);
         const eve = await this.eventService.createArr(event) 
         newCalendar.name = calendar.name

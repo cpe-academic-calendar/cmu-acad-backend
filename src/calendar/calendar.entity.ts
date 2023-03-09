@@ -39,6 +39,6 @@ export class Calendar {
     delete_at: Date;
     
     @ApiProperty({ type: () => Event })
-    @OneToMany(() => Event, events => events.calendar)
+    @OneToMany(() => Event, events => events.calendar,{ onDelete: 'SET NULL' })
     events : Event[]
 }
