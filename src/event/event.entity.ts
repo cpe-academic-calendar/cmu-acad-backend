@@ -86,6 +86,6 @@ export class Event {
     reference_condition: Event
 
     @ApiProperty({ type: () => Calendar })
-    @ManyToOne(() => Calendar, calendar => calendar.events, { createForeignKeyConstraints: false })
+    @ManyToOne(() => Calendar, calendar => calendar.events,{ onDelete: 'SET NULL' })
     calendar: Calendar;
 }

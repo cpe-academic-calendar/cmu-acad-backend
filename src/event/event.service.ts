@@ -5,7 +5,7 @@ import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { UpdateEventDto } from './event.dto';
-import { create } from 'domain';
+import { Not } from 'typeorm';
 
 @Injectable()
 export class EventService {
@@ -18,7 +18,6 @@ export class EventService {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
-
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
@@ -314,63 +313,40 @@ export class EventService {
                 calendar: true
             }
         })
+
         const arr = await this.eventRepository.find({
             where: {
+
                 type: 'กิจกรรม',
                 calendar: {
                     id: eventData.calendar.id
-                }
+                },
+                event_name: Not('วันเปิดภาคเรียน')
             }
         })
-        const changeDate = new Date(event.start_date)
-        const oldDate = new Date(eventData.start_date)
-        const type = changeDate.getTime() - oldDate.getTime()
-        const firstDate = new Date(changeDate).getDate()
-        const lastDate = new Date(oldDate).getDate()
-
-        // if (eventData.event_name == 'วันเปิดภาคเรียน') {
-        //     return await this.eventRepository.update(arr[0].id, {
-        //         start_date: event.start_date
-        //     })
-        //     // for (let i = 1; i < arr.length; i++) {
-        //     //     if (type > 0) {
-        //     //         console.log("ok")
-        //     //         const day = new Date(`${arr[i].start_date}`).getDate() + (lastDate - firstDate)
-        //     //         const month = new Date(`${arr[i].start_date}`).getMonth()
-        //     //         const year = new Date(`${arr[i].start_date}`).getFullYear()
-        //     //         const endDay = new Date(`${arr[i].end_date}`).getDate() + (lastDate - firstDate)
-        //     //         const endMonth = new Date(`${arr[i].end_date}`).getMonth()
-        //     //         const endYear = new Date(`${arr[i].end_date}`).getFullYear()
-        //     //         const str = new Date(year, month, day)
-        //     //         const ed = new Date(endYear, endMonth, endDay)
-        //     //         console.log(str)
-        //     //         console.log(ed)
-        //     //         // await this.eventRepository.update(arr[i + ].id, {
-        //     //         //     start_date: str,
-        //     //         //     end_date: ed
-        //     //         // })
-        //     //     } else if (type < 0) {
-        //     //         const day = new Date(`${arr[i].start_date}`).getDate() - (lastDate - firstDate)
-        //     //         const month = new Date(`${arr[i].start_date}`).getMonth()
-        //     //         const year = new Date(`${arr[i].start_date}`).getFullYear()
-        //     //         const endDay = new Date(`${arr[i].end_date}`).getDate() - (lastDate - firstDate)
-        //     //         const endMonth = new Date(`${arr[i].end_date}`).getMonth()
-        //     //         const endYear = new Date(`${arr[i].end_date}`).getFullYear()
-        //     //         const str = new Date(year, month, day)
-        //     //         const ed = new Date(endYear, endMonth, endDay)
-        //     //         // await this.eventRepository.update(arr[i + 1].id, {
-        //     //         //     start_date: str,
-        //     //         //     end_date: ed
-        //     //         // })
-        //     //         console.log(str)
-        //     //         console.log(ed)
-        //     //     }
-        //     // }
-
-        // }
-
-        return await this.eventRepository.update(id, event)
-
+        const change_date = new Date(event.start_date)
+        const old_date = new Date(eventData.start_date)
+        let diffTime = (change_date.getTime() - old_date.getTime());
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if(event.event_name == 'วันเปิดภาคเรียน'){
+            this.eventRepository.update(id,event)
+            for(let i in arr){
+                if(arr[i].isOveride == false){
+                    const newEvent = new Event()
+                    const eventDate = arr[i].start_date.getDate()
+                    newEvent.start_date = new Date(arr[i].start_date.setDate(eventDate + diffDays))
+                    newEvent.end_date =  new Date(arr[i].end_date.setDate(eventDate + diffDays))
+                    await this.eventRepository.update(arr[i].id,newEvent)    
+                }
+            }    
+        }else{
+            const newEvent = new Event()
+            newEvent.isOveride = true
+            newEvent.start_date = event.start_date
+            newEvent.event_name = event.event_name
+            newEvent.type = event.type
+            return this.eventRepository.update(id,newEvent)
+        }
 
     }
 
@@ -380,15 +356,15 @@ export class EventService {
         return await this.eventRepository.delete(id)
     }
 
-    async createArr(event: Event[]){
-        const createArr =  event.map( async (entity: Event) => {
+    async createArr(event: Event[]) {
+        const createArr = event.map(async (entity: Event) => {
             entity.id = null
-            const newEntity =  this.eventRepository.create(entity);
-            return  this.eventRepository.save(newEntity)
+            const newEntity = this.eventRepository.create(entity);
+            return this.eventRepository.save(newEntity)
         });
 
         return Promise.all(createArr)
-    }   
+    }
 }
 
 
