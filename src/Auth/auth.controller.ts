@@ -3,8 +3,9 @@ import { AuthenService } from './auth.service';
 import { HttpService } from '@nestjs/axios';
 import { Code } from 'typeorm';
 import { map } from 'rxjs';
+import { ApiTags } from '@nestjs/swagger/dist';
 
-
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthenController {
 

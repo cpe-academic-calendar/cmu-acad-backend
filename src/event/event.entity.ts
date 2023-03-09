@@ -1,72 +1,91 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { EventType } from 'src/asset/enum';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,  ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { Calendar } from '../calendar/calendar.entity';
 
 
 @Entity()
 export class Event {
+
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty()
     @Column()
     event_name: string;
-     @Column()
+
+    @ApiProperty()
+    @Column()
     isOveride: boolean
+
+    @ApiProperty()
     @Column()
     type: string
 
+    @ApiProperty()
     @Column({
         default: "#352829"
     })
     color: string
-    
+
+    @ApiProperty()
     @Column({
         default: null
     })
     ref_start: string
 
+    @ApiProperty()
     @Column({
         default: null
     })
     ref_end: string
 
+    @ApiProperty()
     @CreateDateColumn({
         default: null
     })
     start_date: Date
 
+    @ApiProperty()
     @CreateDateColumn({
         default: null
     })
     end_date: Date
 
+    @ApiProperty()
     @Column({
         default: null
     })
     num_weeks: number
 
+    @ApiProperty()
     @Column({
         default: null
     })
     num_days: number
 
+    @ApiProperty()
     @Column({
         default: null
     })
     duration_weeks: number
 
+    @ApiProperty()
     @Column({
         default: null
     })
     duration_days: number
 
-    @ManyToOne(() =>  Event)
+    @ApiProperty({ type: () => Event })
+    @ManyToOne(() => Event)
     reference_event: Event
 
-    @ManyToOne(() =>  Event)
+    @ApiProperty({ type: () => Event })
+    @ManyToOne(() => Event)
     reference_condition: Event
-    
+
+    @ApiProperty({ type: () => Calendar })
     @ManyToOne(() => Calendar, calendar => calendar.events, { createForeignKeyConstraints: false })
-    @JoinColumn({ name: 'calendarId'})
     calendar: Calendar;
 }

@@ -107,7 +107,6 @@ export class CalendarService {
     }
 
     async duplicateCalendar(calendar: Calendar) {
-        console.log(calendar)
         return await this.calendarRepository.save(calendar)
     }
 
