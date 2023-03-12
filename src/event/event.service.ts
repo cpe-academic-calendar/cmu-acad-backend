@@ -379,8 +379,8 @@ export class EventService {
         if (dayOfweek != 1) {
             const daysToMonday = dayOfweek === 1 ? 1 : dayOfweek === 0 ? 0 : dayOfweek - 1
             let monday = new Date(date.getTime() - daysToMonday * 24 * 60 * 60 * 1000);
-            return monday
-        }else{
+            return new Date(monday)
+        } else {
             return date
         }
     }
@@ -416,15 +416,15 @@ export class EventService {
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
             this.eventRepository.update(id, event)
-            for (let i in arr) {
-                if (arr[i].isOveride == false) {
+            arr.map(async (data, idx) => {
+                if (arr[idx].isOveride == false) {
                     const newEvent = new Event()
-                    const eventDate = arr[i].start_date.getDate()
-                    newEvent.start_date = new Date(arr[i].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[i].end_date.setDate(eventDate + diffDays))
-                    await this.eventRepository.update(arr[i].id, newEvent)
+                    const eventDate = arr[idx].start_date.getDate()
+                    newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
+                    await this.eventRepository.update(arr[idx].id, newEvent)
                 }
-            }
+            })
         } else {
             const newEvent = new Event()
             newEvent.isOveride = true
@@ -448,6 +448,10 @@ export class EventService {
         });
 
         return Promise.all(createArr)
+    }
+
+    async createData(data) {
+        return await this.eventRepository.save(data)
     }
 }
 
