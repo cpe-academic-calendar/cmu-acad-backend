@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateEvent } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
@@ -32,8 +32,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 // end date before ref_condition 1 days
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
 
                     } else
                         if (event[i].ref_end == 'after') {
@@ -45,11 +51,16 @@ export class EventService {
                             const last_month = new Date(event[con_index].start_date).getMonth()
                             const last_day = new Date(event[con_index].start_date).getDate() + 1 // end date after ref_condition 1 days
                             const end_date = new Date(last_year, last_month, last_day)
-                            event[i].start_date = start_date
-                            event[i].end_date = end_date
+                            if (event[i].isAffair == true) {
+                                const newDate = this.setDay(start_date)
+                                event[i].start_date = newDate
+                                event[i].end_date = end_date
+                            } else {
+                                event[i].start_date = start_date
+                                event[i].end_date = end_date
+                            }
                         } else
                             if (event[i].ref_end == 'after-last') {
-
                                 const year = new Date(event[con_index].start_date).getFullYear()
                                 const month = new Date(event[con_index].start_date).getMonth()
                                 const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) //start date before
@@ -58,8 +69,14 @@ export class EventService {
                                 const last_month = new Date(event[con_index].end_date).getMonth()
                                 const last_day = new Date(event[con_index].end_date).getDay() + 1 // end date after last ref_condition 1 days
                                 const end_date = new Date(last_year, last_month, last_day)
-                                event[i].start_date = start_date
-                                event[i].end_date = end_date
+                                if (event[i].isAffair == true) {
+                                    const newDate = this.setDay(start_date)
+                                    event[i].start_date = newDate
+                                    event[i].end_date = end_date
+                                } else {
+                                    event[i].start_date = start_date
+                                    event[i].end_date = end_date
+                                }
                             }
                     //normal case have only ref_start = before
                     const year = new Date(event[index].start_date).getFullYear()
@@ -70,8 +87,15 @@ export class EventService {
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
-                    event[i].start_date = start_date
-                    event[i].end_date = end_date
+                    if (event[i].isAffair == true) {
+                        const newDate = this.setDay(start_date)
+                        event[i].start_date = newDate
+                        event[i].end_date = end_date
+                    } else {
+                        event[i].start_date = start_date
+                        event[i].end_date = end_date
+                    }
+
 
                 }
                 if (event[i].ref_start == 'after') {
@@ -84,9 +108,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before ref_condition
                         const end = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end
-
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end
+                        }
                     } else if (event[i].ref_end == 'after') {
                         const year = new Date(event[index].start_date).getFullYear()
                         const month = new Date(event[index].start_date).getMonth()
@@ -96,8 +125,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
 
                     } else if (event[i].ref_end == 'after-last') {
                         const year = new Date(event[index].start_date).getFullYear()
@@ -108,8 +143,15 @@ export class EventService {
                         const last_month = new Date(event[con_index].end_date).getMonth()
                         const last_day = new Date(event[con_index].end_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
+
                     }
 
                     //normal cas have only ref_start = after
@@ -121,8 +163,14 @@ export class EventService {
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
-                    event[i].start_date = start_date
-                    event[i].end_date = end_date
+                    if (event[i].isAffair == true) {
+                        const newDate = this.setDay(start_date)
+                        event[i].start_date = newDate
+                        event[i].end_date = end_date
+                    } else {
+                        event[i].start_date = start_date
+                        event[i].end_date = end_date
+                    }
                 }
                 if (event[i].ref_start == 'after-last') {
                     if (event[i].ref_end == 'before') {
@@ -134,8 +182,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before start date of ref_condition
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
                     } else if (event[i].ref_end == 'after') {
                         const year = new Date(event[index].end_date).getFullYear()
                         const month = new Date(event[index].end_date).getMonth()
@@ -145,8 +199,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].start_date).getMonth()
                         const last_day = new Date(event[con_index].start_date).getDate() + 1 //end date before start date of ref_condition
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
                     }
                     else if (event[i].ref_end == 'after-last') {
                         const year = new Date(event[index].end_date).getFullYear()
@@ -157,8 +217,14 @@ export class EventService {
                         const last_month = new Date(event[con_index].end_date).getMonth()
                         const last_day = new Date(event[con_index].end_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
-                        event[i].start_date = start_date
-                        event[i].end_date = end_date
+                        if (event[i].isAffair == true) {
+                            const newDate = this.setDay(start_date)
+                            event[i].start_date = newDate
+                            event[i].end_date = end_date
+                        } else {
+                            event[i].start_date = start_date
+                            event[i].end_date = end_date
+                        }
                     }
                     const year = new Date(event[index].end_date).getFullYear()
                     const month = new Date(event[index].end_date).getMonth()
@@ -168,8 +234,14 @@ export class EventService {
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
-                    event[i].start_date = start_date
-                    event[i].end_date = end_date
+                    if (event[i].isAffair == true) {
+                        const newDate = this.setDay(start_date)
+                        event[i].start_date = newDate
+                        event[i].end_date = end_date
+                    } else {
+                        event[i].start_date = start_date
+                        event[i].end_date = end_date
+                    }
                 }
             }
         }
@@ -299,6 +371,15 @@ export class EventService {
         })
     }
 
+    async setDay(date) {
+        const dayOfweek = date.getDay()
+        if (dayOfweek != 1) {
+            const daysToadd = dayOfweek === 0 ? 1 : 8 - dayOfweek;
+            date.setDate(date.getDate() + daysToadd)
+        }
+        return new Date(date)
+    }
+
     async updateEvent(id, event: UpdateEventDto) {
         const eventData = await this.eventRepository.findOne({
             where: {
@@ -328,29 +409,27 @@ export class EventService {
         const old_date = new Date(eventData.start_date)
         let diffTime = (change_date.getTime() - old_date.getTime());
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if(event.event_name == 'วันเปิดภาคเรียน'){
-            this.eventRepository.update(id,event)
-            for(let i in arr){
-                if(arr[i].isOveride == false){
+        if (event.event_name == 'วันเปิดภาคเรียน') {
+            this.eventRepository.update(id, event)
+            for (let i in arr) {
+                if (arr[i].isOveride == false) {
                     const newEvent = new Event()
                     const eventDate = arr[i].start_date.getDate()
                     newEvent.start_date = new Date(arr[i].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date =  new Date(arr[i].end_date.setDate(eventDate + diffDays))
-                    await this.eventRepository.update(arr[i].id,newEvent)    
+                    newEvent.end_date = new Date(arr[i].end_date.setDate(eventDate + diffDays))
+                    await this.eventRepository.update(arr[i].id, newEvent)
                 }
-            }    
-        }else{
+            }
+        } else {
             const newEvent = new Event()
             newEvent.isOveride = true
             newEvent.start_date = event.start_date
             newEvent.event_name = event.event_name
             newEvent.type = event.type
-            return this.eventRepository.update(id,newEvent)
+            return this.eventRepository.update(id, newEvent)
         }
 
     }
-
-
 
     async deleteEvent(id: number) {
         return await this.eventRepository.delete(id)

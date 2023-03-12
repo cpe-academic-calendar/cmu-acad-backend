@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ColumnTypeUndefinedError, DeleteDateColumn, OneToMany} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, OneToMany} from 'typeorm'
 import { Event } from '../event/event.entity';
 
 @Entity()

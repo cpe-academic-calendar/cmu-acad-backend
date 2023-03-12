@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { EventType } from 'src/asset/enum';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
 import { Calendar } from '../calendar/calendar.entity';
 
 
@@ -76,6 +75,12 @@ export class Event {
         default: null
     })
     duration_days: number
+
+    @ApiProperty()
+    @Column({
+        default:  false
+    })
+    isAffair:  boolean
 
     @ApiProperty({ type: () => Event })
     @ManyToOne(() => Event)
