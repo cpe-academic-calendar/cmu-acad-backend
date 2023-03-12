@@ -706,7 +706,7 @@
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2",
         "num_days": 0,
         "ref_start": "after",
-        "num_weeks": 9,
+        "num_weeks": 10,
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 1,
