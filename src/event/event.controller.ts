@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { EventService } from './event.service';
 import { Event } from '../event/event.entity'
-import *  as fs from 'fs'
 import { UpdateEventDto } from './event.dto';
 import { ApiTags } from '@nestjs/swagger/dist';
 

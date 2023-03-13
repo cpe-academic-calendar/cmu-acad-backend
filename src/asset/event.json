@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "event_name": "วันเปิดภาคเรียน",
         "type": "วันเปิดภาคเรียน",
         "color": "#352829",
@@ -8,22 +9,23 @@
         "isOveride": false
     },
     {
+        "id": 2,
         "event_name": "วันลงทะเบียนเรียนล่วงหน้า",
         "type": "กิจกรรม",
         "color": "#352829",
         "reference_event": 1,
         "ref_start": "before",
-        "num_days": 48,
+        "num_days": 45,
         "num_weeks": 0,
-        "duration_days": 0,
-        "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
+        "duration_days": 6,
+        "duration_weeks": 0,
         "start_date": null,
         "end_date": null,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 3,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนล่วงหน้าของนักศึกษาทางระบบ Internet",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -31,15 +33,14 @@
         "ref_start": "after",
         "num_days": 0,
         "num_weeks": 1,
-        "duration_days": 0,
-        "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
+        "duration_days": 6,
+        "duration_weeks": 0,
         "start_date": null,
         "end_date": null,
         "isOveride": false
     },
     {
+        "id": 4,
         "event_name": "วันประกาศผลการลงทะเบียนล่วงหน้า",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -49,29 +50,27 @@
         "num_days": 2,
         "duration_weeks": 0,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "isOveride": false
     },
     {
+        "id": 5,
         "event_name": "วันรายงานตัวขึ้นทะเบียนเป็นนักศึกษา สําหรับนักศึกษาปริญญาตรี รหัส [cal-year]",
         "type": "กิจกรรม",
         "color": "#352829",
-        "reference_event": 1,
+        "reference_event": 3,
         "ref_start": "before",
         "num_weeks": 0,
-        "num_days": 12,
+        "num_days": 2,
         "duration_days": 3,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "isOveride": false
     },
     {
+        "id": 6,
         "event_name": "วันลงทะเบียนกระบวนวิชานักศึกษาใหม่ รหัส [cal-year]",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -83,11 +82,10 @@
         "num_days": 3,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 7,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite)",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -99,11 +97,10 @@
         "num_days": 2,
         "duration_weeks": 0,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 8,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -115,11 +112,10 @@
         "num_days": 2,
         "duration_days": 2,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 9,
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -131,11 +127,10 @@
         "num_days": 2,
         "duration_weeks": 2,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 10,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -144,14 +139,13 @@
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
-        "num_days": 1,
+        "num_days": 2,
         "duration_weeks": 2,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 11,
         "event_name": "วันสุดท้ายของการส่งเอกสารอนุมัติการย้ายสาขาวิชาสำหรับนักศึกษาปริญญาตรี ถึงสํานักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -163,11 +157,10 @@
         "num_days": 4,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 12,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -179,11 +172,10 @@
         "num_weeks": 1,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 13,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -195,11 +187,11 @@
         "num_weeks": 2,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 14,
         "event_name": "วันประกาศผลสรุปการลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -211,11 +203,10 @@
         "num_days": 1,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 15,
         "event_name": "วันรายงานตัวนักศึกษาปริญญาตรีที่คาดว่าจะสําเร็จการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -227,11 +218,10 @@
         "num_weeks": 2,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 16,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -243,11 +233,11 @@
         "num_weeks": 2,
         "duration_weeks": 1,
         "duration_days": 5,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 17,
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน)",
         "type": "วันสอบ",
         "color": "#352829",
@@ -259,11 +249,10 @@
         "num_weeks": 9,
         "duration_weeks": 1,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 18,
         "event_name": "วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ)",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -275,11 +264,10 @@
         "num_weeks": 1,
         "duration_weeks": 1,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 19,
         "event_name": "วันสอบไล่",
         "type": "วันสอบ",
         "color": "#352829",
@@ -288,14 +276,14 @@
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
-        "num_weeks": 18,
+        "num_weeks": 17,
         "duration_weeks": 2,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 20,
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -309,11 +297,11 @@
         "ref_end": "before",
         "duration_weeks": 0,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 21,
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -325,11 +313,11 @@
         "reference_event": 14,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 22,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -341,11 +329,10 @@
         "reference_event": 1,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 23,
         "event_name": "วันพ้นสถานภาพนักศึกษาของนักศึกษาที่ไม่มาลงทะเบียนและมิได้ลาพักการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -357,11 +344,10 @@
         "reference_event": 22,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 24,
         "event_name": "วันสุดท้ายของการส่งหลักฐานการอนุมัติเรื่องเทียบแทนกระบวนวิชาระดับปริญญาตรีถึงสํานักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -373,11 +359,10 @@
         "reference_event": 1,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 25,
         "event_name": "วันขอรับอักษรลําดับขั้น I",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -391,11 +376,11 @@
         "reference_condition": 19,
         "duration_weeks": 0,
         "duration_days": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 26,
         "event_name": "วันสุดท้ายของการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -407,11 +392,10 @@
         "reference_event": 1,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 27,
         "event_name": "วันสุดท้ายของการขอแก้ไขชื่อ-สกุล ของนักศึกษาระดับปริญญาตรี ที่คาดว่าจะสําเร็จการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -423,27 +407,25 @@
         "reference_event": 26,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 28,
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
         "start_date": null,
         "end_date": null,
-        "num_days": 3,
-        "ref_start": "before",
+        "num_days": 1,
+        "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 19,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 29,
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -455,11 +437,10 @@
         "reference_event": 19,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 30,
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -471,11 +452,10 @@
         "reference_event": 19,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 31,
         "event_name": "วันสุดท้ายของการส่งเอกสารการลาออก โดยได้รับอักษรลําดับขั้น W สําหรับนักศึกษาปริญญาตรี",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -487,11 +467,10 @@
         "reference_event": 30,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 32,
         "event_name": "วันประกาศผลการศึกษา",
         "type": "กิจกรรม",
         "color": "#352829",
@@ -503,26 +482,25 @@
         "reference_event": 30,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "isOveride": false
     },
     {
+        "id": 33,
         "event_name": "วันเปิดภาคเรียน เทอม 2",
         "start_date": null,
         "end_date": null,
-        "num_days": 3,
-        "ref_start": "after",
+        "num_days": 2,
+        "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 32,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "วันเปิดภาคเรียน",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 34,
         "event_name": "วันลงทะเบียนเรียนล่วงหน้า เทอม 2",
         "start_date": null,
         "end_date": null,
@@ -532,12 +510,12 @@
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 35,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite) เทอม 2",
         "start_date": null,
         "end_date": null,
@@ -547,12 +525,11 @@
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 36,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนเรียนล่วงหน้าของนักศึกษาทางระบบงานทะเบียน เทอม 2",
         "num_days": 0,
         "ref_start": "after",
@@ -560,12 +537,11 @@
         "reference_event": 33,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 37,
         "event_name": "วันประกาศผลการลงทะเบียนล่วงหน้า เทอม 2",
         "num_days": 2,
         "ref_start": "before",
@@ -573,12 +549,11 @@
         "reference_event": 34,
         "duration_days": 0,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 38,
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 2",
         "num_days": 2,
         "ref_start": "before",
@@ -586,12 +561,11 @@
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 2,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 39,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 2",
         "num_days": 0,
         "ref_start": "before",
@@ -599,12 +573,11 @@
         "reference_event": 32,
         "duration_days": 0,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 40,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 2,
         "ref_start": "before",
@@ -612,12 +585,11 @@
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 2,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 41,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 2",
         "num_days": 0,
         "ref_start": "after",
@@ -625,12 +597,12 @@
         "reference_event": 33,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 42,
         "event_name": "วันประกาศผลสรุปการลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา เทอม 2",
         "num_days": 1,
         "ref_start": "before",
@@ -638,12 +610,11 @@
         "reference_event": 41,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 43,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด เทอม 2",
         "num_days": 0,
         "ref_start": "after",
@@ -651,15 +622,15 @@
         "reference_event": 33,
         "duration_days": 5,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 44,
         "event_name": "วันสอบไล่ เทอม 2",
         "num_days": 0,
-        "num_weeks": 17,
+        "num_weeks": 20,
         "reference_event": 33,
         "ref_start": "after",
         "duration_weeks": 2,
@@ -667,9 +638,11 @@
         "start_date": null,
         "end_date": null,
         "type": "วันสอบ",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 45,
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 0,
         "ref_start": "after",
@@ -681,12 +654,12 @@
         "reference_condition": 44,
         "duration_weeks": 4,
         "duration_days": 3,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 46,
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 2",
         "num_days": 1,
         "ref_start": "after",
@@ -694,14 +667,14 @@
         "reference_event": 44,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 47,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 2",
         "num_days": 29,
         "ref_start": "after",
@@ -709,14 +682,13 @@
         "reference_event": 34,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 48,
         "event_name": "วันพ้นสถานภาพนักศึกษาของนักศึกษาที่ไม่มาลงทะเบียนและมิได้ลาพักการศึกษา เทอม 2",
         "num_days": 1,
         "ref_start": "after",
@@ -724,14 +696,13 @@
         "reference_event": 47,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 49,
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2",
         "num_days": 0,
         "ref_start": "after",
@@ -739,14 +710,13 @@
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "วันสอบ",
         "isOveride": false
     },
     {
+        "id": 50,
         "event_name": "วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ) เทอม 2",
         "num_days": 0,
         "ref_start": "before",
@@ -754,14 +724,13 @@
         "reference_event": 49,
         "duration_days": 0,
         "duration_weeks": 1,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "วันสอบ",
         "isOveride": false
     },
     {
+        "id": 51,
         "event_name": "วันขอรับอักษรลําดับขั้น I เทอม 2",
         "num_days": 0,
         "ref_start": "before",
@@ -771,14 +740,14 @@
         "duration_weeks": 0,
         "ref_end": "after-last",
         "reference_condition": 44,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 52,
         "event_name": "วันสุดท้ายของการศึกษา เทอม 2",
         "num_days": 3,
         "ref_start": "before",
@@ -786,14 +755,13 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 53,
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา เทอม 2",
         "num_days": 1,
         "ref_start": "after-last",
@@ -801,14 +769,13 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 54,
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล เทอม 2",
         "num_days": 1,
         "ref_start": "after-last",
@@ -816,14 +783,13 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 55,
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 2",
         "num_days": 9,
         "ref_start": "after-last",
@@ -831,14 +797,13 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 56,
         "event_name": "วันประกาศผลการศึกษา เทอม 2",
         "num_days": 3,
         "ref_start": "after",
@@ -846,14 +811,13 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 57,
         "event_name": "วันสุดท้ายของการส่งเอกสารการลาออก โดยได้รับอักษรลําดับขั้น W สําหรับนักศึกษาปริญญาตรี เทอม 2",
         "num_days": 1,
         "ref_start": "before",
@@ -861,14 +825,13 @@
         "reference_event": 56,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 58,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น P เทอม 2",
         "num_days": 9,
         "ref_start": "after-last",
@@ -876,29 +839,27 @@
         "reference_event": 44,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 59,
         "event_name": "วันเปิดภาคเรียน เทอม 3",
-        "num_days": 4,
+        "num_days": 12,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 56,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "วันเปิดภาคเรียน",
         "isOveride": false
     },
     {
+        "id": 60,
         "event_name": "วันลงทะเบียนเรียน เทอม 3",
         "num_days": 0,
         "ref_start": "before",
@@ -906,14 +867,13 @@
         "reference_event": 59,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 61,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite) เทอม 3",
         "num_days": 0,
         "ref_start": "before",
@@ -921,29 +881,27 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 62,
         "event_name": "วันประกาศผลการลงทะเบียน เทอม 3",
-        "num_days": 6,
+        "num_days": 10,
         "ref_start": "before",
         "num_weeks": 0,
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 63,
         "event_name": "วันลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา เทอม 3",
         "num_days": 10,
         "ref_start": "before",
@@ -951,14 +909,13 @@
         "reference_event": 59,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 64,
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย เทอม 3",
         "num_days": 9,
         "ref_start": "before",
@@ -966,14 +923,13 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 5,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 65,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 3",
         "num_days": 10,
         "ref_start": "before",
@@ -981,14 +937,13 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 66,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 3",
         "num_days": 2,
         "ref_start": "before",
@@ -996,44 +951,42 @@
         "reference_event": 59,
         "duration_days": 4,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 67,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน เทอม 3",
-        "num_days": 0,
+        "num_days": 2,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 59,
-        "duration_days": 5,
+        "duration_days": 3,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 68,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 3",
-        "num_days": 5,
+        "num_days": 4,
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 59,
         "duration_days": 5,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 69,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด เทอม 3",
         "num_days": 4,
         "ref_start": "after",
@@ -1041,14 +994,14 @@
         "reference_event": 59,
         "duration_days": 12,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 70,
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W เทอม 3",
         "num_days": 5,
         "ref_start": "after",
@@ -1056,14 +1009,14 @@
         "reference_event": 59,
         "duration_days": 5,
         "duration_weeks": 2,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 71,
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 3",
         "num_days": 2,
         "ref_start": "after",
@@ -1071,14 +1024,14 @@
         "reference_event": 59,
         "duration_days": 2,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 72,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี เทอม 3",
         "num_days": 5,
         "ref_start": "after",
@@ -1086,14 +1039,13 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 73,
         "event_name": "วันขอรับอักษรลําดับขั้น I เทอม 3",
         "num_days": 4,
         "ref_start": "after",
@@ -1101,14 +1053,14 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 74,
         "event_name": "วันสุดท้ายของการศึกษา เทอม 3",
         "num_days": 4,
         "ref_start": "after",
@@ -1116,14 +1068,13 @@
         "reference_event": 59,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 75,
         "event_name": "วันสอบไล่ เทอม 3",
         "num_days": 0,
         "ref_start": "after",
@@ -1131,14 +1082,14 @@
         "reference_event": 59,
         "duration_days": 4,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "วันสอบ",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
+        "id": 76,
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา เทอม 3",
         "num_days": 1,
         "ref_start": "after-last",
@@ -1146,14 +1097,13 @@
         "reference_event": 75,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 77,
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล เทอม 3",
         "num_days": 5,
         "ref_start": "after-last",
@@ -1161,14 +1111,13 @@
         "reference_event": 69,
         "duration_days": 4,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 78,
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 3",
         "num_days": 5,
         "ref_start": "after-last",
@@ -1176,14 +1125,13 @@
         "reference_event": 75,
         "duration_days": 1,
         "duration_weeks": 0,
-        "condition_days": 0,
-        "condition_weeks": 0,
         "start_date": null,
         "end_date": null,
         "type": "กิจกรรม",
         "isOveride": false
     },
     {
+        "id": 79,
         "event_name": "วันประกาศผลการศึกษา เทอม 3",
         "num_days": 2,
         "ref_start": "after",

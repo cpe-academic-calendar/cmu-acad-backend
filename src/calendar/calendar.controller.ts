@@ -4,7 +4,6 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
-import { Event } from 'src/event/event.entity';
 
 @ApiTags('Calendar')
 @Controller('calendar')
