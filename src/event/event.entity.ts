@@ -7,7 +7,7 @@ import { Calendar } from '../calendar/calendar.entity';
 export class Event {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @ApiProperty()
