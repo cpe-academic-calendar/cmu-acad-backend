@@ -22,6 +22,7 @@ export class CalendarService {
     ) { }
 
     async createCalendar(calendar: Calendar) {
+<<<<<<< HEAD
         const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
@@ -60,6 +61,41 @@ export class CalendarService {
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
+=======
+            const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
+            const jsonData = JSON.parse(data)
+            const eventData = await this.eventService.autoGenerate(calendar.start_semester)
+            let arr = []
+            const calendarData = await this.calendarRepository.create(calendar)
+            await Promise.all(eventData.map(async (ev) => {
+                ev.id = null;
+                arr.push(ev)
+            }));
+            await jsonData.map((data, idx) => {
+                const setYear = new Date(calendar.start_semester).getFullYear()
+                const setDate = (a) => {
+                    return new Date(jsonData[idx].start_date).setFullYear(a)
+                }
+                const setEventName = (b) => {
+                    return `${jsonData[idx].event_name} ${(new Date(b).getFullYear()) + 543}`
+                }
+                if (jsonData[idx].isNextYear == true) {
+                    const year = setDate(setYear + 1)
+                    jsonData[idx].start_date = new Date(year)
+                    jsonData[idx].end_date = new Date(year)
+                    jsonData[idx].event_name = setEventName(year)
+                } else {
+                    const year = setDate(setYear)
+                    jsonData[idx].start_date = new Date(year)
+                    jsonData[idx].end_date = new Date(year)
+                    jsonData[idx].event_name = setEventName(year)
+                }
+                arr.push(jsonData[idx])
+            })
+            await this.eventRepository.insert(arr)
+            calendarData.events = [...arr]
+            return await this.calendarRepository.save(calendarData)
+>>>>>>> 36127f4 (fix: invalid date)
     }
 
     async findByStatus(calendarStatus){
