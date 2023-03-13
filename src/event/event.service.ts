@@ -88,6 +88,7 @@ export class EventService {
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
+
                     if (event[i].isAffair == true) {
                         const newDate = await this.setDay(start_date)
                         event[i].start_date = newDate
