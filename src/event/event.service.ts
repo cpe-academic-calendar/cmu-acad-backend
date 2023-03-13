@@ -18,6 +18,7 @@ export class EventService {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         event[0].start_date = new Date(start_semester)
+        event[0].end_date = new Date(start_semester)
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
@@ -33,7 +34,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 // end date before ref_condition 1 days
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -52,7 +53,7 @@ export class EventService {
                             const last_day = new Date(event[con_index].start_date).getDate() + 1 // end date after ref_condition 1 days
                             const end_date = new Date(last_year, last_month, last_day)
                             if (event[i].isAffair == true) {
-                                const newDate = this.setDay(start_date)
+                                const newDate = await this.setDay(start_date)
                                 event[i].start_date = newDate
                                 event[i].end_date = end_date
                             } else {
@@ -70,7 +71,7 @@ export class EventService {
                                 const last_day = new Date(event[con_index].end_date).getDay() + 1 // end date after last ref_condition 1 days
                                 const end_date = new Date(last_year, last_month, last_day)
                                 if (event[i].isAffair == true) {
-                                    const newDate = this.setDay(start_date)
+                                    const newDate = await this.setDay(start_date)
                                     event[i].start_date = newDate
                                     event[i].end_date = end_date
                                 } else {
@@ -88,7 +89,7 @@ export class EventService {
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
                     if (event[i].isAffair == true) {
-                        const newDate = this.setDay(start_date)
+                        const newDate = await this.setDay(start_date)
                         event[i].start_date = newDate
                         event[i].end_date = end_date
                     } else {
@@ -109,7 +110,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before ref_condition
                         const end = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end
                         } else {
@@ -126,7 +127,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].start_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -144,7 +145,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].end_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -164,7 +165,7 @@ export class EventService {
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
                     if (event[i].isAffair == true) {
-                        const newDate = this.setDay(start_date)
+                        const newDate = await this.setDay(start_date)
                         event[i].start_date = newDate
                         event[i].end_date = end_date
                     } else {
@@ -183,7 +184,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before start date of ref_condition
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -200,7 +201,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].start_date).getDate() + 1 //end date before start date of ref_condition
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -218,7 +219,7 @@ export class EventService {
                         const last_day = new Date(event[con_index].end_date).getDate() + 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
-                            const newDate = this.setDay(start_date)
+                            const newDate = await this.setDay(start_date)
                             event[i].start_date = newDate
                             event[i].end_date = end_date
                         } else {
@@ -235,7 +236,7 @@ export class EventService {
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
                     if (event[i].isAffair == true) {
-                        const newDate = this.setDay(start_date)
+                        const newDate = await this.setDay(start_date)
                         event[i].start_date = newDate
                         event[i].end_date = end_date
                     } else {
@@ -363,21 +364,25 @@ export class EventService {
         return await this.eventRepository.save(event)
     }
 
+
     async getEventByID(id: number) {
         return await this.eventRepository.findOne({
             where: {
                 id: id
             }
         })
+
     }
 
     async setDay(date) {
         const dayOfweek = date.getDay()
         if (dayOfweek != 1) {
-            const daysToadd = dayOfweek === 0 ? 1 : 8 - dayOfweek;
-            date.setDate(date.getDate() + daysToadd)
+            const daysToMonday = dayOfweek === 1 ? 1 : dayOfweek === 0 ? 0 : dayOfweek - 1
+            let monday = new Date(date.getTime() - daysToMonday * 24 * 60 * 60 * 1000);
+            return monday
+        }else{
+            return date
         }
-        return new Date(date)
     }
 
     async updateEvent(id, event: UpdateEventDto) {

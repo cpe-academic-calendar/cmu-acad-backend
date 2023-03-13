@@ -59,10 +59,10 @@
         "event_name": "วันรายงานตัวขึ้นทะเบียนเป็นนักศึกษา สําหรับนักศึกษาปริญญาตรี รหัส [cal-year]",
         "type": "กิจกรรม",
         "color": "#352829",
-        "reference_event": 1,
+        "reference_event": 3,
         "ref_start": "before",
         "num_weeks": 0,
-        "num_days": 12,
+        "num_days": 2,
         "duration_days": 3,
         "duration_weeks": 0,
         "start_date": null,
@@ -139,7 +139,7 @@
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
-        "num_days": 1,
+        "num_days": 2,
         "duration_weeks": 2,
         "duration_days": 0,
         "isOveride": false
@@ -496,7 +496,8 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 34,
@@ -705,7 +706,7 @@
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน) เทอม 2",
         "num_days": 0,
         "ref_start": "after",
-        "num_weeks": 10,
+        "num_weeks": 9,
         "reference_event": 33,
         "duration_days": 0,
         "duration_weeks": 1,

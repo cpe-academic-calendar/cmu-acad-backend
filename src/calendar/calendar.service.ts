@@ -26,11 +26,25 @@ export class CalendarService {
         Object.keys(eventData).forEach((key) => {
             arr.push(eventData[key])
         })
+
         Object.keys(jsonData).forEach((key) => {
-            const year = new Date(jsonData[key].start_date).setFullYear(new Date(calendar.start_semester).getFullYear())
-            jsonData[key].start_date = new Date(year)
+            const setYear = new Date(calendar.start_semester).getFullYear()
+            const setDate = (a) => {
+                return new Date(jsonData[key].start_date).setFullYear(a)
+            }    
+            if (jsonData[key].isNextYear == true) {
+                const year = setDate(setYear+1)
+                jsonData[key].start_date = new Date(year)
+                jsonData[key].event_name = `${jsonData[key].event_name} ${(new Date(year).getFullYear()) + 543}`
+            } else {
+                const year = setDate(setYear)
+                jsonData[key].start_date = new Date(year)
+                jsonData[key].event_name = `${jsonData[key].event_name} ${(new Date(year).getFullYear()) + 543}`
+            }
             arr.push(jsonData[key])
         })
+        // return eventData
+        // return jsonData
         await this.eventRepository.save(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
@@ -76,11 +90,11 @@ export class CalendarService {
     async findEventType(calendar_id) {
         return await this.calendarRepository.find({
             relations: ['events'],
-            select:{
-                events:{
+            select: {
+                events: {
                     event_name: true,
                     start_date: true,
-                    end_date:true
+                    end_date: true
                 }
             },
             where: {
@@ -95,7 +109,7 @@ export class CalendarService {
                 id: id,
                 events: [
                     {
-                        type: 'กิจกรรม' 
+                        type: 'กิจกรรม'
                     },
                     {
                         type: 'วันเปิดภาคเรียน'
