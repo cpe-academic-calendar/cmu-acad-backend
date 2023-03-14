@@ -4,6 +4,8 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
+import { Header, Res } from '@nestjs/common/decorators';
+import { Response } from 'express';
 
 @ApiTags('Calendar')
 @Controller('calendar')
@@ -30,10 +32,10 @@ export class CalendarController {
         const newCalendar = new Calendar();
         const oldCalendar = await this.calendarService.findEventById(calendar_id.id).then()
         const event = oldCalendar[0].events.map((ev) => ev);
-        const eve = await this.eventService.createArr(event) 
+        const eve = await this.eventService.createArr(event)
         newCalendar.name = calendar.name
         let arr = []
-        eve.map((dt)=>{
+        eve.map((dt) => {
             arr.push(dt)
         })
         newCalendar.events = [...arr]
@@ -109,4 +111,13 @@ export class CalendarController {
     async restore(@Param() id: number) {
         return await this.calendarService.restoreDelete(id)
     }
+
+    @Get('export/:id')
+    @Header('Content-Type', 'text/xlsx')
+    async exportFile(@Param() id, @Res() res: Response) {
+        const data = await this.calendarService.exportData(id.id)
+        res.download(`${data}`)
+    }
+
+
 }
