@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { Calendar } from '../calendar/calendar.entity';
 
 
@@ -92,5 +92,6 @@ export class Event {
 
     @ApiProperty({ type: () => Calendar })
     @ManyToOne(() => Calendar, calendar => calendar.events,{ onDelete: 'SET NULL' })
+    @JoinColumn()
     calendar: Calendar;
 }
