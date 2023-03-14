@@ -85,6 +85,9 @@ export class EventService {
                     const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days)
                     const start_date = new Date(year, month, day)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
                         const last_month = new Date(date).getMonth()
@@ -92,12 +95,15 @@ export class EventService {
                         const end_date = new Date(last_year, last_month, last_day)
                         return end_date
                     }
+<<<<<<< HEAD
 =======
                     const last_year = new Date(start_date).getFullYear()
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
 >>>>>>> 36127f4 (fix: invalid date)
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
 
                     if (event[i].isAffair == true) {
                         const newDate = await this.setDay(start_date)

@@ -23,6 +23,9 @@ export class CalendarService {
 
     async createCalendar(calendar: Calendar) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
         const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
@@ -61,6 +64,7 @@ export class CalendarService {
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
+<<<<<<< HEAD
 =======
             const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
             const jsonData = JSON.parse(data)
@@ -104,6 +108,8 @@ export class CalendarService {
                 calendar_status: calendarStatus
             }
         })
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
     }
 
     async findEventById(calendar_id) {
@@ -240,7 +246,12 @@ export class CalendarService {
         return await this.calendarRepository.restore(id)
     }
 
+<<<<<<< HEAD
     async exportEventData(id) {
+=======
+    async exportData(id) {
+        console.log(id)
+>>>>>>> 34162e3 (feat: export xlsx)
         const data = await this.calendarRepository.find({
             select: {
                 events: {
@@ -306,9 +317,12 @@ export class CalendarService {
         rows.unshift(label)
 
         sheet.addRows(rows)
+<<<<<<< HEAD
         sheet.getColumn(1).width = 100
         sheet.getColumn(2).width = 30
         sheet.getColumn(3).width = 30
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
 
         let File = await new Promise((resolve, reject) => {
             tmp.file({ discardDescriptor: true, prefix: 'ร่างปฏิทิน', postfix: '.xlsx' },
@@ -326,6 +340,7 @@ export class CalendarService {
 
         return File;
     }
+<<<<<<< HEAD
 
     async exportHolidayData(id){
         const data = await this.calendarRepository.find({
@@ -401,5 +416,7 @@ export class CalendarService {
         return File;
 
     }
+=======
+>>>>>>> 34162e3 (feat: export xlsx)
 }
 
