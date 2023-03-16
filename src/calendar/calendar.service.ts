@@ -62,6 +62,14 @@ export class CalendarService {
         return await this.calendarRepository.save(calendarData)
     }
 
+    async findByStatus(calendarStatus){
+        return await this.calendarRepository.find({
+            where:{
+                calendar_status: calendarStatus
+            }
+        })
+    }
+
     async findEventById(calendar_id) {
         return await this.calendarRepository.find({
             relations: ['events'],
@@ -196,8 +204,7 @@ export class CalendarService {
         return await this.calendarRepository.restore(id)
     }
 
-    async exportData(id) {
-        console.log(id)
+    async exportEventData(id) {
         const data = await this.calendarRepository.find({
             select: {
                 events: {
@@ -279,6 +286,81 @@ export class CalendarService {
         })
 
         return File;
+    }
+
+    async exportHolidayData(id){
+        const data = await this.calendarRepository.find({
+            select: {
+                events: {
+                    event_name: true,
+                    start_date: true,
+                }
+            },
+            where: {
+                id: id,
+                events: [
+                    {
+                        type: 'วันหยุด'
+                    }
+                ]
+            },
+            relations: ['events']
+        })
+        if (!data[0].events) {
+            throw new NotFoundException("No data to download.")
+        }
+
+        let rows = []
+        let arr = []
+
+        data[0].events.forEach(doc => {
+            arr.push(doc)
+        })
+
+        arr.map(idx => {
+            idx.event_name = idx.event_name
+            idx.start_date = new Date(idx.start_date).toLocaleDateString('th-TH',{
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+            })
+        })
+        arr.forEach(doc=>{
+            rows.push(Object.values(doc))
+        })
+
+    
+
+        let book = new Workbook();
+
+        let sheet = book.addWorksheet(`สรุปวันหยุด`)
+
+        let label = [
+            "ชื่อวันหยุด",
+            "วันที่"
+        ]
+
+        rows.unshift(label)
+
+        sheet.addRows(rows)
+
+        let File = await new Promise((resolve, reject) => {
+            tmp.file({ discardDescriptor: true, prefix: 'สรุปวันหยุด', postfix: '.xlsx' },
+                async (err, file) => {
+                    if (err)
+                        throw new BadRequestException(err);
+                    book.xlsx.writeFile(file).then(_ => {
+                        resolve(file)
+                    }).catch(err => {
+                        throw new BadRequestException(err)
+                    })
+                }
+            )
+        })
+
+        return File;
+
     }
 }
 

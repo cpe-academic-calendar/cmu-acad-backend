@@ -19,6 +19,11 @@ export class CalendarController {
         return await this.calendarService.createCalendar(calendar)
     }
 
+    @Get('findCalendarByType')
+    async findCalendarByStatus(@Query() calendarStatus){
+        return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
+    }
+
     @Get('studyweek/:id')
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
@@ -112,12 +117,17 @@ export class CalendarController {
         return await this.calendarService.restoreDelete(id)
     }
 
-    @Get('export/:id')
+    @Get('exportEvent/:id')
     @Header('Content-Type', 'text/xlsx')
     async exportFile(@Param() id, @Res() res: Response) {
-        const data = await this.calendarService.exportData(id.id)
+        const data = await this.calendarService.exportEventData(id.id)
         res.download(`${data}`)
     }
 
-
+    @Get('exportHoliday/:id')
+    @Header('Conten-TYpe', 'text/xlsx')
+    async exportHolidayFile(@Param() id,@Res() res: Response){
+        const data = await this.calendarService.exportHolidayData(id.id)
+        res.download(`${data}`)
+    }
 }

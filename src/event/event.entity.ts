@@ -83,11 +83,11 @@ export class Event {
     isAffair:  boolean
 
     @ApiProperty({ type: () => Event })
-    @ManyToOne(() => Event)
+    @ManyToOne(() => Event,{ onDelete: 'SET NULL' })
     reference_event: Event
 
     @ApiProperty({ type: () => Event })
-    @ManyToOne(() => Event)
+    @ManyToOne(() => Event,{ onDelete: 'SET NULL' })
     reference_condition: Event
 
     @ApiProperty({ type: () => Calendar })
