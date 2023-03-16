@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { Calendar } from '../calendar/calendar.entity';
 
 
@@ -83,14 +83,15 @@ export class Event {
     isAffair:  boolean
 
     @ApiProperty({ type: () => Event })
-    @ManyToOne(() => Event)
+    @ManyToOne(() => Event,{ onDelete: 'SET NULL' })
     reference_event: Event
 
     @ApiProperty({ type: () => Event })
-    @ManyToOne(() => Event)
+    @ManyToOne(() => Event,{ onDelete: 'SET NULL' })
     reference_condition: Event
 
     @ApiProperty({ type: () => Calendar })
     @ManyToOne(() => Calendar, calendar => calendar.events,{ onDelete: 'SET NULL' })
+    @JoinColumn()
     calendar: Calendar;
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, OneToMany} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, OneToMany, JoinColumn} from 'typeorm'
 import { Event } from '../event/event.entity';
 
 @Entity()
@@ -40,5 +40,6 @@ export class Calendar {
     
     @ApiProperty({ type: () => Event })
     @OneToMany(() => Event, events => events.calendar,{ onDelete: 'SET NULL' })
+    @JoinColumn()
     events : Event[]
 }
