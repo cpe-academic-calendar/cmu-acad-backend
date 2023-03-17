@@ -24,6 +24,7 @@ export class CalendarController {
         return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
     }
 
+
     @Get('studyweek/:id')
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
