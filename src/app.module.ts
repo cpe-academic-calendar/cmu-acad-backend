@@ -8,7 +8,6 @@ import { DataSource } from 'typeorm';
 import { Calendar } from './calendar/calendar.entity';
 import { Event } from './event/event.entity';
 import { EventModule } from './event/event.module';
-import { AuthenModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,7 +25,6 @@ import { AuthenModule } from './auth/auth.module';
     }),
     CalendarModule,
     EventModule,
-    AuthenModule
   ],
   controllers: [AppController],
   providers: [AppService],
