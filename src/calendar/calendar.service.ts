@@ -270,6 +270,9 @@ export class CalendarService {
         rows.unshift(label)
 
         sheet.addRows(rows)
+        sheet.getColumn(1).width = 100
+        sheet.getColumn(2).width = 30
+        sheet.getColumn(3).width = 30
 
         let File = await new Promise((resolve, reject) => {
             tmp.file({ discardDescriptor: true, prefix: 'ร่างปฏิทิน', postfix: '.xlsx' },
