@@ -22,10 +22,6 @@ export class CalendarService {
     ) { }
 
     async createCalendar(calendar: Calendar) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 34162e3 (feat: export xlsx)
         const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
@@ -64,42 +60,6 @@ export class CalendarService {
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
-<<<<<<< HEAD
-=======
-            const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
-            const jsonData = JSON.parse(data)
-            const eventData = await this.eventService.autoGenerate(calendar.start_semester)
-            let arr = []
-            const calendarData = await this.calendarRepository.create(calendar)
-            await Promise.all(eventData.map(async (ev) => {
-                ev.id = null;
-                arr.push(ev)
-            }));
-            await jsonData.map((data, idx) => {
-                const setYear = new Date(calendar.start_semester).getFullYear()
-                const setDate = (a) => {
-                    return new Date(jsonData[idx].start_date).setFullYear(a)
-                }
-                const setEventName = (b) => {
-                    return `${jsonData[idx].event_name} ${(new Date(b).getFullYear()) + 543}`
-                }
-                if (jsonData[idx].isNextYear == true) {
-                    const year = setDate(setYear + 1)
-                    jsonData[idx].start_date = new Date(year)
-                    jsonData[idx].end_date = new Date(year)
-                    jsonData[idx].event_name = setEventName(year)
-                } else {
-                    const year = setDate(setYear)
-                    jsonData[idx].start_date = new Date(year)
-                    jsonData[idx].end_date = new Date(year)
-                    jsonData[idx].event_name = setEventName(year)
-                }
-                arr.push(jsonData[idx])
-            })
-            await this.eventRepository.insert(arr)
-            calendarData.events = [...arr]
-            return await this.calendarRepository.save(calendarData)
->>>>>>> 36127f4 (fix: invalid date)
     }
 
     async findByStatus(calendarStatus){
@@ -108,8 +68,6 @@ export class CalendarService {
                 calendar_status: calendarStatus
             }
         })
-=======
->>>>>>> 34162e3 (feat: export xlsx)
     }
 
     async findEventById(calendar_id) {
@@ -246,12 +204,7 @@ export class CalendarService {
         return await this.calendarRepository.restore(id)
     }
 
-<<<<<<< HEAD
     async exportEventData(id) {
-=======
-    async exportData(id) {
-        console.log(id)
->>>>>>> 34162e3 (feat: export xlsx)
         const data = await this.calendarRepository.find({
             select: {
                 events: {
@@ -317,12 +270,9 @@ export class CalendarService {
         rows.unshift(label)
 
         sheet.addRows(rows)
-<<<<<<< HEAD
         sheet.getColumn(1).width = 100
         sheet.getColumn(2).width = 30
         sheet.getColumn(3).width = 30
-=======
->>>>>>> 34162e3 (feat: export xlsx)
 
         let File = await new Promise((resolve, reject) => {
             tmp.file({ discardDescriptor: true, prefix: 'ร่างปฏิทิน', postfix: '.xlsx' },
@@ -340,7 +290,6 @@ export class CalendarService {
 
         return File;
     }
-<<<<<<< HEAD
 
     async exportHolidayData(id){
         const data = await this.calendarRepository.find({
@@ -416,6 +365,4 @@ export class CalendarService {
         return File;
 
     }
-=======
->>>>>>> 34162e3 (feat: export xlsx)
 }
