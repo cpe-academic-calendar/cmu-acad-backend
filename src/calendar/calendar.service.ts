@@ -10,7 +10,8 @@ import { Inject } from '@nestjs/common/decorators';
 import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
 import { Workbook } from 'exceljs';
 import * as tmp from 'tmp'
-
+import { eachDayOfInterval } from 'date-fns'
+import { interval } from 'rxjs';
 
 @Injectable()
 export class CalendarService {
@@ -173,12 +174,17 @@ export class CalendarService {
         })
     }
 
-    async findByName(query) {
+    async findByName(query,filter) {
+        console.log(query)
+        console.log(filter)
         return await this.calendarRepository.find({
             where: {
-                'name': ILike(`%${query}%`)
+                'name': ILike(`%${query}%`) ,
+                'calendar_status': `${filter}`
             }
         })
+
+      
     }
 
     async findDelete(id) {
@@ -382,11 +388,9 @@ export class CalendarService {
                         event_name: ILike(`%วันปฐมนิเทศ%`)
                     },
                     {
-                        event_name: ILike(`%วันลงทะเบียน%`)
+                        event_name: ILike(`วันลงทะเบียนกระบวนวิชานักศึกษาใหม่%`)
                     },
                     {
-                        event_name: ILike(`วันลงทะเบียนกระบวนวิชานักศึกษาใหม่%`)
-                    }, {
                         type: 'วันเปิดภาคเรียน'
                     }, {
 
@@ -417,12 +421,30 @@ export class CalendarService {
 
         let sheet = book.addWorksheet(`โครงร่างปฏิทิน`)
 
-
-        console.log(data[0].events)
-
-        await this.setcell(data,sheet)
+        console.log(data[0].events.length)
 
 
+        //วันรายงานตัว 0
+        //precollege 1
+        //ลงทะเบียน 2
+        //เรียน 3
+        //สอบกลางภาค 5
+        //สอบไล่ 6
+        //ส่งผล 8
+        //ปรระกาศผล 10
+
+        await this.setcellData(data[0].events[0], sheet, 2)
+        await this.setcellData(data[0].events[1], sheet, 3)
+        await this.setcellData(data[0].events[2], sheet, 4)
+        await this.setcellData(data[0].events[3], sheet, 5)
+        await this.setcellData(data[0].events[4], sheet, 5)
+        await this.setcellData(data[0].events[5], sheet, 6)
+        await this.setcellData(data[0].events[6], sheet, 7)
+        await this.setcellData(data[0].events[7], sheet, 5)
+        await this.setcellData(data[0].events[8], sheet, 6)
+        // await this.setcellData(data[0].events[9], sheet, 11)
+        // await this.setcellData(data[0].events[10], sheet, 7)
+        // await this.setcellData(data[0].events[11], sheet, 5)        
 
 
         sheet.getCell('A2').value = 'รายงานตัว'
@@ -451,175 +473,320 @@ export class CalendarService {
         sheet.getCell('AX1').value = 'มิ.ย.'
 
         sheet.getCell('A2').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
-    }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
+        }
+
+        sheet.getCell('A2').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
 
         sheet.getCell('A3').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
-    }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
+        }
+
+        sheet.getCell('A3').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
+
+
         sheet.getCell('A4').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
-    }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
+        }
+
+        sheet.getCell('A4').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A5').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A5').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A6').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+
+        sheet.getCell('A6').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A7').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+
+        sheet.getCell('A7').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A8').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A8').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A9').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A9').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A10').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A10').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A11').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A11').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('A1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('A1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('B1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('B1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('F1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('F1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('R1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('R1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('V1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('V1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('Z1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('Z1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('J1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('J1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('N1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('N1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AD1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('AD1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AH1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('AH1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AL1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
-    }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
+        }
+        sheet.getCell('AL1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AP1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
+        sheet.getCell('AP1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AT1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
 
-    }
+        }
         sheet.getCell('AT1').border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' }
-    }
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
         sheet.getCell('AX1').fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF7CB0' },
-        bgColor: { argb: 'FF7CB0' }
-    }
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF7CB0' },
+            bgColor: { argb: 'FF7CB0' }
+        }
+        sheet.getCell('AX1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+        }
 
         sheet.mergeCells('B1: E1')
 
@@ -662,33 +829,33 @@ export class CalendarService {
         sheet.getCell('AX1').alignment = { horizontal: 'center', vertical: 'middle' };
 
         sheet.columns = [
-        { width: 15 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 },
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
-        , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }
-    ];
+            { width: 15 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 },
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }, { width: 3 }
+            , { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, { width: 3 }, , { width: 3 }, { width: 3 }
+        ];
 
         let File = await new Promise((resolve, reject) => {
-        tmp.file({ discardDescriptor: true, prefix: 'สรุปร่างปฏิทิน', postfix: '.xlsx' },
-            async (err, file) => {
-                if (err)
-                    throw new BadRequestException(err);
-                book.xlsx.writeFile(file).then(_ => {
-                    resolve(file)
-                }).catch(err => {
-                    throw new BadRequestException(err)
-                })
-            }
-        )
-    })
-return File
+            tmp.file({ discardDescriptor: true, prefix: 'สรุปร่างปฏิทิน', postfix: '.xlsx' },
+                async (err, file) => {
+                    if (err)
+                        throw new BadRequestException(err);
+                    book.xlsx.writeFile(file).then(_ => {
+                        resolve(file)
+                    }).catch(err => {
+                        throw new BadRequestException(err)
+                    })
+                }
+            )
+        })
+        return File
 
     }
 
-    async setcell(data,sheet){
+    async setcellData(data, sheet, num) {
         const setCell = (date, end, cell) => {
             if (date == end) {
                 sheet.getCell(cell).value = `${date}`
@@ -702,215 +869,189 @@ return File
                 bgColor: { argb: 'FF7CB0' }
             }
 
-        }  
-            const month = data[0].events[0].start_date.getMonth()
-            const date = data[0].events[0].start_date.getDate()
-            const end = data[0].events[0].start_date.getDate()
-            if (month == 6) {
-                if (date <= 7) {
-                    setCell(date, end, `B2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `C2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `D2`)
-                }
+        }
 
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `E2`)
+        const intervalDay = eachDayOfInterval({
+            start: data.start_date,
+            end: data.end_date
+        })
+
+        for (let i = 0; i < intervalDay.length; i++) {
+            const map_month = intervalDay[i].getMonth()
+            const interval_date = intervalDay[i].getDate()
+            if (map_month == 5) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `B${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `C${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `D${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `E${num}`)
                 }
             }
-            if (month == 7) {
-                if (date <= 7) {
-                    setCell(date, end, `F2`)
+            if (map_month == 6) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `F${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `G2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `G${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `H2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `H${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `I2`)
-                }
-
-            }
-            if (month == 8) {
-                if (date <= 7) {
-                    setCell(date, end, `J2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `K2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `L2`)
-                }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `M2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `I${num}`)
                 }
             }
-            if (month == 9) {
-                if (date <= 7) {
-                    setCell(date, end, `N2`)
+            if (map_month == 7) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `J${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `O2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `K${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `P2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `L${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `Q2`)
-                }
-            }
-            if (month == 10) {
-                if (date <= 7) {
-                    setCell(date, end, `R2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `S2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `T2`)
-                }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `U2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `M${num}`)
                 }
             }
-            if (month == 11) {
-                if (date <= 7) {
-                    setCell(date, end, `V2`)
+            if (map_month == 8) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `N${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `W2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `O${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `X2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `P${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `Y2`)
-                }
-            }
-
-            if (month == 12) {
-                if (date <= 7) {
-                    setCell(date, end, `Z2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AA2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AB2`)
-                }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AC2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `Q${num}`)
                 }
             }
-            if (month == 1) {
-                if (date <= 7) {
-                    setCell(date, end, `AD2`)
+            if (map_month == 9) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `R${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AE2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `S${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AF2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `T${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AG2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `U${num}`)
                 }
             }
-            if (month == 2) {
-                if (date <= 7) {
-                    setCell(date, end, `AH2`)
+            if (map_month == 10) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `V${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AI2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `W${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AJ2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `X${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AK2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `Y${num}`)
+                }
+            }
+            if (map_month == 11) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `Z${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AA${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AB${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AC${num}`)
+                }
+            }
+            if (map_month == 12) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `AD${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AE${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AF${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AG${num}`)
+                }
+            }
+            if (map_month == 1) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `AH${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AI${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AJ${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AK${num}`)
                 }
             }
 
-            if (month == 3) {
-                if (date <= 7) {
-                    setCell(date, end, `AL2`)
+            if (map_month == 2) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `AL${num}`)
                 }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AM2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AM${num}`)
                 }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AN2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AN${num}`)
                 }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AO2`)
-                }
-            }
-            if (month == 4) {
-                if (date <= 7) {
-                    setCell(date, end, `AP2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AQ2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AR2`)
-                }
-
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AS2`)
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AO${num}`)
                 }
             }
-            if (month == 5) {
-                if (date <= 7) {
-                    setCell(date, end, `AT2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AU2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AV2`)
-                }
 
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `AW2`)
+            if (map_month == 3) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `AP${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AQ${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AR${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AS${num}`)
                 }
             }
-            if (month == 6) {
-                if (date <= 7) {
-                    setCell(date, end, `AX2`)
-                }
-                if (date > 7 && date < 14) {
-                    setCell(date, end, `AY2`)
-                }
-                if (date >= 14 && date < 21) {
-                    setCell(date, end, `AZ2`)
-                }
 
-                if (date >= 21 && date < 31) {
-                    setCell(date, end, `BA2`)
+            if (map_month == 4) {
+                if (interval_date < 7) {
+                    setCell(interval_date, interval_date, `AT${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AU${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AV${num}`)
+                }
+                if (interval_date > 7 && interval_date < 14) {
+                    setCell(interval_date, interval_date, `AW${num}`)
                 }
             }
-        
+        }
     }
-
-
-
-
-
 }
 
 
