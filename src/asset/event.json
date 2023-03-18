@@ -336,7 +336,7 @@
     {
         "id": 26,
         "event_name": "วันสุดท้ายของการศึกษา",
-        "type": "กิจกรรม",
+        "type": "วันปิดภาคเรียน",
         "color": "#352829",
         "num_days": 0,
         "ref_start": "after",
@@ -689,7 +689,7 @@
         "reference_event": 45,
         "duration_days": 1,
         "duration_weeks": 0,
-        "type": "กิจกรรม",
+        "type": "วันปิดภาคเรียน",
         "isOveride": false
     },
     {
@@ -946,7 +946,7 @@
         "reference_event": 60,
         "duration_days": 0,
         "duration_weeks": 0,
-        "type": "กิจกรรม",
+        "type": "วันปิดภาคเรียน",
         "isOveride": false
     },
     {

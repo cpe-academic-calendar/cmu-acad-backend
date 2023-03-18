@@ -75,6 +75,7 @@ export class CalendarController {
 
     @Get('/findByName')
     async findName(@Query('query') query) {
+        console.log(query)
         return this.calendarService.findByName(query)
     }
 
@@ -126,9 +127,17 @@ export class CalendarController {
     }
 
     @Get('exportHoliday/:id')
-    @Header('Conten-TYpe', 'text/xlsx')
+    @Header('Conten-Type', 'text/xlsx')
     async exportHolidayFile(@Param() id,@Res() res: Response){
         const data = await this.calendarService.exportHolidayData(id.id)
         res.download(`${data}`)
+    }
+
+    @Get('exportDraft/:id')
+    @Header('Conten-Type', 'text/xlsx')
+    async exportDraftFile(@Param() id,@Res() res: Response){
+        const data = await this.calendarService.exportDraftCalendar(id.id)
+        res.download(`${data}`)
+        return data
     }
 }
