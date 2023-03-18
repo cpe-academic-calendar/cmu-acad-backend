@@ -417,18 +417,18 @@ export class CalendarService {
 
         let sheet = book.addWorksheet(`โครงร่างปฏิทิน`)
         const setCell = (date, end, cell) => {
-            if(date == end){
+            if (date == end) {
                 sheet.getCell(cell).value = `${date}`
-            }else{
+            } else {
                 sheet.getCell(cell).value = `${date}-${end}`
             }
             sheet.getCell(cell).fill = {
                 type: 'pattern',
                 pattern: 'solid',
-                fgColor: { argb: 'FFFFFF00' },
+                fgColor: { argb: 'FF7CB0' },
                 bgColor: { argb: 'FF7CB0' }
             }
-           
+
         }
 
         data[0].events.forEach((ev) => {
@@ -667,165 +667,171 @@ export class CalendarService {
         sheet.getCell('A2').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
         }
 
         sheet.getCell('A3').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
         }
         sheet.getCell('A4').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
         }
         sheet.getCell('A5').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A6').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A7').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A8').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A9').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A10').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A11').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('A1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('B1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('F1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('R1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('V1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('Z1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('J1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('N1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('AD1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('AH1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('AL1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
         }
         sheet.getCell('AP1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
         }
         sheet.getCell('AT1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
 
+        }
+        sheet.getCell('AT1').border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
         }
         sheet.getCell('AX1').fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFFFFF00' },
+            fgColor: { argb: 'FF7CB0' },
             bgColor: { argb: 'FF7CB0' }
         }
 
