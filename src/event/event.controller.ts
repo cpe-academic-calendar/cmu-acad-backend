@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { EventService } from './event.service';
 import { Event } from '../event/event.entity'
-import { UpdateEventDto } from './event.dto';
+import { EventDto, UpdateEventDto } from './event.dto';
 import { ApiTags } from '@nestjs/swagger/dist';
 
 @ApiTags('Event')
@@ -22,6 +22,7 @@ export class EventController {
         newEvent.type = event.type
         newEvent.calendar = event.calendar
         newEvent.start_date = event.start_date
+        newEvent.color = event.color
         return await this.eventService.createEvent(newEvent)
     }
 
@@ -32,7 +33,7 @@ export class EventController {
 
 
     @Put('/update/:id')
-    async updateEvent(@Param() id: number, @Body() event: UpdateEventDto) {
+    async updateEvent(@Param() id: number, @Body() event: Event) {
         return await this.eventService.updateEvent(id, event)
     }
 

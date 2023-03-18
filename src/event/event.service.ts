@@ -401,7 +401,7 @@ export class EventService {
         }
     }
 
-    async updateEvent(id, event: UpdateEventDto) {
+    async updateEvent(id, event: Event) {
         const eventData = await this.eventRepository.findOne({
             where: {
                 id: id.id
@@ -447,7 +447,6 @@ export class EventService {
             newEvent.start_date = event.start_date
             newEvent.event_name = event.event_name
             newEvent.type = event.type
-            newEvent.color = event.color
             return this.eventRepository.update(id, newEvent)
         }
 
