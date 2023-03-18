@@ -24,9 +24,11 @@ export class Event {
 
     @ApiProperty()
     @Column({
-        default: "#352829"
+        default: null
     })
     color: string
+
+    
 
     @ApiProperty()
     @Column({
