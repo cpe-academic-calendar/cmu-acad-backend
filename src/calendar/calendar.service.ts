@@ -840,25 +840,15 @@ export class CalendarService {
         sheet.mergeCells('F1: I1')
 
         sheet.mergeCells('J1: M1')
-
         sheet.mergeCells('N1: Q1')
-
         sheet.mergeCells('R1: U1')
-
         sheet.mergeCells('V1: Y1')
-
         sheet.mergeCells('Z1: AC1')
-
         sheet.mergeCells('AD1: AG1')
-
         sheet.mergeCells('AH1: AK1')
-
         sheet.mergeCells('AL1: AO1')
-
         sheet.mergeCells('AP1: AS1')
-
         sheet.mergeCells('AT1: AW1')
-
         sheet.mergeCells('AX1: BA1')
 
         sheet.getCell('B1').alignment = { horizontal: 'center', vertical: 'middle' };
