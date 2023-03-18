@@ -546,6 +546,18 @@
         "isOveride": false
     },
     {
+        "id": 41,
+        "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 2",
+        "num_days": 0,
+        "ref_start": "before",
+        "num_weeks": 1,
+        "reference_event": 33,
+        "duration_days": 0,
+        "duration_weeks": 1,
+        "type": "กิจกรรม",
+        "isOveride": false
+    },
+    {
         "id": 42,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 2,
