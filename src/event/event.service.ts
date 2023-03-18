@@ -447,6 +447,7 @@ export class EventService {
             newEvent.start_date = event.start_date
             newEvent.event_name = event.event_name
             newEvent.type = event.type
+            newEvent.color = event.color
             return this.eventRepository.update(id, newEvent)
         }
 
