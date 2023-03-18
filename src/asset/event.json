@@ -462,7 +462,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
-        "color": "#F57F17"
+        "color": "#F57F17",
         "isOveride": false,
         "isAffair": true
     },
@@ -813,7 +813,7 @@
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
         "isOveride": false,
-        "color": "#F57F17",
+        "color": "#F57F17"
     },
     {
         "id": 62,
