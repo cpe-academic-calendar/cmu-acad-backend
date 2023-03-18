@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, PartialType } from "@nestjs/swagger";
 
 export class EventDto {
     @ApiProperty()
@@ -39,7 +39,7 @@ export class EventDto {
 }
 
 export class UpdateEventDto {
-   
+    
     @ApiProperty()
     event_name: string;
 
@@ -48,4 +48,7 @@ export class UpdateEventDto {
 
     @ApiProperty()
     start_date: Date;
+
+    @ApiProperty()
+    color: string
 }
