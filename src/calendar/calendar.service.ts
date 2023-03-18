@@ -431,10 +431,10 @@ export class CalendarService {
 
         }
 
-        data[0].events.forEach((ev) => {
-            const month = ev.start_date.getMonth()
-            const date = ev.start_date.getDate()
-            const end = ev.start_date.getDate()
+        for(let i in data[0].events){
+            const month = data[0].events[0].start_date.getMonth()
+            const date = data[0].events[0].start_date.getDate()
+            const end = data[0].events[0].start_date.getDate()
             if (month == 6) {
                 if (date <= 7) {
                     setCell(date, end, 'B2')
@@ -633,8 +633,7 @@ export class CalendarService {
                     setCell(date, end, 'BA2')
                 }
             }
-
-        })
+        }
 
 
 
