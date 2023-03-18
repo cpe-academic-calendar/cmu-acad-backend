@@ -3,14 +3,14 @@
         "id": 1,
         "event_name": "วันเปิดภาคเรียน",
         "type": "วันเปิดภาคเรียน",
-        "color": "#352829",
+        "color": "#F57F17",
         "isOveride": false
     },
     {
         "id": 2,
         "event_name": "วันลงทะเบียนเรียนล่วงหน้า",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#EC407A",
         "reference_event": 1,
         "ref_start": "before",
         "num_days": 45,
@@ -24,7 +24,7 @@
         "id": 3,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนล่วงหน้าของนักศึกษาทางระบบ Internet",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#AB47BC",
         "reference_event": 2,
         "ref_start": "after-last",
         "num_days": 1,
@@ -37,7 +37,7 @@
         "id": 4,
         "event_name": "วันประกาศผลการลงทะเบียนล่วงหน้า",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#EC407A",
         "reference_event": 3,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -50,7 +50,7 @@
         "id": 5,
         "event_name": "วันลงทะเบียนกระบวนวิชานักศึกษาใหม่ รหัส",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#EC407A",
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -64,7 +64,7 @@
         "id": 6,
         "event_name": "วันรายงานตัวขึ้นทะเบียนเป็นนักศึกษา สําหรับนักศึกษาปริญญาตรี รหัส",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#347BBB",
         "reference_event": 5,
         "ref_start": "before",
         "num_weeks": 0,
@@ -78,7 +78,7 @@
         "id":7,
         "event_name": "วันปฐมนิเทศนักศึกษาใหม่ สําหรับนักศึกษาปริญญาตรี ",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#42A5F5",
         "reference_event": 6,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -91,7 +91,7 @@
         "id": 8,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite)",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#26A69A",
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -104,7 +104,7 @@
         "id": 9,
         "event_name": "วันลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา สำหรับนักศึกษาทุกระดับ",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#AB47BC",
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -117,7 +117,7 @@
         "id": 10,
         "event_name": "วันลงทะเบียนเพื่อใช้บริการของมหาวิทยาลัย",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#4CAF50",
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -130,7 +130,7 @@
         "id": 11,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FFA726",
         "reference_event": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -143,7 +143,7 @@
         "id": 12,
         "event_name": "วันสุดท้ายของการส่งเอกสารอนุมัติการย้ายสาขาวิชาสำหรับนักศึกษาปริญญาตรี ถึงสํานักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FF5722",
         "reference_event": 1,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -156,7 +156,7 @@
         "id": 13,
         "event_name": "วันที่อาจารย์ที่ปรึกษาให้ความเห็นชอบการลงทะเบียนเรียนของนักศึกษาทางระบบงานทะเบียน",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#347BBB",
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
@@ -169,7 +169,7 @@
         "id": 14,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#42A5F5",
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
@@ -183,7 +183,7 @@
         "id": 15,
         "event_name": "วันประกาศผลสรุปการลงทะเบียน/เพิ่ม-ถอนกระบวนวิชา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FF5722",
         "reference_event": 14,
         "ref_start": "before",
         "num_weeks": 0,
@@ -196,7 +196,7 @@
         "id": 16,
         "event_name": "วันรายงานตัวนักศึกษาปริญญาตรีที่คาดว่าจะสําเร็จการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FF5722",
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
@@ -210,7 +210,7 @@
         "id": 17,
         "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาหลังกําหนด",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#DD2C00",
         "reference_event": 14,
         "ref_start": "after",
         "num_days": 0,
@@ -224,7 +224,7 @@
         "id": 18,
         "event_name": "วันสอบกลางภาคการศึกษา (งดการสอน)",
         "type": "วันสอบ",
-        "color": "#352829",
+        "color": "#666AD1",
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
@@ -236,7 +236,7 @@
     {
         "id": 19,
         "event_name": "วันเตรียมสอบกลางภาคการศึกษา (งดการสอนและการสอบ)",
-        "type": "กิจกรรม",
+        "type": "วันหยุด",
         "color": "#352829",
         "reference_event": 18,
         "ref_start": "before",
@@ -250,7 +250,7 @@
         "id": 20,
         "event_name": "วันสอบไล่",
         "type": "วันสอบ",
-        "color": "#352829",
+        "color": "#666AD1",
         "reference_event": 1,
         "ref_start": "after",
         "num_days": 0,
@@ -264,7 +264,7 @@
         "id": 21,
         "event_name": "วันถอนกระบวนวิชาโดยได้รับอักษรลําดับขั้น W",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#EC407A",
         "num_weeks": 0,
         "ref_start": "after",
         "num_days": 0,
@@ -280,7 +280,7 @@
         "id": 22,
         "event_name": "วันยื่นคําร้องขออักษรลําดับขั้น V หรือขอเปลี่ยนอักษรลําดับขั้น V เป็นการวัดและประเมินผล สําหรับกระบวนวิชาระดับปริญญาตรี",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#AB47BC",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 2,
@@ -294,7 +294,7 @@
         "id": 23,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น I ถึงสํานักทะเบียนและประมวลผล สําหรับกระบวนวิชาระดับปริญญาตรี",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#347BBB",
         "num_days": 29,
         "ref_start": "after",
         "num_weeks": 0,
@@ -307,7 +307,7 @@
         "id": 24,
         "event_name": "วันพ้นสถานภาพนักศึกษาของนักศึกษาที่ไม่มาลงทะเบียนและมิได้ลาพักการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#42A5F5",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 0,
@@ -320,7 +320,7 @@
         "id": 25,
         "event_name": "วันสุดท้ายของการส่งหลักฐานการอนุมัติเรื่องเทียบแทนกระบวนวิชาระดับปริญญาตรีถึงสํานักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#26A69A",
         "num_weeks": 5,
         "num_days": 3,
         "ref_start": "after",
@@ -333,7 +333,7 @@
         "id": 26,
         "event_name": "วันขอรับอักษรลําดับขั้น I",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#4CAF50",
         "num_weeks": 1,
         "ref_start": "before",
         "num_days": 0,
@@ -362,7 +362,7 @@
         "id": 28,
         "event_name": "วันสุดท้ายของการขอแก้ไขชื่อ-สกุล ของนักศึกษาระดับปริญญาตรี ที่คาดว่าจะสําเร็จการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FFA726",
         "num_days": 4,
         "ref_start": "after",
         "num_weeks": 16,
@@ -376,7 +376,7 @@
         "id": 29,
         "event_name": "วันปิดภาคการศึกษาและวันสําเร็จการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#FF5722",
         "num_days": 1,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -389,7 +389,7 @@
         "id": 30,
         "event_name": "วันแจ้งหนี้สินผ่านระบบสำนักทะเบียนและประมวลผล",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#DD2C00",
         "num_days": 1,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -402,7 +402,7 @@
         "id": 31,
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#EC407A",
         "num_days": 8,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -415,7 +415,7 @@
         "id": 32,
         "event_name": "วันสุดท้ายของการส่งเอกสารการลาออก โดยได้รับอักษรลําดับขั้น W สําหรับนักศึกษาปริญญาตรี",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#AB47BC",
         "num_days": 1,
         "ref_start": "before",
         "num_weeks": 0,
@@ -428,7 +428,7 @@
         "id": 33,
         "event_name": "วันประกาศผลการศึกษา",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#347BBB",
         "num_days": 3,
         "ref_start": "after",
         "num_weeks": 0,
@@ -441,7 +441,7 @@
         "id": 34,
         "event_name": "วันสุดท้ายของการส่งลําดับขั้นแก้อักษรลําดับขั้น P",
         "type": "กิจกรรม",
-        "color": "#352829",
+        "color": "#42A5F5",
         "num_days": 8,
         "ref_start": "after-last",
         "num_weeks": 0,
@@ -462,6 +462,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
+        "color": "#F57F17"
         "isOveride": false,
         "isAffair": true
     },
@@ -476,6 +477,7 @@
         "duration_weeks": 1,
         "type": "กิจกรรม",
         "isOveride": false,
+        "color": "#26A69A",
         "isAffair": true
     },
     {
@@ -488,6 +490,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false
     },
     {
@@ -500,6 +503,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FFA726",
         "isOveride": false
     },
     {
@@ -512,6 +516,7 @@
         "duration_days": 0,
         "duration_weeks": 1,
         "type": "กิจกรรม",
+        "color": "#FF5722",
         "isOveride": false
     },
     {
@@ -524,6 +529,7 @@
         "duration_days": 0,
         "duration_weeks": 2,
         "type": "กิจกรรม",
+        "color": "#DD2C00",
         "isOveride": false
     },
     {
@@ -536,6 +542,7 @@
         "duration_days": 0,
         "duration_weeks": 1,
         "type": "กิจกรรม",
+        "color": "#EC407A",
         "isOveride": false
     },
     {
@@ -548,6 +555,7 @@
         "duration_days": 0,
         "duration_weeks": 2,
         "type": "กิจกรรม",
+        "color": "#AB47BC",
         "isOveride": false
     },
     {
@@ -560,6 +568,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#347BBB",
         "isOveride": false,
         "isAffair": true
     },
@@ -573,6 +582,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#42A5F5",
         "isOveride": false
     },
     {
@@ -585,6 +595,7 @@
         "duration_days": 5,
         "duration_weeks": 1,
         "type": "กิจกรรม",
+        "color": "#26A69A",
         "isOveride": false,
         "isAffair": true
     },
@@ -598,6 +609,7 @@
         "duration_weeks": 2,
         "duration_days": 0,
         "type": "วันสอบ",
+        "color": "#4CAF50",
         "isOveride": false,
         "isAffair": true
     },
@@ -613,6 +625,7 @@
         "duration_weeks": 4,
         "duration_days": 3,
         "type": "กิจกรรม",
+        "color": "#FFA726",
         "isOveride": false,
         "isAffair": true
     },
@@ -626,6 +639,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false,
         "isAffair": true
     },
@@ -639,6 +653,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FFA726",
         "isOveride": false
     },
     {
@@ -651,6 +666,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FF5722",
         "isOveride": false
     },
     {
@@ -663,6 +679,7 @@
         "duration_days": 0,
         "duration_weeks": 1,
         "type": "วันสอบ",
+        "color": "#666AD1",
         "isOveride": false
     },
     {
@@ -674,7 +691,8 @@
         "reference_event": 51,
         "duration_days": 0,
         "duration_weeks": 1,
-        "type": "วันสอบ",
+        "type": "วันหยุด",
+        "color": "#352829",
         "isOveride": false
     },
     {
@@ -689,6 +707,7 @@
         "ref_end": "after-last",
         "reference_condition": 46,
         "type": "กิจกรรม",
+        "color": "#347BBB",
         "isOveride": false,
         "isAffair": true
     },
@@ -702,6 +721,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "วันปิดภาคเรียน",
+        "color": "#347BBB",
         "isOveride": false
     },
     {
@@ -714,6 +734,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#AB47BC",
         "isOveride": false
     },
     {
@@ -726,6 +747,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#347BBB",
         "isOveride": false
     },
     {
@@ -738,6 +760,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false
     },
     {
@@ -750,6 +773,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false
     },
     {
@@ -762,6 +786,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#26A69A",
         "isOveride": false
     },
     {
@@ -774,6 +799,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false
     },
     {
@@ -786,7 +812,8 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
-        "isOveride": false
+        "isOveride": false,
+        "color": "#F57F17",
     },
     {
         "id": 62,
@@ -798,6 +825,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FFA726",
         "isOveride": false
     },
     {
@@ -810,6 +838,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FF5722",
         "isOveride": false
     },
     {
@@ -822,6 +851,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FF5722",
         "isOveride": false
     },
     {
@@ -834,6 +864,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#DD2C00",
         "isOveride": false
     },
     {
@@ -846,6 +877,7 @@
         "duration_days": 1,
         "duration_weeks": 5,
         "type": "กิจกรรม",
+        "color": "#EC407A",
         "isOveride": false
     },
     {
@@ -858,6 +890,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#347BBB",
         "isOveride": false
     },
     {
@@ -870,6 +903,7 @@
         "duration_days": 3,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#42A5F5",
         "isOveride": false
     },
     {
@@ -882,6 +916,7 @@
         "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#26A69A",
         "isOveride": false,
         "isAffair": true
     },
@@ -895,6 +930,7 @@
         "duration_days": 12,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#4CAF50",
         "isOveride": false,
         "isAffair": true
     },
@@ -908,6 +944,7 @@
         "duration_days": 5,
         "duration_weeks": 2,
         "type": "กิจกรรม",
+        "color": "#FFA726",
         "isOveride": false,
         "isAffair": true
     },
@@ -921,6 +958,7 @@
         "duration_days": 2,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#FF5722",
         "isOveride": false,
         "isAffair": true
     },
@@ -934,6 +972,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#DD2C00",
         "isOveride": false
     },
     {
@@ -946,6 +985,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#EC407A",
         "isOveride": false,
         "isAffair": true
     },
@@ -959,6 +999,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันปิดภาคเรียน",
+        "color": "#F57F17",
         "isOveride": false
     },
     {
@@ -971,6 +1012,7 @@
         "duration_days": 4,
         "duration_weeks": 0,
         "type": "วันสอบ",
+        "color": "#666AD1",
         "isOveride": false,
         "isAffair": true
     },
@@ -984,6 +1026,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#EC407A",
         "isOveride": false
     },
     {
@@ -996,6 +1039,7 @@
         "duration_days": 4,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#AB47BC",
         "isOveride": false
     },
     {
@@ -1008,6 +1052,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#42A5F5",
         "isOveride": false
     },
     {
@@ -1020,6 +1065,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "กิจกรรม",
+        "color": "#26A69A",
         "isOveride": false
     }
    
