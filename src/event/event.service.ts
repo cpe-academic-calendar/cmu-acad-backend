@@ -441,6 +441,7 @@ export class EventService {
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
+
         } else {
             const newEvent = new Event()
             const change_date = new Date(event.start_date)
