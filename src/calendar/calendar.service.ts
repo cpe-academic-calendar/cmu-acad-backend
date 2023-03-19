@@ -104,7 +104,7 @@ export class CalendarService {
             select: {
                 events: {
                     event_name: true,
-                    start_date: true,
+                    date: true,
                     id: true,
                     color: true,
                     type: true
