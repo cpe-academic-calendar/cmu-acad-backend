@@ -445,7 +445,6 @@ export class EventService {
 
         } else {
             const newEvent = new Event()
-
             const arr = await this.eventRepository.find({
                 where: {
                     calendar: {
