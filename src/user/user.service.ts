@@ -14,10 +14,6 @@ export class UserService {
     ) {}
 
     async saveData(userData) {
-            console.log(userData)
-            console.log(this.jwtService.sign({
-                sub: userData.cmuitaccount
-            }))
             return this.jwtService.sign({
                 sub: userData.cmuitaccount
             })

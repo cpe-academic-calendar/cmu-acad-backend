@@ -286,6 +286,38 @@ export class CalendarService {
             }, relations: ['events']
         })
 
+        const holiday2 = await this.calendarRepository.find({
+            where: {
+                id: id,
+                events: [
+                    {
+                        start_date: Between(
+                            new Date(ex2[0].events[0].start_date),
+                            new Date(ex2[0].events[1].start_date)
+                        ),
+                        type: 'วันหยุด'
+                    }
+                ]
+            }, relations: ['events']
+        })
+
+        const holiday3 = await this.calendarRepository.find({
+            where: {
+                id: id,
+                events: [
+                    {
+                        start_date: Between(
+                            new Date(ex3[0].events[0].start_date),
+                            new Date(ex3[0].events[1].start_date)
+                        ),
+                        type: 'วันหยุด'
+                    }
+                ]
+            }, relations: ['events']
+        })
+        console.log(holiday3)
+
+
         const duration = intervalToDuration({
             start: new Date(ex1[0].events[0].start_date),
             end: new Date(ex1[0].events[1].start_date)
@@ -368,8 +400,6 @@ export class CalendarService {
             weekday: 'long',
         })}  `
 
-
-
         sheet.getCell('B1').alignment = { horizontal: 'center', vertical: 'middle' };
         sheet.getCell('C2').value = Math.floor(Number(studyweek))
         sheet.getCell('C3').value = Math.floor(Number(studyweek2))
@@ -398,6 +428,12 @@ export class CalendarService {
         sheet.getCell('A6').value = 'วันหยุดของภาคเรียนที่ 1'
         sheet.getCell('B6').value = 'ชื่อวัน'
 
+        sheet.getCell('D6').value = 'วันหยุดของภาคเรียนที่ 2'
+        sheet.getCell('E6').value = 'ชื่อวัน'
+
+        sheet.getCell('G6').value = 'วันหยุดของภาคเรียนที่ 3'
+        sheet.getCell('H6').value = 'ชื่อวัน'
+
         for (let i in holiday[0].events) {
             sheet.getCell(`A${7 + Number(i)}`).value = holiday[0].events[i].start_date.toLocaleDateString('th-TH', {
                 year: 'numeric',
@@ -407,6 +443,30 @@ export class CalendarService {
             })
             sheet.getCell(`B${Number(7 + Number(i))}`).value = holiday[0].events[i].event_name
         }
+
+
+        for (let i in holiday2[0].events) {
+            sheet.getCell(`D${7 + Number(i)}`).value = holiday2[0].events[i].start_date.toLocaleDateString('th-TH', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+            })
+            sheet.getCell(`E${Number(7 + Number(i))}`).value = holiday2[0].events[i].event_name
+        }
+
+        if (holiday3.length != 0) {
+            for (let i in holiday3[0].events) {
+                sheet.getCell(`G${7 + Number(i)}`).value = holiday3[0].events[i].start_date.toLocaleDateString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    weekday: 'long',
+                })
+                sheet.getCell(`H${Number(7 + Number(i))}`).value = holiday3[0].events[i].event_name
+            }
+        }
+
 
 
 

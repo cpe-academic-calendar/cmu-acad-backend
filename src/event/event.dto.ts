@@ -5,9 +5,6 @@ export class EventDto {
     event_name: string;
 
     @ApiProperty()
-    date: string;
-
-    @ApiProperty()
     color: string;
 
     @ApiProperty()
@@ -52,7 +49,5 @@ export class UpdateEventDto {
     @ApiProperty()
     color: string
 
-    @ApiProperty()
-    date: string;
 
 }
