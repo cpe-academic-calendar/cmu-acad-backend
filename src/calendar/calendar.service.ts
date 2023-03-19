@@ -57,6 +57,7 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
+        console.log("before",arr)
         const calendarEvents = arr.map(event => {
             const startDate = new Date(event.start_date);
             const endDate = new Date(event.end_date);
@@ -85,9 +86,10 @@ export class CalendarService {
                 calendar: null
             }));
         }).flat()
-        await this.eventRepository.insert(calendarEvents)
-        calendarData.events = [...calendarEvents]
-        return await this.calendarRepository.save(calendarData)
+
+        // await this.eventRepository.insert(calendarEvents)
+        // calendarData.events = [...calendarEvents]
+        // return await this.calendarRepository.save(calendarData)
     }
 
     async findByStatus(calendarStatus) {
