@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
+import { UpdateEventDto } from './event.dto';
 import { Not } from 'typeorm';
 
 @Injectable()
@@ -105,7 +106,6 @@ export class EventService {
                         event[i].start_date = start_date
                         event[i].end_date = setLastdate(start_date)
                     }
-
 
                 }
                 if (event[i].ref_start == 'after') {
@@ -294,26 +294,25 @@ export class EventService {
             }
 
             if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
-                holiday.push(evnetArr[i].date)
+                holiday.push(evnetArr[i].start_date)
             }
         }
 
 
+
         const dateArr1 = eachDayOfInterval({
-            start: new Date(`${start[0].date}`),
-            end: new Date(`${end[0].date}`)
+            start: new Date(`${start[0].start_date}`),
+            end: new Date(`${end[0].start_date}`)
         })
         const dateArr2 = eachDayOfInterval({
-            start: new Date(`${start2[0].date}`),
-            end: new Date(`${end2[0].date}`)
+            start: new Date(`${start2[0].start_date}`),
+            end: new Date(`${end2[0].start_date}`)
         })
-
-        console.log(dateArr2)
 
 
         const dateArr3 = eachDayOfInterval({
-            start: new Date(`${start3[0].date}`),
-            end: new Date(`${end3[0].date}`)
+            start: new Date(`${start3[0].start_date}`),
+            end: new Date(`${end3[0].start_date}`)
         })
 
 
@@ -417,6 +416,7 @@ export class EventService {
         })
 
 
+
         const arr = await this.eventRepository.find({
             where: {
 
@@ -427,8 +427,8 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
-        const change_date = new Date(event.date)
-        const old_date = new Date(eventData.date)
+        const change_date = new Date(event.start_date)
+        const old_date = new Date(eventData.start_date)
         let diffTime = (change_date.getTime() - old_date.getTime());
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
@@ -437,42 +437,19 @@ export class EventService {
                 if (arr[idx].isOveride == false) {
                     const newEvent = new Event()
                     const eventDate = arr[idx].start_date.getDate()
-                    newEvent.date = new Date(arr[idx].date.setDate(eventDate + diffDays))
-                    newEvent.date = new Date(arr[idx].date.setDate(eventDate + diffDays))
+                    newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
-
         } else {
             const newEvent = new Event()
-            const arr = await this.eventRepository.find({
-                where: {
-                    calendar: {
-                        id: eventData.calendar.id
-                    },
-                    event_name: eventData.event_name
-                   
-                }
-            })
-
-            const data = await arr.map(async (date: any,idx: any)=>{
             newEvent.isOveride = true
-            console.log(event.date)
-            const date_ev = new Date(event.date).getDate()
-            newEvent.date =  new Date(new Date(event.date).getFullYear(),new Date(event.date).getMonth(),(date_ev + idx)-1)
-            newEvent.event_name = eventData.event_name
-            newEvent.type = eventData.type
-            newEvent.color = eventData.color
-            console.log(newEvent)
-            await this.eventRepository.update(date.id, {
-                    isOveride: true,
-                    date: newEvent.date,
-                    event_name: eventData.event_name,
-                    type: eventData.type,
-                    color: eventData.color
-            })
-            })
-            return data
+            newEvent.start_date = event.start_date
+            newEvent.event_name = event.event_name
+            newEvent.type = event.type
+            newEvent.color = event.color
+            return this.eventRepository.update(id, newEvent)
         }
 
     }
@@ -495,5 +472,4 @@ export class EventService {
         return await this.eventRepository.save(data)
     }
 }
-
 
