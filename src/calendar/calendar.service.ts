@@ -87,9 +87,9 @@ export class CalendarService {
             }));
         }).flat()
 
-        // await this.eventRepository.insert(calendarEvents)
-        // calendarData.events = [...calendarEvents]
-        // return await this.calendarRepository.save(calendarData)
+        await this.eventRepository.insert(calendarEvents)
+        calendarData.events = [...calendarEvents]
+        return await this.calendarRepository.save(calendarData)
     }
 
     async findByStatus(calendarStatus) {
