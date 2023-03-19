@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
-import { UpdateEventDto } from './event.dto';
 import { Not } from 'typeorm';
 
 @Injectable()
@@ -446,12 +445,22 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
-            newEvent.isOveride = true
-            newEvent.start_date = event.start_date
-            newEvent.event_name = event.event_name
-            newEvent.type = event.type
-            newEvent.color = event.color
-            return this.eventRepository.update(id, newEvent)
+            const arr = await this.eventRepository.find({
+                where: {
+                    calendar: {
+                        id: eventData.calendar.id
+                    },
+                    event_name: eventData.event_name
+                   
+                }
+            })
+            console.log(arr)
+            // newEvent.isOveride = true
+            // newEvent.start_date = event.start_date
+            // newEvent.event_name = event.event_name
+            // newEvent.type = event.type
+            // newEvent.color = event.color
+            // return this.eventRepository.update(id, newEvent)
         }
 
     }
