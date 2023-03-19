@@ -58,6 +58,38 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
+<<<<<<< HEAD
+=======
+        
+        const calendarEvents = arr.map(event => {
+            const startDate = new Date(event.start_date);
+            const endDate = new Date(event.end_date);
+            const dates = [];
+            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+                dates.push(new Date(date));
+            }
+            return dates.map(date => ({
+                id: event.id,
+                event_name: event.event_name,
+                color: event.color,
+                type: event.type,
+                date: date,
+                isOveride: false,
+                ref_start: null,
+                ref_end: null,
+                start_date: null,
+                end_date: null,
+                num_weeks: null, 
+                num_days:null, 
+                duration_weeks:null, 
+                duration_days:null,
+                isAffair: null, 
+                reference_event:null, 
+                reference_condition:null,
+                calendar: null
+            }));
+        }).flat()
+>>>>>>> e02dfa8 (chore/ update-multiple day)
 
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
@@ -307,9 +339,9 @@ export class CalendarService {
                 id: id,
                 events: [
                     {
-                        start_date: Between(
-                            new Date(ex1[0].events[0].start_date),
-                            new Date(ex1[0].events[1].start_date)
+                        date: Between(
+                            new Date(ex1[0].events[0].date),
+                            new Date(ex1[0].events[1].date)
                         ),
                         type: 'วันหยุด'
                     }
@@ -364,18 +396,18 @@ export class CalendarService {
 
 
         const duration = intervalToDuration({
-            start: new Date(ex1[0].events[0].start_date),
-            end: new Date(ex1[0].events[1].start_date)
+            start: new Date(ex1[0].events[0].date),
+            end: new Date(ex1[0].events[1].date)
         })
 
         const duration2 = intervalToDuration({
-            start: new Date(ex2[0].events[0].start_date),
-            end: new Date(ex2[0].events[1].start_date)
+            start: new Date(ex2[0].events[0].date),
+            end: new Date(ex2[0].events[1].date)
         })
 
         const duration3 = intervalToDuration({
-            start: new Date(ex3[0].events[0].start_date),
-            end: new Date(ex3[0].events[1].start_date)
+            start: new Date(ex3[0].events[0].date),
+            end: new Date(ex3[0].events[1].date)
         })
 
         const studyweek = ((((duration.months * 30) + duration.days) / 7)).toFixed(2)

@@ -404,6 +404,10 @@ export class EventService {
             }
         })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e02dfa8 (chore/ update-multiple day)
         const arr = await this.eventRepository.find({
             where: {
                 type: 'กิจกรรม',
@@ -413,7 +417,6 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
-<<<<<<< HEAD
 
         const changEnd_date = new Date(event.end_date)
         const oldEnd_date = new Date(eventData.end_date)
@@ -421,10 +424,6 @@ export class EventService {
         let diffDaysEnd = Math.ceil(diffTimeEnd / (1000 * 60 * 60 * 24));
         const change_date = new Date(event.start_date)
         const old_date = new Date(eventData.start_date)
-=======
-        const change_date = new Date(event.date)
-        const old_date = new Date(eventData.date)
->>>>>>> e72d22f (fix: update multiple date)
         let diffTime = (change_date.getTime() - old_date.getTime());
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
