@@ -812,8 +812,12 @@
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
         "isOveride": false,
+<<<<<<< HEAD
         "color": "#F57F17",
         "isAffair": true
+=======
+        "color": "#F57F17"
+>>>>>>> 88337fa (fix: json)
     },
     {
         "id": 62,
