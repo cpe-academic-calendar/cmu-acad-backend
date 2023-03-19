@@ -404,10 +404,6 @@ export class EventService {
             }
         })
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e02dfa8 (chore/ update-multiple day)
         const arr = await this.eventRepository.find({
             where: {
                 type: 'กิจกรรม',
@@ -445,7 +441,6 @@ export class EventService {
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
-
         } else {
             const newEvent = new Event()
             const change_date = new Date(event.start_date)
@@ -473,6 +468,7 @@ export class EventService {
                 newEvent.start_date = new Date(eventData.start_date.setDate(start))
                 newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
             }
+            // }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name
             newEvent.type = event.type
@@ -500,4 +496,3 @@ export class EventService {
         return await this.eventRepository.save(data)
     }
 }
-
