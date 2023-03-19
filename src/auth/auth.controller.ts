@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Redirect, Res } from '@nestjs/common';
-import { AuthenService } from './auth.service';
+import { AuthService } from './auth.service';
 import { HttpService } from '@nestjs/axios';
 import { Code } from 'typeorm';
 import { map } from 'rxjs';
@@ -36,8 +36,8 @@ export class AuthenController {
                 }
             }
             ).toPromise();
-            await this.userService.saveData(response.data)
-            res.redirect(`http://localhost:3000`);
+            const getToken = await this.userService.saveData(response.data)
+            res.redirect(`http://localhost:3000/${getToken}`);
         } catch (error) {
             // handle error
         }
