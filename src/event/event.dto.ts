@@ -51,4 +51,8 @@ export class UpdateEventDto {
 
     @ApiProperty()
     color: string
+
+    @ApiProperty()
+    date: string;
+
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 
 @Entity()
@@ -33,4 +33,8 @@ export class User {
     @ApiProperty()
     @Column()
     itaccounttype_id: String
+
+    @ApiProperty()
+    @Column()
+    role: String
 }

@@ -1,5 +1,7 @@
-import { Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Permission } from './permission.entity';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @ApiTags('User')
@@ -17,14 +19,29 @@ export class UserController {
         return await this.userService.findById(id.id)
     }
 
+
     @Get('findByName')
     async findByName(@Param() user){
         return await this.userService.findByName(user.firstname_EN)
     }
 
+
     @Put('update/:id')
-    async updateUser(@Param() user){
-        return await this.userService.setPermission(user._id)
+    async updateUser(@Param() user,@Body() info: User){
+        return await this.userService.updateUser(user._id,info)
     }
+
+    @Put('setRole/:id')
+    async changeRole(@Param() user,@Body() role: User){
+        return await this.userService.setRole(user._id,role)
+    }
+
+    @Get('setEdit/:id')
+    async setEdit(@Param() user){
+        const newPermission = new Permission()
+        newPermission.user_id = [...user.id]
+        return await this.userService.setEdit(newPermission)
+    }
+
 
 }

@@ -52,6 +52,12 @@ export class Event {
     @CreateDateColumn({
         default: null
     })
+    date: Date
+
+    @ApiProperty()
+    @CreateDateColumn({
+        default: null
+    })
     end_date: Date
 
     @ApiProperty()

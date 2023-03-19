@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, CustomRepositoryCannotInheritRepositoryError, ILike, Repository } from 'typeorm';
+import { Between, ILike, Repository } from 'typeorm';
 import { Calendar } from './calendar.entity';
 import { Event } from 'src/event/event.entity';
 import { EventType } from 'src/asset/enum';
@@ -105,7 +105,6 @@ export class CalendarService {
                 events: {
                     event_name: true,
                     start_date: true,
-                    end_date: true,
                     id: true,
                     color: true,
                     type: true
