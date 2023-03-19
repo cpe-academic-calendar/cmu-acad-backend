@@ -442,6 +442,7 @@ export class EventService {
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
+
         } else {
             const newEvent = new Event()
             const arr = await this.eventRepository.find({
@@ -453,20 +454,23 @@ export class EventService {
                    
                 }
             })
+        
             const data = await arr.map(async (date: any,idx: any)=>{
             newEvent.isOveride = true
             const date_ev = new Date(event.date).getDate()
-            newEvent.date = new Date(new Date(event.date).getFullYear(),new Date(event.date).getMonth(),date_ev + idx)
-            console.log(newEvent.date)
+            newEvent.date =  new Date(new Date(event.date).getFullYear(),new Date(event.date).getMonth(),date_ev + idx)
             newEvent.event_name = eventData.event_name
             newEvent.type = eventData.type
             newEvent.color = eventData.color
-            console.log(await this.eventRepository.update(date.id, newEvent))
-            return  await this.eventRepository.update(date.id, newEvent)
+            await this.eventRepository.update(date.id, {
+                    isOveride: true,
+                    date: newEvent.date,
+                    event_name: eventData.event_name,
+                    type: eventData.type,
+                    color: eventData.color
             })
-           
+            })
             return data
-          
         }
 
     }
