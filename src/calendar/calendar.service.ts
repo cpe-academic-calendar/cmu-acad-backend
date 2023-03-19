@@ -57,8 +57,36 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
-        await this.eventRepository.insert(arr)
-        calendarData.events = [...arr]
+        const calendarEvents = arr.map(event => {
+            const startDate = new Date(event.start_date);
+            const endDate = new Date(event.end_date);
+            const dates = [];
+            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+                dates.push(new Date(date));
+            }
+            return dates.map(date => ({
+                id: event.id,
+                event_name: event.event_name,
+                color: event.color,
+                type: event.type,
+                date: date,
+                isOveride: false,
+                ref_start: null,
+                ref_end: null,
+                start_date: null,
+                end_date: null,
+                num_weeks: null, 
+                num_days:null, 
+                duration_weeks:null, 
+                duration_days:null,
+                isAffair: null, 
+                reference_event:null, 
+                reference_condition:null,
+                calendar: null
+            }));
+        }).flat()
+        await this.eventRepository.insert(calendarEvents)
+        calendarData.events = [...calendarEvents]
         return await this.calendarRepository.save(calendarData)
     }
 
@@ -278,7 +306,7 @@ export class CalendarService {
                         start_date: Between(
                             new Date(ex1[0].events[0].start_date),
                             new Date(ex1[0].events[1].start_date)
-                                        ),
+                        ),
                         type: 'วันหยุด'
                     }
                 ]
@@ -399,15 +427,15 @@ export class CalendarService {
 
         sheet.getCell('A6').value = 'วันหยุดของภาคเรียนที่ 1'
         sheet.getCell('B6').value = 'ชื่อวัน'
-        
-        for(let i in holiday[0].events){
-                sheet.getCell(`A${7+Number(i)}`).value = holiday[0].events[i].start_date.toLocaleDateString('th-TH', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    weekday: 'long',
-                })
-                sheet.getCell(`B${Number(7+Number(i))}`).value = holiday[0].events[i].event_name
+
+        for (let i in holiday[0].events) {
+            sheet.getCell(`A${7 + Number(i)}`).value = holiday[0].events[i].start_date.toLocaleDateString('th-TH', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+            })
+            sheet.getCell(`B${Number(7 + Number(i))}`).value = holiday[0].events[i].event_name
         }
 
 

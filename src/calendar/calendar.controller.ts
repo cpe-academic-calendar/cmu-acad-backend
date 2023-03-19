@@ -148,7 +148,6 @@ export class CalendarController {
         let arr = []
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         const dataWeek = await this.eventService.countWeek(arr)
-
         const data = await this.calendarService.exportStudyData(id.id,dataWeek)
         res.download(`${data}`)
         return data
