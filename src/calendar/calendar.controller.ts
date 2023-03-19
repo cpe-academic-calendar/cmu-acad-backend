@@ -139,4 +139,18 @@ export class CalendarController {
         res.download(`${data}`)
         return data
     }
+
+
+    @Get('exportStudy/:id')
+    @Header('Content-Type','text/xlsx')
+    async exportStudyFile(@Param() id,@Res() res: Response){
+        const event = await this.calendarService.findEventById(id.id)
+        let arr = []
+        event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
+        const dataWeek = await this.eventService.countWeek(arr)
+
+        const data = await this.calendarService.exportStudyData(id.id,dataWeek)
+        res.download(`${data}`)
+        return data
+    }
 }

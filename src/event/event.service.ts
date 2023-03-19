@@ -310,7 +310,6 @@ export class EventService {
         })
 
 
-
         const dateArr3 = eachDayOfInterval({
             start: new Date(`${start3[0].start_date}`),
             end: new Date(`${end3[0].start_date}`)
