@@ -57,7 +57,7 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
-        console.log("before",arr)
+        
         const calendarEvents = arr.map(event => {
             const startDate = new Date(event.start_date);
             const endDate = new Date(event.end_date);
@@ -304,9 +304,9 @@ export class CalendarService {
                 id: id,
                 events: [
                     {
-                        start_date: Between(
-                            new Date(ex1[0].events[0].start_date),
-                            new Date(ex1[0].events[1].start_date)
+                        date: Between(
+                            new Date(ex1[0].events[0].date),
+                            new Date(ex1[0].events[1].date)
                         ),
                         type: 'วันหยุด'
                     }
@@ -318,18 +318,18 @@ export class CalendarService {
 
 
         const duration = intervalToDuration({
-            start: new Date(ex1[0].events[0].start_date),
-            end: new Date(ex1[0].events[1].start_date)
+            start: new Date(ex1[0].events[0].date),
+            end: new Date(ex1[0].events[1].date)
         })
 
         const duration2 = intervalToDuration({
-            start: new Date(ex2[0].events[0].start_date),
-            end: new Date(ex2[0].events[1].start_date)
+            start: new Date(ex2[0].events[0].date),
+            end: new Date(ex2[0].events[1].date)
         })
 
         const duration3 = intervalToDuration({
-            start: new Date(ex3[0].events[0].start_date),
-            end: new Date(ex3[0].events[1].start_date)
+            start: new Date(ex3[0].events[0].date),
+            end: new Date(ex3[0].events[1].date)
         })
 
         const studyweek = ((((duration.months * 30) + duration.days) / 7)).toFixed(2)
