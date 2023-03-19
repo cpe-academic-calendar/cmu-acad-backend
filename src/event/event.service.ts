@@ -295,24 +295,24 @@ export class EventService {
             }
 
             if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
-                holiday.push(evnetArr[i].start_date)
+                holiday.push(evnetArr[i].date)
             }
         }
 
 
         const dateArr1 = eachDayOfInterval({
-            start: new Date(`${start[0].start_date}`),
-            end: new Date(`${end[0].start_date}`)
+            start: new Date(`${start[0].date}`),
+            end: new Date(`${end[0].date}`)
         })
         const dateArr2 = eachDayOfInterval({
-            start: new Date(`${start2[0].start_date}`),
-            end: new Date(`${end2[0].start_date}`)
+            start: new Date(`${start2[0].date}`),
+            end: new Date(`${end2[0].date}`)
         })
 
 
         const dateArr3 = eachDayOfInterval({
-            start: new Date(`${start3[0].start_date}`),
-            end: new Date(`${end3[0].start_date}`)
+            start: new Date(`${start3[0].date}`),
+            end: new Date(`${end3[0].date}`)
         })
 
 
@@ -414,6 +414,8 @@ export class EventService {
                 calendar: true
             }
         })
+
+
 
         const arr = await this.eventRepository.find({
             where: {
