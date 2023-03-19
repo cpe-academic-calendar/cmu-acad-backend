@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Permission } from './permission.entity';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
     constructor(
-        @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
+        @InjectRepository(User) private readonly userRepository: Repository<User>,
+        @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>
     ) {}
 
     async saveData(userData) {
@@ -44,8 +45,18 @@ export class UserService {
         })
     }
 
-    async setPermission(id){
-        
+    async updateUser(id,data){
+        return await this.userRepository.update(id,data)
+    }
+
+    async setRole(id,role){
+        return await this.userRepository.update(id,{
+            role: `${role}`
+        })
+    }
+
+    async setEdit(permission){
+        return await this.permissionRepository.save(permission)
     }
 
 }
