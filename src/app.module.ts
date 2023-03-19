@@ -9,6 +9,8 @@ import { Calendar } from './calendar/calendar.entity';
 import { Event } from './event/event.entity';
 import { EventModule } from './event/event.module';
 import { AuthenModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
@@ -20,13 +22,14 @@ import { AuthenModule } from './auth/auth.module';
       username: 'admin',
       password: 'acad.1234',
       database: 'cmu_acad',
-      entities: [Calendar,Event],
+      entities: [Calendar,Event,User],
       synchronize: true,
       autoLoadEntities: true
     }),
     CalendarModule,
     EventModule,
-    AuthenModule
+    AuthenModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
