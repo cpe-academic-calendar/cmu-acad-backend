@@ -443,7 +443,6 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
-<<<<<<< HEAD
             const change_date = new Date(event.start_date)
             const old_date = new Date(eventData.start_date)
             let diffTime = (change_date.getTime() - old_date.getTime());
@@ -469,20 +468,6 @@ export class EventService {
                 newEvent.start_date = new Date(eventData.start_date.setDate(start))
                 newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
             }
-            // }
-=======
-            const arr = await this.eventRepository.find({
-                where: {
-                    calendar: {
-                        id: eventData.calendar.id
-                    },
-                    event_name: eventData.event_name
-                   
-                }
-            })
-        
-            const data = await arr.map(async (date: any,idx: any)=>{
->>>>>>> 3efaca6 (fix: update multiple date)
             newEvent.isOveride = true
             newEvent.event_name = event.event_name
             newEvent.type = event.type
