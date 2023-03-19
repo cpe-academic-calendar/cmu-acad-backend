@@ -427,8 +427,8 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
-        const change_date = new Date(event.start_date)
-        const old_date = new Date(eventData.start_date)
+        const change_date = new Date(event.date)
+        const old_date = new Date(eventData.date)
         let diffTime = (change_date.getTime() - old_date.getTime());
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
@@ -437,14 +437,13 @@ export class EventService {
                 if (arr[idx].isOveride == false) {
                     const newEvent = new Event()
                     const eventDate = arr[idx].start_date.getDate()
-                    newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
+                    newEvent.date = new Date(arr[idx].date.setDate(eventDate + diffDays))
+                    newEvent.date = new Date(arr[idx].date.setDate(eventDate + diffDays))
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
         } else {
             const newEvent = new Event()
-
             const arr = await this.eventRepository.find({
                 where: {
                     calendar: {
@@ -454,15 +453,16 @@ export class EventService {
                    
                 }
             })
-
-            for(let i in arr){
+            const data = await arr.map((date,idx)=>{
             newEvent.isOveride = true
-            newEvent.start_date = event.start_date
-            newEvent.event_name = event.event_name
-            newEvent.type = event.type
-            newEvent.color = event.color
-            return this.eventRepository.update(id+i, newEvent)
-            }
+            newEvent.date = event.date
+            newEvent.event_name = eventData.event_name
+            newEvent.type = eventData.type
+            newEvent.color = eventData.color
+            return  this.eventRepository.update(date.id+idx, newEvent)
+            })
+            console.log(data)
+            return data
           
         }
 
