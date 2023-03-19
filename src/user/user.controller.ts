@@ -25,7 +25,6 @@ export class UserController {
         return await this.userService.findByName(user.firstname_EN)
     }
 
-
     @Put('update/:id')
     async updateUser(@Param() user,@Body() info: User){
         return await this.userService.updateUser(user._id,info)
