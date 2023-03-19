@@ -417,7 +417,6 @@ export class EventService {
         })
 
 
-
         const arr = await this.eventRepository.find({
             where: {
 
@@ -445,6 +444,7 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
+
             const arr = await this.eventRepository.find({
                 where: {
                     calendar: {
@@ -454,13 +454,16 @@ export class EventService {
                    
                 }
             })
-            console.log(arr)
-            // newEvent.isOveride = true
-            // newEvent.start_date = event.start_date
-            // newEvent.event_name = event.event_name
-            // newEvent.type = event.type
-            // newEvent.color = event.color
-            // return this.eventRepository.update(id, newEvent)
+
+            for(let i in arr){
+            newEvent.isOveride = true
+            newEvent.start_date = event.start_date
+            newEvent.event_name = event.event_name
+            newEvent.type = event.type
+            newEvent.color = event.color
+            return this.eventRepository.update(id+i, newEvent)
+            }
+          
         }
 
     }
