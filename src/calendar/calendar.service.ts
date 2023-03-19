@@ -57,38 +57,9 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
-        
-        const calendarEvents = arr.map(event => {
-            const startDate = new Date(event.start_date);
-            const endDate = new Date(event.end_date);
-            const dates = [];
-            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-                dates.push(new Date(date));
-            }
-            return dates.map(date => ({
-                id: event.id,
-                event_name: event.event_name,
-                color: event.color,
-                type: event.type,
-                date: date,
-                isOveride: false,
-                ref_start: null,
-                ref_end: null,
-                start_date: null,
-                end_date: null,
-                num_weeks: null, 
-                num_days:null, 
-                duration_weeks:null, 
-                duration_days:null,
-                isAffair: null, 
-                reference_event:null, 
-                reference_condition:null,
-                calendar: null
-            }));
-        }).flat()
 
-        await this.eventRepository.insert(calendarEvents)
-        calendarData.events = [...calendarEvents]
+        await this.eventRepository.insert(arr)
+        calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
     }
 
@@ -106,7 +77,8 @@ export class CalendarService {
             select: {
                 events: {
                     event_name: true,
-                    date: true,
+                    start_date: true,
+                    end_date: true,
                     id: true,
                     color: true,
                     type: true
@@ -304,9 +276,9 @@ export class CalendarService {
                 id: id,
                 events: [
                     {
-                        date: Between(
-                            new Date(ex1[0].events[0].date),
-                            new Date(ex1[0].events[1].date)
+                        start_date: Between(
+                            new Date(ex1[0].events[0].start_date),
+                            new Date(ex1[0].events[1].start_date)
                         ),
                         type: 'วันหยุด'
                     }
@@ -314,22 +286,19 @@ export class CalendarService {
             }, relations: ['events']
         })
 
-
-
-
         const duration = intervalToDuration({
-            start: new Date(ex1[0].events[0].date),
-            end: new Date(ex1[0].events[1].date)
+            start: new Date(ex1[0].events[0].start_date),
+            end: new Date(ex1[0].events[1].start_date)
         })
 
         const duration2 = intervalToDuration({
-            start: new Date(ex2[0].events[0].date),
-            end: new Date(ex2[0].events[1].date)
+            start: new Date(ex2[0].events[0].start_date),
+            end: new Date(ex2[0].events[1].start_date)
         })
 
         const duration3 = intervalToDuration({
-            start: new Date(ex3[0].events[0].date),
-            end: new Date(ex3[0].events[1].date)
+            start: new Date(ex3[0].events[0].start_date),
+            end: new Date(ex3[0].events[1].start_date)
         })
 
         const studyweek = ((((duration.months * 30) + duration.days) / 7)).toFixed(2)
@@ -695,9 +664,6 @@ export class CalendarService {
         await this.setcellData(data[0].events[6], sheet, 7)
         await this.setcellData(data[0].events[7], sheet, 5)
         await this.setcellData(data[0].events[8], sheet, 6)
-        // await this.setcellData(data[0].events[9], sheet, 11)
-        // await this.setcellData(data[0].events[10], sheet, 7)
-        // await this.setcellData(data[0].events[11], sheet, 5)        
 
 
         sheet.getCell('A2').value = 'รายงานตัว'
