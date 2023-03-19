@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Permission } from './permission.entity';
@@ -8,21 +9,38 @@ import { User } from './user.entity';
 export class UserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>,
-        @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>
+        @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>,
+        @Inject(JwtService) private readonly jwtService: JwtService
     ) {}
 
     async saveData(userData) {
-            const username = userData.firstname_EN 
-            const user = await this.userRepository.findOne({
-                where: {
-                    firstname_EN: username
-                }
+            console.log(userData)
+            console.log(this.jwtService.sign({
+                sub: userData.cmuitaccount
+            }))
+            return this.jwtService.sign({
+                sub: userData.cmuitaccount
             })
-            if(user){
-                return userData
-            }else{
-                return  await this.userRepository.save(userData)
-            }
+            // const username = userData.firstname_EN 
+            // const user = await this.userRepository.findOne({
+            //     where: {
+            //         firstname_EN: username
+            //     }
+            // })
+            
+            // if(user){
+            //     const data = this.jwtService.sign({
+            //         sub: userData.firstname_EN,
+            //         email: userData.cmuitaccount
+            //     })
+            //     return data
+            // }else{
+            //     await this.userRepository.save(userData)
+            //     const data = this.jwtService.sign({
+            //         sub: userData.cmuitaccount
+            //     })
+            //     return   data
+            // }
     }
 
     async findAll(){
