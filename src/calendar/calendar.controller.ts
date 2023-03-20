@@ -46,17 +46,18 @@ export class CalendarController {
         eve.map((dt) => {
             arr.push(dt)
         })
+        newCalendar.user_id = calendar.user_id
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
     @Get('/findAll')
-    async findCalendar() {
-        return this.calendarService.findAll()
+    async findCalendar(@Body() user) {
+        return this.calendarService.findAll(user)
     }
 
     @Get('findEventById/:id')
-    async findEventByCalendar(@Param() id) {
+    async findEventByCalendar(@Param() id,@Body() user) {
         return this.calendarService.findEventById(id.id)
     }
 
@@ -76,8 +77,8 @@ export class CalendarController {
     }
 
     @Get('/findByName')
-    async findName(@Query('query') query,@Query('type') type) {
-        return this.calendarService.findByName(query,type)
+    async findName(@Query('query') query,@Query('type') type,@Body() user) {
+        return this.calendarService.findByName(query,type,user)
     }
 
     @Get('/sort')
@@ -91,8 +92,8 @@ export class CalendarController {
     }
 
     @Get(':id')
-    async findById(@Param('id') id: number) {
-        return this.calendarService.findById(id)
+    async findById(@Param('id') id: number,@Body() user) {
+        return this.calendarService.findById(id,user)
     }
 
     @Put('setstatus/:id')

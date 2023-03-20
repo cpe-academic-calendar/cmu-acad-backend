@@ -415,8 +415,6 @@ export class EventService {
             }
         })
 
-
-
         const arr = await this.eventRepository.find({
             where: {
 
