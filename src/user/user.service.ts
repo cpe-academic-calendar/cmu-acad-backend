@@ -14,6 +14,7 @@ export class UserService {
     ) { }
 
     async saveData(userData) {
+        console.log(userData)
         const user = await this.userRepository.findOne({
             where: {
                 cmuitaccount : userData.cmuitaccount

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query,Headers } from '@nestjs/common';
 import { Calendar } from './calendar.entity';
 import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
@@ -27,7 +27,7 @@ export class CalendarController {
     }
 
 
-    @Get('studyweek/:id/:acadId')
+    @Get('studyweek/:id/')
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
@@ -50,9 +50,9 @@ export class CalendarController {
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
 
-
+    
     @Get('/findAll')
-    async findCalendar() {
+    async findCalendar(@Headers() headers) {
         return this.calendarService.findAll()
     }
 
@@ -134,15 +134,6 @@ export class CalendarController {
         const data = await this.calendarService.exportHolidayData(id.id)
         res.download(`${data}`)
     }
-
-    @Get('exportDraft/:id')
-    @Header('Conten-Type', 'text/xlsx')
-    async exportDraftFile(@Param() id,@Res() res: Response){
-        const data = await this.calendarService.exportDraftCalendar(id.id)
-        res.download(`${data}`)
-        return data
-    }
-
 
     @Get('exportStudy/:id')
     @Header('Content-Type','text/xlsx')

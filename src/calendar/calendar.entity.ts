@@ -40,7 +40,7 @@ export class Calendar {
 
     @ApiProperty()
     @DeleteDateColumn()
-    delete_at: Date;
+    delete_at?: Date;
     
     @ApiProperty({ type: () => Event })
     @OneToMany(() => Event, events => events.calendar,{ onDelete: 'SET NULL' })

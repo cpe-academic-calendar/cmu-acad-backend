@@ -73,9 +73,9 @@
         "duration_weeks": 0,
         "isOveride": false,
         "isSetYear": true
-    },
-    {
-        "id": 7,
+
+    },{
+        "id":7,
         "event_name": "วันปฐมนิเทศนักศึกษาใหม่ สําหรับนักศึกษาปริญญาตรี ",
         "type": "กิจกรรม",
         "color": "#42A5F5",
@@ -87,8 +87,7 @@
         "duration_weeks": 0,
         "isOveride": false,
         "isSetYear": true
-    },
-    {
+    },{
         "id": 8,
         "event_name": "วันยกเลิกกระบวนวิชาที่ไม่ผ่านเงื่อนไข (Prerequisite)",
         "type": "กิจกรรม",
@@ -350,7 +349,7 @@
         "id": 27,
         "event_name": "วันสุดท้ายของการศึกษา",
         "type": "วันปิดภาคเรียน",
-        "color": "#F57F17",
+        "color": "#352829",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 16,
@@ -408,7 +407,7 @@
         "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 20,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "isOveride": false
     },
@@ -447,10 +446,12 @@
         "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 20,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "isOveride": false
+        
     },
+
     {
         "id": 35,
         "event_name": "วันเปิดภาคเรียน เทอม 2",
@@ -545,6 +546,18 @@
         "isOveride": false
     },
     {
+        "id": 41,
+        "event_name": "วันลงทะเบียน/เพิ่ม/เปลี่ยนตอนกระบวนวิชาผ่านภาควิชา เทอม 2",
+        "num_days": 0,
+        "ref_start": "before",
+        "num_weeks": 1,
+        "reference_event": 33,
+        "duration_days": 0,
+        "duration_weeks": 1,
+        "type": "กิจกรรม",
+        "isOveride": false
+    },
+    {
         "id": 42,
         "event_name": "วันถอนกระบวนวิชาโดยไม่ได้รับอักษรลําดับขั้น W เทอม 2",
         "num_days": 2,
@@ -602,13 +615,13 @@
         "id": 46,
         "event_name": "วันสอบไล่ เทอม 2",
         "num_days": 0,
-        "num_weeks": 17,
+        "num_weeks": 20,
         "reference_event": 35,
         "ref_start": "after",
         "duration_weeks": 2,
         "duration_days": 0,
         "type": "วันสอบ",
-        "color": "#666AD1",
+        "color": "#4CAF50",
         "isOveride": false,
         "isAffair": true
     },
@@ -649,7 +662,7 @@
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 36,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#FFA726",
@@ -717,10 +730,10 @@
         "ref_start": "before",
         "num_weeks": 0,
         "reference_event": 46,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "วันปิดภาคเรียน",
-        "color": "#F57F17",
+        "color": "#347BBB",
         "isOveride": false
     },
     {
@@ -730,7 +743,7 @@
         "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 46,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#AB47BC",
@@ -756,7 +769,7 @@
         "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 46,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#4CAF50",
@@ -765,11 +778,11 @@
     {
         "id": 58,
         "event_name": "วันประกาศผลการศึกษา เทอม 2",
-        "num_days": 10,
-        "ref_start": "after-last",
+        "num_days": 3,
+        "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 46,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#4CAF50",
@@ -812,8 +825,7 @@
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
         "isOveride": false,
-        "color": "#F57F17",
-        "isAffair": true
+        "color": "#F57F17"
     },
     {
         "id": 62,
@@ -822,7 +834,7 @@
         "ref_start": "before",
         "num_weeks": 2,
         "reference_event": 61,
-        "duration_days": 4,
+        "duration_days": 5,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#FFA726",
@@ -969,7 +981,7 @@
         "ref_start": "after",
         "num_weeks": 0,
         "reference_event": 61,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#DD2C00",
@@ -993,8 +1005,8 @@
         "id": 75,
         "event_name": "วันสุดท้ายของการศึกษา เทอม 3",
         "num_days": 0,
-        "ref_start": "after-last",
-        "num_weeks": 5,
+        "ref_start": "after",
+        "num_weeks": 6,
         "reference_event": 61,
         "duration_days": 0,
         "duration_weeks": 0,
@@ -1007,10 +1019,10 @@
         "event_name": "วันสอบไล่ เทอม 3",
         "num_days": 0,
         "ref_start": "after",
-        "num_weeks": 6,
+        "num_weeks": 7,
         "reference_event": 61,
-        "duration_days": 3,
-        "duration_weeks": 0,
+        "duration_days": 0,
+        "duration_weeks": 1,
         "type": "วันสอบ",
         "color": "#666AD1",
         "isOveride": false,
@@ -1023,7 +1035,7 @@
         "ref_start": "after-last",
         "num_weeks": 0,
         "reference_event": 76,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#EC407A",
@@ -1035,8 +1047,8 @@
         "num_days": 5,
         "ref_start": "after-last",
         "num_weeks": 0,
-        "reference_event": 76,
-        "duration_days": 3,
+        "reference_event": 71,
+        "duration_days": 4,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#AB47BC",
@@ -1045,11 +1057,11 @@
     {
         "id": 79,
         "event_name": "วันสุดท้ายของการส่งผลการศึกษา เทอม 3",
-        "num_days": 1,
-        "ref_start": "after",
+        "num_days": 5,
+        "ref_start": "after-last",
         "num_weeks": 0,
-        "reference_event": 78,
-        "duration_days": 0,
+        "reference_event": 76,
+        "duration_days": 1,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#42A5F5",
@@ -1058,14 +1070,15 @@
     {
         "id": 80,
         "event_name": "วันประกาศผลการศึกษา เทอม 3",
-        "num_days": 0,
-        "ref_start": "after-last",
+        "num_days": 2,
+        "ref_start": "after",
         "num_weeks": 0,
-        "reference_event": 78,
+        "reference_event": 79,
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#26A69A",
         "isOveride": false
     }
+   
 ]
