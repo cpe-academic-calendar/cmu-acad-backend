@@ -60,7 +60,11 @@ export class UserService {
     }
 
     async setEdit(permission) {
-        return await this.permissionRepository.save(permission)
+        return await this.permissionRepository.create(permission)
+    }
+
+    async findPermission(){
+        return await this.permissionRepository.find()
     }
 
 }
