@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Permission } from './permission.entity';
 import { User } from './user.entity';
@@ -21,9 +21,9 @@ export class UserController {
     }
 
 
-    @Get('findByName')
-    async findByName(@Param() user){
-        return await this.userService.findByName(user.firstname_EN)
+    @Get('findByName/:cmuaccount')
+    async findByName(@Param() account){
+        return await this.userService.findByName(account.cmuaccount)
     }
 
     @Put('update/:id')

@@ -92,8 +92,8 @@ export class CalendarController {
     }
 
     @Get(':id')
-    async findById(@Param('id') id: number) {
-        return this.calendarService.findById(id)
+    async findById(@Param('id') id: number,@Body() user) {
+        return this.calendarService.findById(id,user)
     }
 
     @Put('setstatus/:id')

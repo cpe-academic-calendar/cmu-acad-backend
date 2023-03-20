@@ -42,8 +42,11 @@ export class UserService {
 
     async findByName(name) {
         return await this.userRepository.find({
+            select:[
+                '_id'
+            ],
             where: {
-                firstname_EN: name
+                cmuitaccount: name
             }
         })
     }
