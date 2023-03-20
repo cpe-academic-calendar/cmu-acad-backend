@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Redirect, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Redirect, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { HttpService } from '@nestjs/axios';
 import { Code } from 'typeorm';
 import { map } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger/dist';
 import { UserService } from 'src/user/user.service';
-import { response } from 'express';
+import { JwtAuthGuard } from './jwt-auth.guards';
+import { Request} from '@nestjs/common';
+
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -42,6 +44,13 @@ export class AuthenController {
         } catch (error) {
             // handle error
         }
+    }
+    
+
+    @UseGuards(JwtAuthGuard)
+    @Get('profile')
+    getProfile(@Request() req: any) {
+        return req.user
     }
     
 

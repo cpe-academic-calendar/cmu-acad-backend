@@ -19,7 +19,6 @@ export class UserService {
                 cmuitaccount : userData.cmuitaccount
             }
         })
-        console.log(userData)
 
         if (user) {
             return user
