@@ -49,7 +49,7 @@ export class CalendarController {
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
-    
+
 
     @Get('/findAll')
     async findCalendar() {
@@ -87,7 +87,7 @@ export class CalendarController {
     }
 
     @Get('/findDeleted/:id')
-    async findDelete(@Param()id: number,@Body() user) {
+    async findDelete(@Param()id: number) {
         return this.calendarService.findDelete(id)
     }
 

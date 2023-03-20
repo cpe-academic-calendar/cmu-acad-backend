@@ -442,9 +442,14 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
+            if(new Date(newEvent.start_date) ==  new Date(newEvent.end_date)){
+                newEvent.start_date = event.start_date
+                newEvent.end_date = event.start_date
+            }else{
+                newEvent.start_date = event.start_date
+                newEvent.end_date = event.end_date
+            }
             newEvent.isOveride = true
-            newEvent.start_date = event.start_date
-            newEvent.end_date = event.end_date
             newEvent.event_name = event.event_name
             newEvent.type = event.type
             newEvent.color = event.color
