@@ -158,8 +158,8 @@ export class CalendarService {
         })
     }
 
-    async findById(id) {
-        return await this.calendarRepository.findOneBy({ id: id })
+    async findById(id,user) {
+        return await this.calendarRepository.findOneBy({ id: id, user_id: user.user_id })
     }
 
     async sortByDate(queryType) {
