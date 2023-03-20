@@ -4,7 +4,7 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
-import { Header, Res, UseGuards } from '@nestjs/common/decorators';
+import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
 
 @ApiTags('Calendar')
@@ -20,13 +20,14 @@ export class CalendarController {
         return await this.calendarService.createCalendar(calendar)
     }
 
+
     @Get('findCalendarByType')
     async findCalendarByStatus(@Query() calendarStatus){
         return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
     }
 
 
-    @Get('studyweek/:id')
+    @Get('studyweek/:id/:acadId')
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
@@ -85,7 +86,7 @@ export class CalendarController {
     }
 
     @Get('/findDeleted/:id')
-    async findDelete(id: number) {
+    async findDelete(@Param()id: number,@Body() user) {
         return this.calendarService.findDelete(id)
     }
 
@@ -144,7 +145,7 @@ export class CalendarController {
 
     @Get('exportStudy/:id')
     @Header('Content-Type','text/xlsx')
-    async exportStudyFile(@Param() id,@Res() res: Response){
+    async exportStudyFile(@Param() id,@Res() res: Response,@Body() user){
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })

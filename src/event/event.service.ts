@@ -446,6 +446,7 @@ export class EventService {
             const newEvent = new Event()
             newEvent.isOveride = true
             newEvent.start_date = event.start_date
+            newEvent.end_date = event.end_date
             newEvent.event_name = event.event_name
             newEvent.type = event.type
             newEvent.color = event.color

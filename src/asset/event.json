@@ -349,7 +349,7 @@
         "id": 27,
         "event_name": "วันสุดท้ายของการศึกษา",
         "type": "วันปิดภาคเรียน",
-        "color": "#352829",
+        "color": "#F57F17",
         "num_days": 0,
         "ref_start": "after",
         "num_weeks": 16,
@@ -462,7 +462,7 @@
         "duration_days": 0,
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
-        "color": "#F57F17",
+        "color": "#F57F17"
         "isOveride": false,
         "isAffair": true
     },
@@ -721,7 +721,7 @@
         "duration_days": 1,
         "duration_weeks": 0,
         "type": "วันปิดภาคเรียน",
-        "color": "#347BBB",
+        "color": "#F57F17",
         "isOveride": false
     },
     {
@@ -813,7 +813,7 @@
         "duration_weeks": 0,
         "type": "วันเปิดภาคเรียน",
         "isOveride": false,
-        "color": "#F57F17"
+        "color": "#F57F17",
     },
     {
         "id": 62,
@@ -1007,7 +1007,7 @@
         "event_name": "วันสอบไล่ เทอม 3",
         "num_days": 5,
         "ref_start": "after",
-        "num_weeks": 6,
+        "num_weeks": 7,
         "reference_event": 61,
         "duration_days": 4,
         "duration_weeks": 0,
