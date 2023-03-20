@@ -38,7 +38,7 @@ export class UserController {
 
     @Post('setEdit/:id/:calendar_id')
     async setEdit(@Param() user){
-        // return await this.userService.setEdit(user.id,user.calendar_id)
+        return await this.userService.setEdit(user)
     }
 
     @Get('findPermission')
