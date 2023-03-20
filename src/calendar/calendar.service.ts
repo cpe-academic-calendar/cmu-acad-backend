@@ -59,7 +59,6 @@ export class CalendarService {
         })
 
         await this.eventRepository.insert(arr)
-        calendarData.user_id = calendar.user_id
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
     }
@@ -148,17 +147,16 @@ export class CalendarService {
         return await this.calendarRepository.save(calendar)
     }
 
-    async findAll(user) {
+    async findAll() {
         return this.calendarRepository.find({
             where: {
                 'calendar_status': 'Active',
-                'user_id': user.user_id
             }
         })
     }
 
-    async findById(id,user) {
-        return await this.calendarRepository.findOneBy({ id: id, user_id: user.user_id })
+    async findById(id) {
+        return await this.calendarRepository.findOneBy({ id: id })
     }
 
     async sortByDate(queryType) {
