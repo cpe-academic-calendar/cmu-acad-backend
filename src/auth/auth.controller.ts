@@ -18,13 +18,13 @@ export class AuthenController {
 
     @Get('')
     async find(@Query() code,@Res() res){
-        return res.redirect(`http://localhost:4000/auth/code?code=${code.code}`)
+        return res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/code?code=${code.code}`)
     }
 
     @Get('/code')
     async accessToken(@Query() code,@Res() res){
-        return this.httpService.post(`https://oauth.cmu.ac.th/v1/GetToken.aspx?code=${code.code}&redirect_uri=http://localhost:4000/auth/login&client_id=MgtZS8S3J9cAhGAUGhbdX9qFHR2mCySSG7pNHbW8&client_secret=CrJbXxZyb2b5YBhM3YsbfEAkux4ktYkExdNFBpUk&grant_type=authorization_code`).pipe(
-            map(response => res.redirect(`http://localhost:4000/auth/login?token=${response.data.access_token}`)))
+        return this.httpService.post(`https://oauth.cmu.ac.th/v1/GetToken.aspx?code=${code.code}&redirect_uri=https://cmu-acad-backend-production.up.railway.app/auth/login&client_id=MgtZS8S3J9cAhGAUGhbdX9qFHR2mCySSG7pNHbW8&client_secret=CrJbXxZyb2b5YBhM3YsbfEAkux4ktYkExdNFBpUk&grant_type=authorization_code`).pipe(
+            map(response => res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/login?token=${response.data.access_token}`)))
     }
 
     @Get('/login')
@@ -36,8 +36,8 @@ export class AuthenController {
                 }
             }
             ).toPromise();
-            res.redirect(`http://localhost:3000/token=${token.token}`);
-            await this.userService.saveData(response.data)
+            res.redirect(`https://cmu-acad.netlify.app/token=${token.token}`);
+            return this.userService.saveData(response.data)
             
         } catch (error) {
             // handle error
