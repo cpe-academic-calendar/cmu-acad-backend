@@ -36,5 +36,9 @@ export class User {
 
     @ApiProperty()
     @Column()
+    cmuitaccount: string
+
+    @ApiProperty()
+    @Column()
     role: String
 }
