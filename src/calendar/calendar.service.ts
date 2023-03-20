@@ -59,6 +59,7 @@ export class CalendarService {
         })
 
         await this.eventRepository.insert(arr)
+        calendarData.user_id = calendar.user_id
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
     }
@@ -71,7 +72,7 @@ export class CalendarService {
         })
     }
 
-    async findEventById(calendar_id) {
+    async findEventById(calendar_id,user) {
         return await this.calendarRepository.find({
             relations: ['events'],
             select: {
@@ -85,7 +86,8 @@ export class CalendarService {
                 }
             },
             where: {
-                id: calendar_id
+                id: calendar_id,
+                user_id: user._id
             }
         })
     }
@@ -147,17 +149,17 @@ export class CalendarService {
         return await this.calendarRepository.save(calendar)
     }
 
-    async findAll() {
+    async findAll(user) {
         return this.calendarRepository.find({
             where: {
-                'calendar_status': 'Active'
-
+                'calendar_status': 'Active',
+                'user_id': user.user_id
             }
         })
     }
 
-    async findById(id) {
-        return await this.calendarRepository.findOneBy({ id: id })
+    async findById(id,user) {
+        return await this.calendarRepository.findOneBy({ id: id, user_id: user.user_id })
     }
 
     async sortByDate(queryType) {
@@ -176,19 +178,20 @@ export class CalendarService {
         })
     }
 
-    async findByName(query, filter) {
+    async findByName(query, filter,user) {
         return await this.calendarRepository.find({
             where: {
                 'name': ILike(`%${query}%`),
-                'calendar_status': `${filter}`
+                'calendar_status': `${filter}`,
+                'user_id': user.user_id
             }
         })
 
 
     }
 
-    async findDelete(id) {
-        return await this.calendarRepository.find({ where: { id }, withDeleted: true })
+    async findDelete(id,user) {
+        return await this.calendarRepository.find({ where: { id, user_id: user.user_id }, withDeleted: true })
     }
 
     async changeStatus(id: number, calendar: Calendar) {

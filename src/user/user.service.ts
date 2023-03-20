@@ -19,7 +19,6 @@ export class UserService {
                 cmuitaccount : userData.cmuitaccount
             }
         })
-        console.log(userData)
 
         if (user) {
             return user
@@ -43,8 +42,11 @@ export class UserService {
 
     async findByName(name) {
         return await this.userRepository.find({
+            select:[
+                '_id'
+            ],
             where: {
-                firstname_EN: name
+                cmuitaccount: name
             }
         })
     }

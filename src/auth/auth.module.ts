@@ -8,10 +8,12 @@ import { User } from "src/user/user.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Permission } from "src/user/permission.entity";
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from "@nestjs/passport";
 
 @Module({
     imports: [HttpModule, UserModule, TypeOrmModule.forFeature([User]), TypeOrmModule.forFeature([Permission]),
-        JwtModule.register({
+    PassportModule,
+    JwtModule.register({
             secret: process.env.SECRET,
             signOptions: { expiresIn: '60s' },
         }),],
