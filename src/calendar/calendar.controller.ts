@@ -4,8 +4,10 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
-import { Header, Res, UseGuards } from '@nestjs/common/decorators';
+import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/role.decorator';
 
 @ApiTags('Calendar')
 @Controller('calendar')
@@ -20,6 +22,7 @@ export class CalendarController {
         return await this.calendarService.createCalendar(calendar)
     }
 
+
     @Get('findCalendarByType')
     async findCalendarByStatus(@Query() calendarStatus){
         return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
@@ -27,8 +30,8 @@ export class CalendarController {
 
 
     @Get('studyweek/:id')
-    async getStudyWeek(@Param() id) {
-        const event = await this.calendarService.findEventById(id.id)
+    async getStudyWeek(@Param() id,@Body() user) {
+        const event = await this.calendarService.findEventById(id.id,user)
         let arr = []
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         return this.eventService.countWeek(arr)
@@ -37,7 +40,7 @@ export class CalendarController {
     @Post('duplicate/:id')
     async duplicateCalendar(@Param() calendar_id: UpdateCalendarDto, @Body() calendar: Calendar) {
         const newCalendar = new Calendar();
-        const oldCalendar = await this.calendarService.findEventById(calendar_id.id).then()
+        const oldCalendar = await this.calendarService.findEventById(calendar_id.id,calendar).then()
         const event = oldCalendar[0].events.map((ev) => ev);
         const eve = await this.eventService.createArr(event)
         newCalendar.name = calendar.name
@@ -50,13 +53,13 @@ export class CalendarController {
     }
 
     @Get('/findAll')
-    async findCalendar() {
-        return this.calendarService.findAll()
+    async findCalendar(@Body() user) {
+        return this.calendarService.findAll(user)
     }
 
     @Get('findEventById/:id')
-    async findEventByCalendar(@Param() id) {
-        return this.calendarService.findEventById(id.id)
+    async findEventByCalendar(@Param() id,@Body() user) {
+        return this.calendarService.findEventById(id.id,user)
     }
 
     @Get('findHoliday/:id')
@@ -75,8 +78,8 @@ export class CalendarController {
     }
 
     @Get('/findByName')
-    async findName(@Query('query') query,@Query('type') type) {
-        return this.calendarService.findByName(query,type)
+    async findName(@Query('query') query,@Query('type') type,@Body() user) {
+        return this.calendarService.findByName(query,type,user)
     }
 
     @Get('/sort')
@@ -85,8 +88,8 @@ export class CalendarController {
     }
 
     @Get('/findDeleted/:id')
-    async findDelete(id: number) {
-        return this.calendarService.findDelete(id)
+    async findDelete(@Param()id: number,@Body() user) {
+        return this.calendarService.findDelete(id,user)
     }
 
     @Get(':id')
@@ -144,8 +147,8 @@ export class CalendarController {
 
     @Get('exportStudy/:id')
     @Header('Content-Type','text/xlsx')
-    async exportStudyFile(@Param() id,@Res() res: Response){
-        const event = await this.calendarService.findEventById(id.id)
+    async exportStudyFile(@Param() id,@Res() res: Response,@Body() user){
+        const event = await this.calendarService.findEventById(id.id,user)
         let arr = []
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         const dataWeek = await this.eventService.countWeek(arr)

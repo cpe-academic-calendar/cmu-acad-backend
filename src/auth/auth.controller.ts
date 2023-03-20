@@ -36,8 +36,13 @@ export class AuthenController {
                 }
             }
             ).toPromise();
+<<<<<<< HEAD
             res.redirect(`https://cmu-acad.netlify.app/token=${token.token}`);
             return this.userService.saveData(response.data)
+=======
+            res.redirect(`http://localhost:3000/token=${token.token}`);
+            await this.userService.saveData(response.data)
+>>>>>>> 9a300d6 (feat: oauth)
             
         } catch (error) {
             // handle error
