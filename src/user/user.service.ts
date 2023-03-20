@@ -11,47 +11,37 @@ export class UserService {
         @InjectRepository(User) private readonly userRepository: Repository<User>,
         @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>,
         @Inject(JwtService) private readonly jwtService: JwtService
-    ) {}
+    ) { }
 
     async saveData(userData) {
-            return this.jwtService.sign({
-                sub: userData.cmuitaccount
-            })
-            // const username = userData.firstname_EN 
-            // const user = await this.userRepository.findOne({
-            //     where: {
-            //         firstname_EN: username
-            //     }
-            // })
-            
-            // if(user){
-            //     const data = this.jwtService.sign({
-            //         sub: userData.firstname_EN,
-            //         email: userData.cmuitaccount
-            //     })
-            //     return data
-            // }else{
-            //     await this.userRepository.save(userData)
-            //     const data = this.jwtService.sign({
-            //         sub: userData.cmuitaccount
-            //     })
-            //     return   data
-            // }
+        const user = await this.userRepository.findOne({
+            where: {
+                cmuitaccount : userData.cmuitaccount
+            }
+        })
+        console.log(userData)
+
+        if (user) {
+            return user
+        }else{
+            return await this.userRepository.save(userData)
+        }
+
     }
 
-    async findAll(){
+    async findAll() {
         return await this.userRepository.find()
     }
 
-    async findById(id){
+    async findById(id) {
         return await this.userRepository.find({
-            where:{
+            where: {
                 _id: id
             }
         })
     }
 
-    async findByName(name){
+    async findByName(name) {
         return await this.userRepository.find({
             where: {
                 firstname_EN: name
@@ -59,18 +49,22 @@ export class UserService {
         })
     }
 
-    async updateUser(id,data){
-        return await this.userRepository.update(id,data)
+    async updateUser(id, data) {
+        return await this.userRepository.update(id, data)
     }
 
-    async setRole(id,role){
-        return await this.userRepository.update(id,{
+    async setRole(id, role) {
+        return await this.userRepository.update(id, {
             role: `${role}`
         })
     }
 
-    async setEdit(permission){
-        return await this.permissionRepository.save(permission)
+    async setEdit(permission) {
+        return await this.permissionRepository.create(permission)
+    }
+
+    async findPermission(){
+        return await this.permissionRepository.find()
     }
 
 }

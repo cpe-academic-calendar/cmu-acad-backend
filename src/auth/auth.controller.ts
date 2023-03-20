@@ -36,8 +36,9 @@ export class AuthenController {
                 }
             }
             ).toPromise();
-            const getToken = await this.userService.saveData(response.data)
-            res.redirect(`http://localhost:3000/${getToken}`);
+            res.redirect(`http://localhost:3000/token=${token.token}`);
+            await this.userService.saveData(response.data)
+            
         } catch (error) {
             // handle error
         }

@@ -7,7 +7,8 @@ import { UserService } from './user.service';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-    constructor(private readonly userService: UserService) { }
+    constructor(
+        private readonly userService: UserService) { }
 
     @Get('')
     async findUser(){
@@ -35,11 +36,14 @@ export class UserController {
         return await this.userService.setRole(user._id,role)
     }
 
-    @Get('setEdit/:id')
+    @Post('setEdit/:id/:calendar_id')
     async setEdit(@Param() user){
-        const newPermission = new Permission()
-        newPermission.user_id = [...user.id]
-        return await this.userService.setEdit(newPermission)
+        // return await this.userService.setEdit(user.id,user.calendar_id)
+    }
+
+    @Get('findPermission')
+    async finPermission(){
+        return await this.userService.findPermission()
     }
 
 
