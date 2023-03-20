@@ -430,6 +430,8 @@ export class EventService {
         let diffTime = (change_date.getTime() - old_date.getTime());
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
+            event.start_date = event.start_date
+            event.end_date = event.end_date
             this.eventRepository.update(id, event)
             arr.map(async (data, idx) => {
                 if (arr[idx].isOveride == false) {
