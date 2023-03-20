@@ -26,6 +26,7 @@ export class EventController {
         return await this.eventService.createEvent(newEvent)
     }
 
+
     @Get('/find/:id')
     async findEvent(@Param() id: number) {
         return await this.eventService.getEventByID(id)
