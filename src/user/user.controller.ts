@@ -45,6 +45,4 @@ export class UserController {
     async finPermission(){
         return await this.userService.findPermission()
     }
-
-
 }
