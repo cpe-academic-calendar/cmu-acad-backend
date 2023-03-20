@@ -77,8 +77,8 @@ export class CalendarController {
     }
 
     @Get('/findByName')
-    async findName(@Query('query') query,@Query('type') type,@Body() user) {
-        return this.calendarService.findByName(query,type,user)
+    async findName(@Query('query') query,@Query('type') type) {
+        return this.calendarService.findByName(query,type)
     }
 
     @Get('/sort')

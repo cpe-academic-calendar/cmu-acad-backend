@@ -177,12 +177,11 @@ export class CalendarService {
         })
     }
 
-    async findByName(query, filter,user) {
+    async findByName(query, filter) {
         return await this.calendarRepository.find({
             where: {
                 'name': ILike(`%${query}%`),
-                'calendar_status': `${filter}`,
-                'user_id': user.user_id
+                'calendar_status': `${filter}`
             }
         })
 
