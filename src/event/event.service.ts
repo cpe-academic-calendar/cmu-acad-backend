@@ -442,7 +442,7 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
-            if(new Date(newEvent.start_date) ==  new Date(newEvent.end_date)){
+            if((event.duration_days == 0 && event.duration_weeks == 0) || (event.duration_days == null && event.duration_weeks == null)  ){
                 newEvent.start_date = event.start_date
                 newEvent.end_date = event.start_date
             }else{
