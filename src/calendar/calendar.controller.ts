@@ -6,8 +6,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
 import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
-import { Role } from 'src/auth/role.enum';
-import { Roles } from 'src/auth/role.decorator';
 
 @ApiTags('Calendar')
 @Controller('calendar')
@@ -48,6 +46,7 @@ export class CalendarController {
         eve.map((dt) => {
             arr.push(dt)
         })
+        newCalendar.user_id = calendar.user_id
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
     }
