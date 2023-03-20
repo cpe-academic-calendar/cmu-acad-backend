@@ -4,7 +4,7 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
-import { Header, Res } from '@nestjs/common/decorators';
+import { Header, Res, UseGuards } from '@nestjs/common/decorators';
 import { Response } from 'express';
 
 @ApiTags('Calendar')
@@ -13,6 +13,7 @@ export class CalendarController {
     constructor(
         private readonly calendarService: CalendarService,
         private readonly eventService: EventService) { }
+
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
