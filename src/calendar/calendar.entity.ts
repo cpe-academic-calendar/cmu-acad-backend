@@ -46,4 +46,8 @@ export class Calendar {
     @OneToMany(() => Event, events => events.calendar,{ onDelete: 'SET NULL' })
     @JoinColumn()
     events : Event[]
+
+    @ApiProperty()
+    @Column()
+    isDeleted : Boolean
 }

@@ -152,7 +152,7 @@ export class CalendarService {
     async findAll() {
         return this.calendarRepository.find({
             where: {
-                'calendar_status': 'Active',
+                'calendar_status': 'Active'
             }
         })
     }
@@ -185,11 +185,15 @@ export class CalendarService {
             }
         })
 
-
     }
 
-    async findDelete(id) {
-        return await this.calendarRepository.find({ where: { id } })
+    async findDelete(name) {
+        return await this.calendarRepository.find({
+            withDeleted: true ,         
+            where: {
+                'name':  ILike(`%${name}%`),
+                },
+        })
     }
 
     async changeStatus(id: number, calendar: Calendar) {
@@ -203,13 +207,14 @@ export class CalendarService {
         return await this.calendarRepository.delete(id)
     }
 
-    async softDelete(id: number[]) {
+    async softDelete(id: number) {
         return await this.calendarRepository.softDelete(id)
     }
 
     async restoreDelete(id: number) {
         return await this.calendarRepository.restore(id)
     }
+
 
     async exportStudyData(id, dataWeek) {
         const ts1 = await this.calendarRepository.find({

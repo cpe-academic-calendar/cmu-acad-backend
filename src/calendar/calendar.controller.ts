@@ -86,9 +86,9 @@ export class CalendarController {
         return this.calendarService.sortByDate(queryType)
     }
 
-    @Get('/findDeleted/:id')
-    async findDelete(@Param()id: number) {
-        return this.calendarService.findDelete(id)
+    @Get('/findDeleted')
+    async findDelete(@Query('name') name:string) {
+        return this.calendarService.findDelete(name)
     }
 
     @Get(':id')
@@ -103,6 +103,7 @@ export class CalendarController {
 
     @Put('/update/:id')
     async updateCalendar(@Param() id: number, @Body() calendar: Calendar) {
+        console.log(calendar)
         return this.calendarService.update(id, calendar)
     }
 
@@ -112,7 +113,7 @@ export class CalendarController {
     }
 
     @Delete('/delete/:id')
-    async softDelete(@Param() id: number[]) {
+    async softDelete(@Param() id: number) {
         return await this.calendarService.softDelete(id)
     }
 
