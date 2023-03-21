@@ -92,7 +92,7 @@ export class EventService {
                         const end_date = new Date(last_year, last_month, last_day)
                         return end_date
                     }
-             const last_year = new Date(start_date).getFullYear()
+                    const last_year = new Date(start_date).getFullYear()
                     const last_month = new Date(start_date).getMonth()
                     const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
                     const end_date = new Date(last_year, last_month, last_day)
@@ -415,6 +415,7 @@ export class EventService {
             }
         })
 
+        console.log(eventData)
         const arr = await this.eventRepository.find({
             where: {
 
@@ -437,24 +438,39 @@ export class EventService {
                 if (arr[idx].isOveride == false) {
                     const newEvent = new Event()
                     const eventDate = arr[idx].start_date.getDate()
+                    const eventendDate = arr[idx].end_date.getDate()
                     newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
+                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
         } else {
             const newEvent = new Event()
-            if((event.duration_days == 0 && event.duration_weeks == 0) || (event.duration_days == null && event.duration_weeks == null)  ){
-                newEvent.start_date = event.start_date
-                newEvent.end_date = event.start_date
-            }else{
-                newEvent.start_date = event.start_date
-                newEvent.end_date = event.end_date
+            if (eventData.start_date.getDate() == eventData.end_date.getDate()) {
+                const change_date = new Date(event.start_date)
+                const old_date = new Date(eventData.start_date)
+                let diffTime = (change_date.getTime() - old_date.getTime());
+                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                 const start = eventData.start_date.getDate()
+                 const end = eventData.end_date.getDate()
+                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                 newEvent.end_date =  new Date(eventData.end_date.setDate(end + diffDays))
+
+            } else {    
+                const change_date = new Date(event.start_date)
+                const old_date = new Date(eventData.start_date)
+                let diffTime = (change_date.getTime() - old_date.getTime());
+                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                 const start = eventData.start_date.getDate()
+                 const end   = eventData.end_date.getDate()
+                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                 newEvent.end_date =  new Date(eventData.end_date.setDate(end + diffDays))
             }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name
             newEvent.type = event.type
             newEvent.color = event.color
+            console.log(newEvent)
             return this.eventRepository.update(id, newEvent)
         }
 
