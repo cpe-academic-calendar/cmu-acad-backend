@@ -26,7 +26,6 @@ export class CalendarController {
         return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
     }
 
-
     @Get('studyweek/:id/')
     async getStudyWeek(@Param() id) {
         const event = await this.calendarService.findEventById(id.id)
@@ -49,6 +48,11 @@ export class CalendarController {
         })
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
+    }  
+
+    @Get('/findCalendar')
+    async findQueryCalendar(@Query() calendar){
+        return await this.calendarService.findByQuery(calendar)
     }
 
     

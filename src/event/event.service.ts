@@ -415,6 +415,13 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
+
+        const changEnd_date = new Date(event.end_date)
+        const oldEnd_date = new Date(eventData.end_date)
+        let diffTimeEnd = (changEnd_date.getTime() - oldEnd_date.getTime());
+        let diffDaysEnd = Math.ceil(diffTimeEnd / (1000 * 60 * 60 * 24));
+
+
         const change_date = new Date(event.start_date)
         const old_date = new Date(eventData.start_date)
         let diffTime = (change_date.getTime() - old_date.getTime());
@@ -429,7 +436,7 @@ export class EventService {
                     const eventDate = arr[idx].start_date.getDate()
                     const eventendDate = arr[idx].end_date.getDate()
                     newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
+                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDaysEnd))
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
@@ -440,19 +447,41 @@ export class EventService {
                 const old_date = new Date(eventData.start_date)
                 let diffTime = (change_date.getTime() - old_date.getTime());
                 let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                 const start = eventData.start_date.getDate()
-                 const end = eventData.end_date.getDate()
-                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                 newEvent.end_date =  new Date(eventData.end_date.setDate(end + diffDays))
-            } else {    
+                const start = eventData.start_date.getDate()
+                const end = eventData.end_date.getDate()
+                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDays))
+            } else {
                 const change_date = new Date(event.start_date)
                 const old_date = new Date(eventData.start_date)
                 let diffTime = (change_date.getTime() - old_date.getTime());
                 let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                 const start = eventData.start_date.getDate()
-                 const end   = eventData.end_date.getDate()
-                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                 newEvent.end_date =  new Date(eventData.end_date.setDate(end + diffDays))
+                const changeEnd_date = new Date(event.end_date)
+                const oldEnd_date = new Date(eventData.end_date)
+                let diffEndTime = (changeEnd_date.getTime() - oldEnd_date.getTime());
+                let diffEndDays = Math.ceil(diffEndTime / (1000 * 60 * 60 * 24));
+                const start = eventData.start_date.getDate()
+                const end = eventData.end_date.getDate()
+                if(diffDays && diffEndDays){
+                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
+                }
+                if(diffDays && !diffDaysEnd){
+                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDays))
+                }
+                if(!diffDays && diffDaysEnd){
+                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDaysEnd))
+                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
+                }
+
+
+
+
+
+
+               
+             
             }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name

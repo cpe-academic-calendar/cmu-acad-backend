@@ -92,6 +92,17 @@ export class CalendarService {
         })
     }
 
+    async findByQuery(query){
+        return await this.calendarRepository.find({
+            where:{
+                'name': ILike(`%${query}%`),
+            },
+            order:{
+                'create_at': `${query.createType}`
+            }
+        })
+    }
+
 
 
     async findHolidayEvent(calendar_id: number) {
