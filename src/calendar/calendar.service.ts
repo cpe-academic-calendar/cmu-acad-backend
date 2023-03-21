@@ -96,6 +96,7 @@ export class CalendarService {
         return await this.calendarRepository.find({
             where:{
                 'name': ILike(`%${query}%`),
+                
             },
             order:{
                 'create_at': `${query.createType}`
@@ -616,6 +617,11 @@ export class CalendarService {
                         type: 'วันหยุด'
                     }
                 ]
+            },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
             },
             relations: ['events']
         })

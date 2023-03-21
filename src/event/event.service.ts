@@ -414,13 +414,10 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
-
         const changEnd_date = new Date(event.end_date)
         const oldEnd_date = new Date(eventData.end_date)
         let diffTimeEnd = (changEnd_date.getTime() - oldEnd_date.getTime());
         let diffDaysEnd = Math.ceil(diffTimeEnd / (1000 * 60 * 60 * 24));
-
-
         const change_date = new Date(event.start_date)
         const old_date = new Date(eventData.start_date)
         let diffTime = (change_date.getTime() - old_date.getTime());
@@ -442,6 +439,7 @@ export class EventService {
         } else {
             const newEvent = new Event()
             if (eventData.start_date.getDate() == eventData.end_date.getDate()) {
+                console.log("equal")
                 const change_date = new Date(event.start_date)
                 const old_date = new Date(eventData.start_date)
                 let diffTime = (change_date.getTime() - old_date.getTime());
@@ -462,15 +460,18 @@ export class EventService {
                 const start = eventData.start_date.getDate()
                 const end = eventData.end_date.getDate()
                 if(diffDays && diffEndDays){
+                    console.log("diffDays and endDays")
                     newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
                     newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
                 }
                 if(diffDays && !diffDaysEnd){
+                    console.log("diffDays and not endDays")
                     newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDays))
+                    newEvent.end_date = new Date(eventData.end_date.setDate(end))
                 }
                 if(!diffDays && diffDaysEnd){
-                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDaysEnd))
+                    console.log("not diffDays and endDays")
+                    newEvent.start_date = new Date(eventData.start_date.setDate(start))
                     newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
                 } 
             }
