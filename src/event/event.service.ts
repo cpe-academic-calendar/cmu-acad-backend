@@ -438,17 +438,6 @@ export class EventService {
             })
         } else {
             const newEvent = new Event()
-            if (eventData.start_date.getDate() == eventData.end_date.getDate()) {
-                console.log("equal")
-                const change_date = new Date(event.start_date)
-                const old_date = new Date(eventData.start_date)
-                let diffTime = (change_date.getTime() - old_date.getTime());
-                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                const start = eventData.start_date.getDate()
-                const end = eventData.end_date.getDate()
-                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDays))
-            } else {
                 const change_date = new Date(event.start_date)
                 const old_date = new Date(eventData.start_date)
                 let diffTime = (change_date.getTime() - old_date.getTime());
@@ -474,7 +463,7 @@ export class EventService {
                     newEvent.start_date = new Date(eventData.start_date.setDate(start))
                     newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
                 } 
-            }
+            // }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name
             newEvent.type = event.type
