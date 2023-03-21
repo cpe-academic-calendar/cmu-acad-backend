@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Permission } from './permission.entity';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -26,7 +25,7 @@ export class UserController {
         return await this.userService.findByName(account.cmuaccount)
     }
 
-    @Put('update/:id')
+    @Put('update/:_id')
     async updateUser(@Param() user,@Body() info: User){
         return await this.userService.updateUser(user._id,info)
     }
@@ -36,13 +35,5 @@ export class UserController {
         return await this.userService.setRole(user._id,role)
     }
 
-    @Post('setEdit/:id/:calendar_id')
-    async setEdit(@Param() user){
-        return await this.userService.setEdit(user)
-    }
 
-    @Get('findPermission')
-    async finPermission(){
-        return await this.userService.findPermission()
-    }
 }

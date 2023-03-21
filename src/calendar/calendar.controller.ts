@@ -34,6 +34,7 @@ export class CalendarController {
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         return this.eventService.countWeek(arr)
     }
+    
 
     @Post('duplicate/:id')
     async duplicateCalendar(@Param() calendar_id: UpdateCalendarDto, @Body() calendar: Calendar) {
@@ -103,7 +104,6 @@ export class CalendarController {
 
     @Put('/update/:id')
     async updateCalendar(@Param() id: number, @Body() calendar: Calendar) {
-        console.log(calendar)
         return this.calendarService.update(id, calendar)
     }
 

@@ -11,7 +11,6 @@ import { EventModule } from './event/event.module';
 import { AuthenModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
-import { Permission} from './user/permission.entity';
 
 @Module({
   imports: [
@@ -23,7 +22,7 @@ import { Permission} from './user/permission.entity';
       username: 'admin',
       password: 'acad.1234',
       database: 'cmu_acad',
-      entities: [Calendar,Event,User,Permission],
+      entities: [Calendar,Event,User],
       synchronize: true,
       autoLoadEntities: true
     }),

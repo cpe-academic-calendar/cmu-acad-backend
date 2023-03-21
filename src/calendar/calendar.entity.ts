@@ -5,10 +5,6 @@ import { Event } from '../event/event.entity';
 @Entity()
 export class Calendar {
     @ApiProperty()
-    @Column()
-    user_id: number;
-
-    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 

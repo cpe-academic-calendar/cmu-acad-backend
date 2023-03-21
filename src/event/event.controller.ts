@@ -24,7 +24,6 @@ export class EventController {
         newEvent.start_date = event.start_date
         newEvent.end_date = event.end_date
         newEvent.color = event.color
-        console.log("new",newEvent)
         return await this.eventService.createEvent(newEvent)
     }
 
@@ -33,6 +32,7 @@ export class EventController {
     async findEvent(@Param() id: number) {
         return await this.eventService.getEventByID(id)
     }
+
 
 
     @Put('/update/:id')

@@ -321,7 +321,6 @@ export class CalendarService {
                 ]
             }, relations: ['events']
         })
-        console.log(holiday3)
 
 
         const duration = intervalToDuration({

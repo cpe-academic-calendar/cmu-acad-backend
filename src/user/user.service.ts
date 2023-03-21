@@ -2,19 +2,16 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Permission } from './permission.entity';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>,
-        @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>,
         @Inject(JwtService) private readonly jwtService: JwtService
     ) { }
 
     async saveData(userData) {
-        console.log(userData)
         const user = await this.userRepository.findOne({
             where: {
                 cmuitaccount : userData.cmuitaccount
@@ -62,12 +59,5 @@ export class UserService {
         })
     }
 
-    async setEdit(permission) {
-        return await this.permissionRepository.create(permission)
-    }
-
-    async findPermission(){
-        return await this.permissionRepository.find()
-    }
 
 }

@@ -298,24 +298,20 @@ export class EventService {
             }
         }
 
-
-
         const dateArr1 = eachDayOfInterval({
             start: new Date(`${start[0].start_date}`),
             end: new Date(`${end[0].start_date}`)
         })
+
         const dateArr2 = eachDayOfInterval({
             start: new Date(`${start2[0].start_date}`),
             end: new Date(`${end2[0].start_date}`)
         })
 
-
         const dateArr3 = eachDayOfInterval({
             start: new Date(`${start3[0].start_date}`),
             end: new Date(`${end3[0].start_date}`)
         })
-
-
 
         const arrDate = dateArr1.map((date) => {
             return date.toISOString().split('T')[0]
@@ -346,23 +342,18 @@ export class EventService {
                 }
                 if (new Date(week[i]).getDay() == 2) {
                     arr1["wednesday"] += 1
-
                 }
                 if (new Date(week[i]).getDay() == 3) {
                     arr1["thursday"] += 1
-
                 }
                 if (new Date(week[i]).getDay() == 4) {
                     arr1["friday"] += 1
-
                 }
                 if (new Date(week[i]).getDay() == 5) {
                     arr1["saturday"] += 1
-
                 }
                 if (new Date(week[i]).getDay() == 6) {
                     arr1["sunday"] += 1
-
                 }
             }
             return arr1
@@ -415,10 +406,8 @@ export class EventService {
             }
         })
 
-        console.log(eventData)
         const arr = await this.eventRepository.find({
             where: {
-
                 type: 'กิจกรรม',
                 calendar: {
                     id: eventData.calendar.id
@@ -455,7 +444,6 @@ export class EventService {
                  const end = eventData.end_date.getDate()
                  newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
                  newEvent.end_date =  new Date(eventData.end_date.setDate(end + diffDays))
-
             } else {    
                 const change_date = new Date(event.start_date)
                 const old_date = new Date(eventData.start_date)
@@ -470,7 +458,6 @@ export class EventService {
             newEvent.event_name = event.event_name
             newEvent.type = event.type
             newEvent.color = event.color
-            console.log(newEvent)
             return this.eventRepository.update(id, newEvent)
         }
 
