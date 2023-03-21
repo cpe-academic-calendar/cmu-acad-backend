@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Event } from './event.entity';
 import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
-import { UpdateEventDto } from './event.dto';
 import { Not } from 'typeorm';
 
 @Injectable()
@@ -428,7 +427,7 @@ export class EventService {
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (event.event_name == 'วันเปิดภาคเรียน') {
             event.start_date = event.start_date
-            event.end_date = event.end_date
+            event.end_date = event.start_date
             this.eventRepository.update(id, event)
             arr.map(async (data, idx) => {
                 if (arr[idx].isOveride == false) {
@@ -473,15 +472,7 @@ export class EventService {
                 if(!diffDays && diffDaysEnd){
                     newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDaysEnd))
                     newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
-                }
-
-
-
-
-
-
-               
-             
+                } 
             }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name
