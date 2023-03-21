@@ -1,7 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Redirect, Res, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Body, Controller, Get,  Put,Query, Redirect, Res, UseGuards } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Code } from 'typeorm';
 import { map } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger/dist';
 import { UserService } from 'src/user/user.service';
@@ -29,7 +27,6 @@ export class AuthenController {
             map(response => res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/login?token=${response.data.access_token}`)))
     }
     
-
     @Get('/login')
     async loginCmu(@Query() token,@Res() res){
         try{
@@ -40,7 +37,6 @@ export class AuthenController {
             }
             ).toPromise();
             res.redirect(`https://cmu-acad.netlify.app/token=${token.token}`);
-            // res.redirect(`http://localhost:3000/token=${token.token}`)
             return this.userService.saveData(response.data)
             
         } catch (error) {

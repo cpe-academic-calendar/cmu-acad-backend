@@ -47,7 +47,4 @@ export class Calendar {
     @JoinColumn()
     events : Event[]
 
-    @ApiProperty()
-    @Column()
-    isDeleted : Boolean
 }
