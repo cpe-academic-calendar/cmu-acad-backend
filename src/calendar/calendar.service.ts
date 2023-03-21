@@ -258,6 +258,11 @@ export class CalendarService {
                     }
                 ]
             },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
+            },
             relations: ['events']
         })
 
@@ -271,6 +276,11 @@ export class CalendarService {
                         event_name: 'วันสุดท้ายของการศึกษา เทอม 2'
                     }
                 ]
+            },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
             },
             relations: ['events']
         })
@@ -286,7 +296,11 @@ export class CalendarService {
                     }
                 ]
             },
-            relations: ['events']
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
+            },relations: ['events']
         })
 
         const holiday = await this.calendarRepository.find({
@@ -301,7 +315,12 @@ export class CalendarService {
                         type: 'วันหยุด'
                     }
                 ]
-            }, relations: ['events']
+            }, 
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
+            },relations: ['events']
         })
 
         const holiday2 = await this.calendarRepository.find({
@@ -316,6 +335,11 @@ export class CalendarService {
                         type: 'วันหยุด'
                     }
                 ]
+            },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
             }, relations: ['events']
         })
 
@@ -331,6 +355,11 @@ export class CalendarService {
                         type: 'วันหยุด'
                     }
                 ]
+            },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
             }, relations: ['events']
         })
 
@@ -527,7 +556,12 @@ export class CalendarService {
                     {
                         type: 'วันเปิดภาคเรียน'
                     }
-                ]
+                ],
+            },
+            order:{
+                events:{
+                    start_date: 'ASC'
+                }
             },
             relations: ['events']
         })
