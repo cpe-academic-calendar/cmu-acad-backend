@@ -333,31 +333,32 @@ export class EventService {
         const returnCountWeek = (week: any[]) => {
             const arr1 = { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0, }
             for (let i in week) {
-                if (new Date(week[i]).getDay() == 0) {
+                if (new Date(week[i]).getDay() == 1) {
                     arr1["monday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 1) {
+                if (new Date(week[i]).getDay() == 2) {
                     arr1["tuesday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 2) {
+                if (new Date(week[i]).getDay() == 3) {
                     arr1["wednesday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 3) {
+                if (new Date(week[i]).getDay() == 4) {
                     arr1["thursday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 4) {
+                if (new Date(week[i]).getDay() == 5) {
                     arr1["friday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 5) {
+                if (new Date(week[i]).getDay() == 6) {
                     arr1["saturday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 6) {
+                if (new Date(week[i]).getDay() == 7) {
                     arr1["sunday"] += 1
                 }
             }
             return arr1
         }
         const countArr = { term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)] }
+        console.log(countArr)
         return countArr
     }
 
