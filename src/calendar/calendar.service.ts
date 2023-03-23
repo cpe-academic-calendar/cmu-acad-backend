@@ -10,7 +10,6 @@ import { Inject } from '@nestjs/common/decorators';
 import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
 import { Workbook } from 'exceljs';
 import * as tmp from 'tmp'
-import { eachDayOfInterval } from 'date-fns'
 import { intervalToDuration } from 'date-fns'
 
 @Injectable()

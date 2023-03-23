@@ -358,7 +358,6 @@ export class EventService {
             return arr1
         }
         const countArr = { term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)] }
-        console.log(countArr)
         return countArr
     }
 
@@ -432,6 +431,9 @@ export class EventService {
                     const newEvent = new Event()
                     const eventDate = arr[idx].start_date.getDate()
                     const eventendDate = arr[idx].end_date.getDate()
+                    console.log("name",arr[idx].event_name)
+                    console.log("date",eventDate)
+                    console.log("endDate",eventendDate)
                     newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
                     newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDaysEnd))
                     await this.eventRepository.update(arr[idx].id, newEvent)
