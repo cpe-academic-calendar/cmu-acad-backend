@@ -34,7 +34,6 @@ export class EventController {
     }
 
 
-
     @Put('/update/:id')
     async updateEvent(@Param() id: number, @Body() event: Event) {
         return await this.eventService.updateEvent(id, event)

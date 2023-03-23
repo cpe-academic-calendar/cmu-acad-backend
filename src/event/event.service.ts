@@ -273,27 +273,27 @@ export class EventService {
         const evnetArr = event[0].map((edt) => edt)
 
         for (let i in evnetArr) {
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน') {
-                start.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา') {
-                end.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 2') {
-                start2.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 2') {
-                end2.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 3') {
-                start3.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 3') {
-                end3.push(evnetArr[i])
-            }
-
-            if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
-                holiday.push(evnetArr[i].start_date)
+            switch (event.event_name) {
+                case 'วันเปิดภาคเรียน':
+                    start.push(event);
+                    break;
+                case 'วันสุดท้ายของการศึกษา':
+                    end.push(event);
+                    break;
+                case 'วันเปิดภาคเรียน เทอม 2':
+                    start2.push(event);
+                    break;
+                case 'วันสุดท้ายของการศึกษา เทอม 2':
+                    end2.push(event);
+                    break;
+                case 'วันเปิดภาคเรียน เทอม 3':
+                    start3.push(event);
+                    break;
+                case 'วันสุดท้ายของการศึกษา เทอม 3':
+                    end3.push(event);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -431,41 +431,41 @@ export class EventService {
                     const newEvent = new Event()
                     const eventDate = new Date(arr[idx].start_date).getDate()
                     const eventendDate = new Date(arr[idx].end_date).getDate()
-                    console.log("name",arr[idx].event_name)
-                    console.log("date",eventDate)
-                    console.log("endDate",eventendDate)
                     newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDaysEnd))
+                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDaysEnd))
+                    console.log(newEvent.event_name)
+                    console.log(newEvent.start_date)
+                    console.log(newEvent.end_date)
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
         } else {
             const newEvent = new Event()
-                const change_date = new Date(event.start_date)
-                const old_date = new Date(eventData.start_date)
-                let diffTime = (change_date.getTime() - old_date.getTime());
-                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                const changeEnd_date = new Date(event.end_date)
-                const oldEnd_date = new Date(eventData.end_date)
-                let diffEndTime = (changeEnd_date.getTime() - oldEnd_date.getTime());
-                let diffEndDays = Math.ceil(diffEndTime / (1000 * 60 * 60 * 24));
-                const start = eventData.start_date.getDate()
-                const end = eventData.end_date.getDate()
-                if(diffDays && diffEndDays){
-                    console.log("diffDays and endDays")
-                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
-                }
-                if(diffDays && !diffDaysEnd){
-                    console.log("diffDays and not endDays")
-                    newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                    newEvent.end_date = new Date(eventData.end_date.setDate(end))
-                }
-                if(!diffDays && diffDaysEnd){
-                    console.log("not diffDays and endDays")
-                    newEvent.start_date = new Date(eventData.start_date.setDate(start))
-                    newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
-                } 
+            const change_date = new Date(event.start_date)
+            const old_date = new Date(eventData.start_date)
+            let diffTime = (change_date.getTime() - old_date.getTime());
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const changeEnd_date = new Date(event.end_date)
+            const oldEnd_date = new Date(eventData.end_date)
+            let diffEndTime = (changeEnd_date.getTime() - oldEnd_date.getTime());
+            let diffEndDays = Math.ceil(diffEndTime / (1000 * 60 * 60 * 24));
+            const start = eventData.start_date.getDate()
+            const end = eventData.end_date.getDate()
+            if (diffDays && diffEndDays) {
+                console.log("diffDays and endDays")
+                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
+            }
+            if (diffDays && !diffDaysEnd) {
+                console.log("diffDays and not endDays")
+                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end))
+            }
+            if (!diffDays && diffDaysEnd) {
+                console.log("not diffDays and endDays")
+                newEvent.start_date = new Date(eventData.start_date.setDate(start))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
+            }
             // }
             newEvent.isOveride = true
             newEvent.event_name = event.event_name

@@ -6,18 +6,26 @@ import { ApiTags } from '@nestjs/swagger';
 import { UpdateCalendarDto } from './calendar.dto';
 import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
+import *  as fs from 'fs'
+
 
 @ApiTags('Calendar')
 @Controller('calendar')
 export class CalendarController {
     constructor(
         private readonly calendarService: CalendarService,
-        private readonly eventService: EventService) { }
-
+        private readonly eventService: EventService) {}
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
         return await this.calendarService.createCalendar(calendar)
+    }
+
+    @Get('findConditionEvent')
+    async findAllEvent(){
+        const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
+        const event = JSON.parse(dataEvent)
+        return event
     }
 
 
@@ -42,6 +50,7 @@ export class CalendarController {
         const event = oldCalendar[0].events.map((ev) => ev);
         const eve = await this.eventService.createArr(event)
         newCalendar.name = calendar.name
+        console.log(oldCalendar)
         let arr = []
         eve.map((dt) => {
             arr.push(dt)
