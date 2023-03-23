@@ -429,8 +429,8 @@ export class EventService {
             arr.map(async (data, idx) => {
                 if (arr[idx].isOveride == false) {
                     const newEvent = new Event()
-                    const eventDate = arr[idx].start_date.getDate()
-                    const eventendDate = arr[idx].end_date.getDate()
+                    const eventDate = new Date(arr[idx].start_date).getDate()
+                    const eventendDate = new Date(arr[idx].end_date).getDate()
                     console.log("name",arr[idx].event_name)
                     console.log("date",eventDate)
                     console.log("endDate",eventendDate)
