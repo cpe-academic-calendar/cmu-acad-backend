@@ -21,11 +21,18 @@ export class CalendarController {
         return await this.calendarService.createCalendar(calendar)
     }
 
-    @Get('findConditionEvent')
+    @Get('findConditionData')
     async findAllEvent(){
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         return event
+    }
+
+    @Get('findHolidayData')
+    async findAllHoliday(){
+        const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
+        const holiday = JSON.parse(holidayEvent)
+        return holiday
     }
 
 
