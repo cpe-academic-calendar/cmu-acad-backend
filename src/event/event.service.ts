@@ -271,29 +271,28 @@ export class EventService {
         let end3 = []
         let holiday = []
         const evnetArr = event[0].map((edt) => edt)
-
         for (let i in evnetArr) {
-            switch (event.event_name) {
-                case 'วันเปิดภาคเรียน':
-                    start.push(event);
-                    break;
-                case 'วันสุดท้ายของการศึกษา':
-                    end.push(event);
-                    break;
-                case 'วันเปิดภาคเรียน เทอม 2':
-                    start2.push(event);
-                    break;
-                case 'วันสุดท้ายของการศึกษา เทอม 2':
-                    end2.push(event);
-                    break;
-                case 'วันเปิดภาคเรียน เทอม 3':
-                    start3.push(event);
-                    break;
-                case 'วันสุดท้ายของการศึกษา เทอม 3':
-                    end3.push(event);
-                    break;
-                default:
-                    break;
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน') {
+                start.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา') {
+                end.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 2') {
+                start2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 2') {
+                end2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 3') {
+                start3.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 3') {
+                end3.push(evnetArr[i])
+            }
+
+            if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
+                holiday.push(evnetArr[i].start_date)
             }
         }
 
@@ -351,7 +350,7 @@ export class EventService {
                 if (new Date(week[i]).getDay() == 6) {
                     arr1["saturday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 7) {
+                if (new Date(week[i]).getDay() == 0) {
                     arr1["sunday"] += 1
                 }
             }
@@ -414,6 +413,7 @@ export class EventService {
                 event_name: Not('วันเปิดภาคเรียน')
             }
         })
+
         const changEnd_date = new Date(event.end_date)
         const oldEnd_date = new Date(eventData.end_date)
         let diffTimeEnd = (changEnd_date.getTime() - oldEnd_date.getTime());
@@ -431,11 +431,13 @@ export class EventService {
                     const newEvent = new Event()
                     const eventDate = new Date(arr[idx].start_date).getDate()
                     const eventendDate = new Date(arr[idx].end_date).getDate()
-                    newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                    newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDaysEnd))
-                    console.log(newEvent.event_name)
-                    console.log(newEvent.start_date)
-                    console.log(newEvent.end_date)
+                    if(eventDate == eventendDate){
+                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))    
+                    }else{
+                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))    
+                    }
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })

@@ -8,7 +8,6 @@ import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
 import *  as fs from 'fs'
 
-
 @ApiTags('Calendar')
 @Controller('calendar')
 export class CalendarController {
@@ -35,7 +34,6 @@ export class CalendarController {
         return holiday
     }
 
-
     @Get('findCalendarByType')
     async findCalendarByStatus(@Query() calendarStatus){
         return await this.calendarService.findByStatus(calendarStatus.calendarStatus)
@@ -57,7 +55,6 @@ export class CalendarController {
         const event = oldCalendar[0].events.map((ev) => ev);
         const eve = await this.eventService.createArr(event)
         newCalendar.name = calendar.name
-        console.log(oldCalendar)
         let arr = []
         eve.map((dt) => {
             arr.push(dt)

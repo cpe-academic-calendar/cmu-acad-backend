@@ -23,8 +23,8 @@ export class AuthenController {
 
     @Get('/code')
     async accessToken(@Query() code,@Res() res){
-        return this.httpService.post(`https://oauth.cmu.ac.th/v1/GetToken.aspx?code=${code.code}&redirect_uri=https://cmu-acad-backend-production.up.railway.app/auth/code&client_id=MgtZS8S3J9cAhGAUGhbdX9qFHR2mCySSG7pNHbW8&client_secret=CrJbXxZyb2b5YBhM3YsbfEAkux4ktYkExdNFBpUk&grant_type=authorization_code`).pipe(
-            map(response => res.redirect(`https://cmu-acad-backend-production.up.railway.app/auth/login?token=${response.data.access_token}`)))
+        return this.httpService.post(`https://oauth.cmu.ac.th/v1/GetToken.aspx?code=${code.code}&redirect_uri=${process.env.localhost}/auth/code&client_id=MgtZS8S3J9cAhGAUGhbdX9qFHR2mCySSG7pNHbW8&client_secret=CrJbXxZyb2b5YBhM3YsbfEAkux4ktYkExdNFBpUk&grant_type=authorization_code`).pipe(
+            map(response => res.redirect(`${process.env.localhost}/auth/login?token=${response.data.access_token}`)))
     }
     
     @Get('/login')
@@ -43,7 +43,7 @@ export class AuthenController {
             // handle error
         }
     }
-    
+     
 
     @UseGuards(JwtAuthGuard)
     @Get('profile')
