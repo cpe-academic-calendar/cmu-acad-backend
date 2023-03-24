@@ -30,7 +30,7 @@ export class CalendarController {
 
     @Get('findHolidayData')
     async findAllHoliday(){
-        const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
+        const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const holiday = JSON.parse(holidayEvent)
         return holiday
     }
