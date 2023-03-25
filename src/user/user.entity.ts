@@ -13,7 +13,6 @@ export class User {
     @Column()
     prename_id: String
 
-
     @ApiProperty()
     @Column()
     firstname_TH: String
