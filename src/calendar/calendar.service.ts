@@ -719,4 +719,3 @@ export class CalendarService {
     }
 }
 
-

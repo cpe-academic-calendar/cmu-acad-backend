@@ -3,11 +3,12 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-
+import {AccessUser} from './AccessUser.entity'
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>,
+        @InjectRepository(AccessUser) private readonly permissionRepository: Repository<AccessUser>,
         @Inject(JwtService) private readonly jwtService: JwtService
     ) { }
 
@@ -58,6 +59,25 @@ export class UserService {
             role: `${role}`
         })
     }
+    
+    async setEdit(permission) {
+        console.log(permission)
+        return await this.permissionRepository.save(permission)
+    }
 
+    async removeAccesUser(id){
+        return await this.permissionRepository.delete(id)
+    }
 
+    async findAllPermission(){
+        return await this.permissionRepository.find()
+    }
+
+    async findAcessUser(cmu_acc){   
+        return await this.permissionRepository.find({
+            where: {
+                cmuitaccount: cmu_acc
+            }
+        })
+    }
 }

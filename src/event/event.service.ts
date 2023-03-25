@@ -331,7 +331,7 @@ export class EventService {
 
         const returnCountWeek = (week: any[]) => {
             const arr1 = { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0, }
-            for (let i in week) {
+            for (let i in week) {             
                 if (new Date(week[i]).getDay() == 1) {
                     arr1["monday"] += 1
                 }
@@ -350,7 +350,7 @@ export class EventService {
                 if (new Date(week[i]).getDay() == 6) {
                     arr1["saturday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 0) {
+                if (new Date(week[i]).getDay() == 6) {
                     arr1["sunday"] += 1
                 }
             }
@@ -441,6 +441,7 @@ export class EventService {
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
             })
+
         } else {
             const newEvent = new Event()
             const change_date = new Date(event.start_date)
@@ -496,4 +497,3 @@ export class EventService {
         return await this.eventRepository.save(data)
     }
 }
-
