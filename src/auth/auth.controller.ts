@@ -1,11 +1,10 @@
-import { Body, Controller, Get, Put, Query, Redirect, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query,Res } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { map } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger/dist';
-import { UserService } from 'src/user/user.service';
-import { JwtAuthGuard } from './jwt-auth.guards';
-import { Request } from '@nestjs/common';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
+import { PermissionService } from 'src/permission/permission.service';
+import { UserService } from 'src/user/user.service';
 
 
 @ApiTags('Auth')
@@ -14,6 +13,7 @@ export class AuthenController {
 
     constructor(
         private readonly httpService: HttpService,
+        private readonly permissionService: PermissionService,
         private readonly userService: UserService
     ) { }
 
@@ -37,7 +37,7 @@ export class AuthenController {
                 }
             }
             ).toPromise();
-            const user = await this.userService.findAcessUser(response.data.cmuitaccount)
+            const user = await this.permissionService.findAcessUser(response.data.cmuitaccount)
             if (user.length != 0) {
                 res.redirect(`https://cmu-acad.netlify.app/token=${token.token}`);
                 return this.userService.saveData(response.data)
@@ -48,13 +48,6 @@ export class AuthenController {
 
         } catch (error) {
         }
-    }
-
-
-    @UseGuards(JwtAuthGuard)
-    @Get('profile')
-    getProfile(@Request() req: any) {
-        return req.user
     }
 
 }

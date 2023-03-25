@@ -389,7 +389,7 @@ export class EventService {
         }
     }
 
-    async updateEvent(id, event: Event) {
+    async updateEvent(id, event) {
         const eventData = await this.eventRepository.findOne({
             where: {
                 id: id.id

@@ -37,4 +37,15 @@ export class CalendarDto {
     start_semester:  Date;
 }
 
-export class UpdateCalendarDto extends PartialType(CalendarDto){}
+export class QueryCalendarDto{
+    @ApiProperty()
+    id: number
+
+    @ApiProperty({required: false})
+    name: String
+}
+
+export class CreateNewCalendarDto{
+    @ApiProperty()
+    start_semester: Date;
+}

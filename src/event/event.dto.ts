@@ -1,53 +1,66 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { Calendar } from "src/calendar/calendar.entity";
 
 export class EventDto {
-    @ApiProperty()
+    @ApiProperty({required: false})
     event_name: string;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     color: string;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     reference_event: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     start_date: Date;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     duration_start: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     num_week: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     num_days: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     end_date: Date;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     duration_end: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     num_weekEnd: number;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     num_daysEnd: number;
+
+    @ApiProperty({required: false})
+    type: string;
+
+    @ApiProperty({required: false})
+    calendar: Calendar
 }
 
 export class UpdateEventDto {
-    
-    @ApiProperty()
+    @ApiProperty({required: false})
     event_name: string;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     type: string;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
     start_date: Date;
 
-    @ApiProperty()
+    @ApiProperty({required: false})
+    end_datte: Date;
+
+
+    @ApiProperty({required: false})
     color: string
+}
 
-
+export class QueryEventDto{
+    @ApiProperty()
+    id: number
 }

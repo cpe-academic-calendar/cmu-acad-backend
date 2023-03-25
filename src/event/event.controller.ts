@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { EventService } from './event.service';
 import { Event } from '../event/event.entity'
-import { EventDto, UpdateEventDto } from './event.dto';
+import { EventDto, QueryEventDto, UpdateEventDto } from './event.dto';
 import { ApiTags } from '@nestjs/swagger/dist';
 
 @ApiTags('Event')
@@ -16,7 +16,7 @@ export class EventController {
     }
 
     @Post('/create')
-    async createEvent(@Body() event: Event) {
+    async createEvent(@Body() event: EventDto) {
         const newEvent = new Event()
         newEvent.event_name = event.event_name
         newEvent.type = event.type
@@ -29,19 +29,19 @@ export class EventController {
 
 
     @Get('/find/:id')
-    async findEvent(@Param() id: number) {
-        return await this.eventService.getEventByID(id)
+    async findEvent(@Param() user: QueryEventDto) {
+        return await this.eventService.getEventByID(user.id)
     }
 
 
     @Put('/update/:id')
-    async updateEvent(@Param() id: number, @Body() event: Event) {
+    async updateEvent(@Param() id: QueryEventDto, @Body() event: UpdateEventDto) {
         return await this.eventService.updateEvent(id, event)
     }
 
     
     @Delete('/delete/:id')
-    async deleteEvent(@Param() id: number) {
-        return await this.eventService.deleteEvent(id)
+    async deleteEvent(@Param() user: QueryEventDto) {
+        return await this.eventService.deleteEvent(user.id)
     }
 }

@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 
 @Entity()
-export class AccessUser {
+export class PermissionSchema {
     
     @ApiProperty()
     @PrimaryGeneratedColumn()
