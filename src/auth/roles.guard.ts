@@ -1,21 +1,29 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { Reflector } from '@nestjs/core';
-import { ROLES_KEY } from './role.decorator';
-import { Role } from './role.enum';
+import { PermissionService } from 'src/permission/permission.service';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
-  constructor(private reflector: Reflector) {}
+export class RoleGuard implements CanActivate {
+  constructor(
+    private readonly reflector: Reflector,
+    private readonly permissionService: PermissionService
+    ) {}
 
-  canActivate(context: ExecutionContext): boolean {
-    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-    if (!requiredRoles) {
-      return true;
-    }
-    const { user } = context.switchToHttp().getRequest();
-    return requiredRoles.some((role) => user.roles?.includes(role));
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    try{
+      const roles = this.reflector.get<string[]>('roles', context.getHandler());
+      if (!roles) {
+        return true;
+      }
+      const request = context.switchToHttp().getRequest().headers;
+      const headers = request['validate-header'];
+      const user = await this.permissionService.findAcessUser(headers)
+      const hash_Roles = roles.includes(user[0].roles)
+      return user && hash_Roles
+  
+    }catch(error){
+    throw new UnauthorizedException()
   }
+}
 }

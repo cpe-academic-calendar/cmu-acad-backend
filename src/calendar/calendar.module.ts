@@ -6,10 +6,11 @@ import { CalendarService } from './calendar.service';
 import { Event } from 'src/event/event.entity';
 import { EventModule } from 'src/event/event.module';
 import { EventService } from 'src/event/event.service';
+import { PermissionModule } from 'src/permission/permission.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Calendar]),EventModule,
-            TypeOrmModule.forFeature([Event])
+            TypeOrmModule.forFeature([Event]),PermissionModule
 ],
   providers: [CalendarService,EventService],
   controllers: [CalendarController]

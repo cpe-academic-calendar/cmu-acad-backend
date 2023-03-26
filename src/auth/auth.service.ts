@@ -1,16 +1,14 @@
 import { Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { UserService } from "src/user/user.service";
+import { PermissionService } from "src/permission/permission.service";
 
 @Injectable()
 export class AuthService{
     constructor(
-        private jwtService: JwtService,
-        private userService: UserService
+        private permissionService: PermissionService
     ){}
 
     async validateUser(name){
-        const user = await this.userService.findByName(name)
+        const user = await this.permissionService.findAcessUser(name)
         if(user){
             return user
         }

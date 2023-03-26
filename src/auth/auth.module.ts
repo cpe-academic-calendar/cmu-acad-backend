@@ -9,13 +9,14 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { JwtModule } from '@nestjs/jwt';
 import { PermissionSchema } from "src/permission/permission.entity";
 import { PermissionModule } from "src/permission/permission.module";
+import { RoleGuard } from "./roles.guard";
 @Module({
     imports: [HttpModule, UserModule, TypeOrmModule.forFeature([User]),TypeOrmModule.forFeature([PermissionSchema]),
     JwtModule.register({
             secret: process.env.SECRET,
             signOptions: { expiresIn: '60s' },
         }),
-        PermissionModule
+        PermissionModule,
     ],
     providers: [AuthService, UserService],
     controllers: [AuthenController]

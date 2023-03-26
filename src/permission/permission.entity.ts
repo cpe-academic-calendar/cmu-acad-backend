@@ -13,4 +13,7 @@ export class PermissionSchema {
     @Column()
     cmuitaccount: string
 
+    @ApiProperty()
+    @Column()
+    roles: string
 }
