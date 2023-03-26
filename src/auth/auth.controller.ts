@@ -19,17 +19,20 @@ export class AuthenController {
 
     @Get('')
     async find(@Query() code, @Res() res) {
+        console.log("get")
         return await res.redirect(`https://cmu-acad-backend-production.up.railway/auth/code?code=${code.code}`)
     }
 
     @Get('/code')
     async accessToken(@Query() code, @Res() res) {
+        console.log("code")
         return this.httpService.post(`https://oauth.cmu.ac.th/v1/GetToken.aspx?code=${code.code}&redirect_uri=https://cmu-acad-backend-production.up.railway/auth/code&client_id=MgtZS8S3J9cAhGAUGhbdX9qFHR2mCySSG7pNHbW8&client_secret=CrJbXxZyb2b5YBhM3YsbfEAkux4ktYkExdNFBpUk&grant_type=authorization_code`).pipe(
             map(response => res.redirect(`https://cmu-acad-backend-production.up.railway/auth/login?token=${response.data.access_token}`)))
     }
 
     @Get('/login')
     async loginCmu(@Query() token, @Res() res) {
+        console.log("login")
         try {
             const response = await this.httpService.get(`https://misapi.cmu.ac.th/cmuitaccount/v1/api/cmuitaccount/basicinfo`, {
                 headers: {
