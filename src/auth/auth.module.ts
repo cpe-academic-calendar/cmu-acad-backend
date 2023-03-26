@@ -16,8 +16,8 @@ import { RoleGuard } from "./roles.guard";
             secret: process.env.SECRET,
             signOptions: { expiresIn: '60s' },
         }),
-        PermissionModule,
-    ],
+        PermissionModule
+        ],
     providers: [AuthService, UserService],
     controllers: [AuthenController]
 })
