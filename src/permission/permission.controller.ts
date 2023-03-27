@@ -13,8 +13,6 @@ export class PermissionController {
     constructor(
         private readonly permissionService: PermissionService) { }
 
-    @Roles(Role.Admin)
-    @UseGuards(RoleGuard)
     @Get('findAll')
     async findAll() {
         return await this.permissionService.findAll()
@@ -33,6 +31,7 @@ export class PermissionController {
     async setEdit(@Body() user: CreatePermissionDto) {
         return await this.permissionService.setEdit(user)
     }
+
 
     @Roles(Role.Admin)
     @UseGuards(RoleGuard)
