@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/role.decorator';
 import { Role } from 'src/auth/role.enum';
 import { RoleGuard } from 'src/auth/roles.guard';
-import { CreatePermissionDto, RemovePermissionDto } from './permission.dto';
+import { CreatePermissionDto, PermissionDto, RemovePermissionDto } from './permission.dto';
 import { PermissionService } from './permission.service';
 
 
@@ -12,14 +12,16 @@ import { PermissionService } from './permission.service';
 export class PermissionController {
     constructor(
         private readonly permissionService: PermissionService) { }
-    
+
     @Roles(Role.Admin)
     @UseGuards(RoleGuard)
     @Get('findAll')
-    async findAll(){
+    async findAll() {
         return await this.permissionService.findAll()
     }
 
+    @Roles(Role.Admin)
+    @UseGuards(RoleGuard)
     @Get('getAccessUser/:cmuitaccount')
     async getAcessUser(@Param() cmuaccount: CreatePermissionDto) {
         return await this.permissionService.findAcessUser(cmuaccount.cmuitaccount)
@@ -30,6 +32,13 @@ export class PermissionController {
     @Post('setEdit')
     async setEdit(@Body() user: CreatePermissionDto) {
         return await this.permissionService.setEdit(user)
+    }
+
+    @Roles(Role.Admin)
+    @UseGuards(RoleGuard)
+    @Put('setRole/:id')
+    async setRole(@Param() user: PermissionDto, @Body() role: PermissionDto) {
+        return await this.permissionService.setRole(user, role)
     }
 
     @Roles(Role.Admin)

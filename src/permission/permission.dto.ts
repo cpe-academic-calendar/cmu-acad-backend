@@ -6,6 +6,9 @@ export class PermissionDto {
     
     @ApiProperty()
     cmuitaccount: string
+
+    @ApiProperty()
+    roles: string
 }
 
 

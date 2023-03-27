@@ -15,7 +15,7 @@
         "ref_start": "before",
         "num_days": 45,
         "num_weeks": 0,
-        "duration_days": 7,
+        "duration_days": 7 ,
         "duration_weeks": 0,
         "isOveride": false,
         "isAffair": true
@@ -31,7 +31,8 @@
         "num_weeks": 0,
         "duration_days": 6,
         "duration_weeks": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 4,
@@ -232,7 +233,8 @@
         "num_weeks": 9,
         "duration_weeks": 1,
         "duration_days": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 19,
@@ -245,7 +247,8 @@
         "num_weeks": 1,
         "duration_weeks": 1,
         "duration_days": 0,
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 20,
@@ -679,7 +682,8 @@
         "duration_weeks": 1,
         "type": "วันสอบ",
         "color": "#666AD1",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 52,
@@ -692,7 +696,8 @@
         "duration_weeks": 1,
         "type": "วันหยุด",
         "color": "#352829",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 53,
@@ -973,7 +978,8 @@
         "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#DD2C00",
-        "isOveride": false
+        "isOveride": false,
+        "isAffair": true
     },
     {
         "id": 74,

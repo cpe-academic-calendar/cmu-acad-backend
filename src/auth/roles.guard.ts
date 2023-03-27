@@ -9,7 +9,7 @@ export class RoleGuard implements CanActivate {
     private readonly reflector: Reflector,
     private readonly permissionService: PermissionService
     ) {}
-
+    
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try{
       const roles = this.reflector.get<string[]>('roles', context.getHandler());

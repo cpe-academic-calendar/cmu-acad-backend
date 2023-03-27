@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PermissionSchema } from 'src/permission/permission.entity';
 import { Repository } from 'typeorm';
+import { PermissionDto } from './permission.dto';
 
 @Injectable()
 export class PermissionService {
@@ -30,5 +31,12 @@ export class PermissionService {
         }
         )
     }
+
+    async setRole(id: PermissionDto,role:PermissionDto){
+        return await this.permissionRepository.update(id.id,{
+            'roles': role.roles
+        })
+    }
+
 
 }
