@@ -21,8 +21,7 @@ export class AuthenController {
 
     @Get('')
     async find(@Query() code, @Res() res) {
-        // return await res.redirect(`${this.configService.get('authen.auth_path')}/auth/code?code=${code.code}`)
-        return await res.redirect(`http://localhost:4000/auth/code?code=${code.code}`)
+        return await res.redirect(`${this.configService.get('authen.auth_path')}/auth/code?code=${code.code}`)
     }
 
     @Get('/code')
