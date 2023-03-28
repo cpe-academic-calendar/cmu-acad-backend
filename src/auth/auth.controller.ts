@@ -1,6 +1,6 @@
 import { Controller, Get, Query,Res } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger/dist';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { PermissionService } from 'src/permission/permission.service';
@@ -27,7 +27,7 @@ export class AuthenController {
     @Get('/code')
     async accessToken(@Query() code, @Res() res) {
         return this.httpService.post(`${this.configService.get('auth.oauth_path')}=${code.code}&client_id=${this.configService.get('authen.client_id')}&client_secret=${this.configService.get('authen.client_secret')}&grant_type=${this.configService.get('authen.grant_type')}`).pipe(
-            map(response => res.redirect(`${this.configService.get('authen.railway_url')}/auth/login?token=${response.data.access_token}`)))
+            tap(response => res.redirect(`${this.configService.get('authen.railway_url')}/auth/login?token=${response.data.access_token}`)))
     }
 
     @Get('/login')

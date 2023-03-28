@@ -6,10 +6,8 @@ import { UserService } from "src/user/user.service";
 import { UserModule } from "src/user/user.module";
 import { User } from "src/user/user.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { JwtModule } from '@nestjs/jwt';
 import { PermissionSchema } from "src/permission/permission.entity";
 import { PermissionModule } from "src/permission/permission.module";
-import { RoleGuard } from "./roles.guard";
 @Module({
     imports: [HttpModule, UserModule, TypeOrmModule.forFeature([User]),TypeOrmModule.forFeature([PermissionSchema]),
         PermissionModule
