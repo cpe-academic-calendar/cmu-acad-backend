@@ -22,13 +22,13 @@ export class AuthenController {
     @Get('')
     async find(@Query() code, @Res() res) {
         console.log("get")
-        return await res.redirect(`${this.configService.get('auth.auth_path')}=${code.code}`)
+        return await res.redirect(`${this.configService.get('auth.auth_code')}/code?code=${code.code}`)
     }
 
     @Get('/code')
     async accessToken(@Query() code, @Res() res) {
         console.log("code")
-        return this.httpService.post(`${this.configService.get('auth.oauth_path')}=${code.code}&redirect_uri=${this.configService.get('authen.auth_path')}&client_id=${this.configService.get('authen.client_id')}&client_secret=${this.configService.get('authen.client_secret')}&grant_type=${this.configService.get('authen.grant_type')}`).pipe(
+        return this.httpService.post(`${this.configService.get('auth.oauth_path')}=${code.code}&redirect_uri=${this.configService.get('authen.auth_path')}/code&client_id=${this.configService.get('authen.client_id')}&client_secret=${this.configService.get('authen.client_secret')}&grant_type=${this.configService.get('authen.grant_type')}`).pipe(
             map(response => res.redirect(`${this.configService.get('authen.railway_url')}/auth/login?token=${response.data.access_token}`)))
     }
 
