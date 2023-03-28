@@ -12,10 +12,6 @@ import { PermissionModule } from "src/permission/permission.module";
 import { RoleGuard } from "./roles.guard";
 @Module({
     imports: [HttpModule, UserModule, TypeOrmModule.forFeature([User]),TypeOrmModule.forFeature([PermissionSchema]),
-    JwtModule.register({
-            secret: process.env.SECRET,
-            signOptions: { expiresIn: '60s' },
-        }),
         PermissionModule
         ],
     providers: [AuthService, UserService],
