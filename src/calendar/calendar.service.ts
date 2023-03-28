@@ -384,7 +384,7 @@ export class CalendarService {
 
         let book = new Workbook()
 
-        let sheet = book.addWorksheet(`ร่างปฏิทิน`)
+        let sheet = book.addWorksheet(`สรุปวันเรียน`)
 
         sheet.getCell('A1').value = 'ภาคเรียน'
         sheet.getCell('B1').value = 'ช่วงเวลา'
