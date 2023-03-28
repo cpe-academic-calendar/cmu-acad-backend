@@ -22,7 +22,7 @@ export class AuthenController {
     @Get('')
     async find(@Query() code, @Res() res) {
         console.log("get")
-        return await res.redirect(`${this.configService.get('auth.auth_code')}/code?code=${code.code}`)
+        return await res.redirect(`${this.configService.get('auth.auth_path')}/code?code=${code.code}`)
     }
 
     @Get('/code')
