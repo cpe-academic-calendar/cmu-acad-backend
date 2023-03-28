@@ -41,7 +41,7 @@ export class AuthenController {
             ).toPromise();
             const user = await this.permissionService.findAcessUser(response.data.cmuitaccount)
             if (user.length != 0) {
-                res.redirect(`${this.configService.get('authen.netlify_url')}token=${token.token}`);
+                res.redirect(`${this.configService.get('authen.netlify_url')}/token=${token.token}`);
                 return this.userService.saveData(response.data)
             } else {
                 throw new UnauthorizedException('You dont have permission to access!!')
