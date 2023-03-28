@@ -13,7 +13,6 @@ export class CustomLocalAuthGuard extends AuthGuard('local') {
   canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest<Request>();
     const headerValue = request.headers['validate-header'];
-    console.log(headerValue)
     // You can perform additional header validation here if needed
     if (!headerValue) {
         throw new UnauthorizedException('Missing required header');

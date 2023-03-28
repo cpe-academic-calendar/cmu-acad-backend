@@ -21,20 +21,18 @@ export class AuthenController {
 
     @Get('')
     async find(@Query() code, @Res() res) {
-        console.log("get")
-        return await res.redirect(`${this.configService.get('auth.auth_path')}/code?code=${code.code}`)
+        // return await res.redirect(`${this.configService.get('authen.auth_path')}/auth/code?code=${code.code}`)
+        return await res.redirect(`http://localhost:4000/auth/code?code=${code.code}`)
     }
 
     @Get('/code')
     async accessToken(@Query() code, @Res() res) {
-        console.log("code")
-        return this.httpService.post(`${this.configService.get('auth.oauth_path')}=${code.code}&redirect_uri=${this.configService.get('authen.auth_path')}/code&client_id=${this.configService.get('authen.client_id')}&client_secret=${this.configService.get('authen.client_secret')}&grant_type=${this.configService.get('authen.grant_type')}`).pipe(
+        return this.httpService.post(`${this.configService.get('auth.oauth_path')}=${code.code}&client_id=${this.configService.get('authen.client_id')}&client_secret=${this.configService.get('authen.client_secret')}&grant_type=${this.configService.get('authen.grant_type')}`).pipe(
             map(response => res.redirect(`${this.configService.get('authen.railway_url')}/auth/login?token=${response.data.access_token}`)))
     }
 
     @Get('/login')
     async loginCmu(@Query() token, @Res() res) {
-        console.log("login")
         try {
             const response = await this.httpService.get(`${this.configService.get('authen.misapi_url')}`, {
                 headers: {
@@ -47,7 +45,6 @@ export class AuthenController {
                 res.redirect(`${this.configService.get('authen.netlify_url')}token=${token.token}`);
                 return this.userService.saveData(response.data)
             } else {
-                console.log('You dont have permission to access!!')
                 throw new UnauthorizedException('You dont have permission to access!!')
             }
 

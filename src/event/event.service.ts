@@ -448,17 +448,14 @@ export class EventService {
             const start = eventData.start_date.getDate()
             const end = eventData.end_date.getDate()
             if (diffDays && diffEndDays) {
-                console.log("diffDays and endDays")
                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
                 newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
             }
             if (diffDays && !diffDaysEnd) {
-                console.log("diffDays and not endDays")
                 newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
                 newEvent.end_date = new Date(eventData.end_date.setDate(end))
             }
             if (!diffDays && diffDaysEnd) {
-                console.log("not diffDays and endDays")
                 newEvent.start_date = new Date(eventData.start_date.setDate(start))
                 newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
             }
