@@ -56,7 +56,7 @@
         "ref_start": "before",
         "num_weeks": 0,
         "num_days": 4,
-        "duration_days": 0,
+        "duration_days": 1,
         "duration_weeks": 0,
         "isOveride": false,
         "isSetYear": true
