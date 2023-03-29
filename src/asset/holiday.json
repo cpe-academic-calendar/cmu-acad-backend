@@ -42,6 +42,14 @@
         "isNextYear": false
     },
     {
+        "event_name": "วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้า พระบรมราชินี",
+        "start_date": "2023-06-3",
+        "type": "วันหยุด",
+        "color": "#352829",
+        "isNextYear": false
+    },
+
+    {
         "event_name": "วันเฉลิมฯ ร.10",
         "start_date": "2023-07-28",
         "type": "วันหยุด",
