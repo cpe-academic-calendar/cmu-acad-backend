@@ -42,6 +42,7 @@ export class CalendarService {
             arr.push(ev)
         }));
         await jsonData.map((data, idx) => {
+
             const setYear = new Date(calendar.start_semester).getFullYear()
             const setDate = (a) => {
                 return new Date(jsonData[idx].start_date).setFullYear(a)
@@ -60,6 +61,7 @@ export class CalendarService {
                 jsonData[idx].end_date = new Date(year)
                 jsonData[idx].event_name = setEventName(year)
             }
+            data.id = null
             arr.push(jsonData[idx])
         })
         await this.eventRepository.insert(arr)

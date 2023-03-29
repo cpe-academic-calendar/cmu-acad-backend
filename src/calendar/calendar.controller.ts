@@ -25,7 +25,6 @@ export class CalendarController {
     @Put('/update/holidayMockUp')
     async updateHolidayData(@Body() data){
         console.log(data)
-
         return await this.calendarService.updateHolidayData(data)
     }
 
@@ -61,6 +60,7 @@ export class CalendarController {
     async findAllHoliday() {
         const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const holiday = JSON.parse(holidayEvent)
+        console.log(holiday)
         return holiday
     }
 
