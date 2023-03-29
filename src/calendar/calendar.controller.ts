@@ -74,6 +74,8 @@ export class CalendarController {
         eve.map((dt) => {
             arr.push(dt)
         })
+        console.log(calendar.start_semester)
+        console.log(newCalendar.start_semester)
         newCalendar.start_semester = calendar.start_semester
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
