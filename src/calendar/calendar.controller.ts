@@ -40,17 +40,16 @@ export class CalendarController {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         for (let i in event) {
-            let idx = event[i].reference_event
             let last_idx = event[i].reference_condition - 1
-            if (event[i].reference_condition) {
+            if (event[i].reference_condition && !event[i].reference_event) {
                 event[i].reference_condition = event[last_idx].event_name
             }
-            if (event[i].reference_event) {
-                event[i].reference_event = event[idx].event_name
+            if (event[i].reference_event && ! event[i].ref_condition) {
+                event[i].reference_event = event[event[i].reference_event - 1].event_name
             }
             if (event[i].reference_condition && event[i].reference_event) {
+                event[i].reference_event = event[last_idx].event_name
                 event[i].reference_condition = event[last_idx].event_name
-                event[i].reference_event = event[idx].event_name
             }
         }
         return event
