@@ -17,6 +17,7 @@ export class EventService {
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
+        start_semester = new Date(start_semester).setUTCHours(0, 0, 0, 0)
         event[0].start_date = new Date(start_semester)
         event[0].end_date = new Date(start_semester)
         for (let i in event) {
@@ -50,7 +51,7 @@ export class EventService {
                             const start_date = new Date(year, month, day)
                             const last_year = new Date(event[con_index].start_date).getFullYear()
                             const last_month = new Date(event[con_index].start_date).getMonth()
-                            const last_day = new Date(event[con_index].start_date).getDate() + 1 // end date after ref_condition 1 days
+                            const last_day = new Date(event[con_index].start_date).getDate() - 1 // end date after ref_condition 1 days
                             const end_date = new Date(last_year, last_month, last_day)
                             if (event[i].isAffair == true) {
                                 const newDate = await this.setDay(start_date)
@@ -64,11 +65,11 @@ export class EventService {
                             if (event[i].ref_end == 'after-last') {
                                 const year = new Date(event[con_index].start_date).getFullYear()
                                 const month = new Date(event[con_index].start_date).getMonth()
-                                const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) + 1 //start date before
+                                const day = new Date(event[con_index].start_date).getDay() - (event[i].num_weeks * 7 + event[i].num_days) + 1//start date before
                                 const start_date = new Date(year, month, day)
                                 const last_year = new Date(event[con_index].end_date).getFullYear()
                                 const last_month = new Date(event[con_index].end_date).getMonth()
-                                const last_day = new Date(event[con_index].end_date).getDay() + 1 // end date after last ref_condition 1 days
+                                const last_day = new Date(event[con_index].end_date).getDay() - 1 // end date after last ref_condition 1 days
                                 const end_date = new Date(last_year, last_month, last_day)
                                 if (event[i].isAffair == true) {
                                     const newDate = await this.setDay(start_date)
@@ -82,12 +83,12 @@ export class EventService {
                     //normal case have only ref_start = before
                     const year = new Date(event[index].start_date).getFullYear()
                     const month = new Date(event[index].start_date).getMonth()
-                    const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days)
+                    const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days) + 1
                     const start_date = new Date(year, month, day)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
                         const last_month = new Date(date).getMonth()
-                        const last_day = new Date(date).getDate() + ((event[i].duration_weeks * 7 + event[i].duration_days))
+                        const last_day = new Date(date).getDate() + ((event[i].duration_weeks * 7 + event[i].duration_days)) -1
                         const end_date = new Date(last_year, last_month, last_day)
                         return end_date
                     }
@@ -106,7 +107,7 @@ export class EventService {
                     if (event[i].ref_end == 'before') {
                         const year = new Date(event[index].start_date).getFullYear()
                         const month = new Date(event[index].start_date).getMonth()
-                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)// start date after ref_start 
+                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1// start date after ref_start 
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
@@ -123,11 +124,11 @@ export class EventService {
                     } else if (event[i].ref_end == 'after') {
                         const year = new Date(event[index].start_date).getFullYear()
                         const month = new Date(event[index].start_date).getMonth()
-                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
+                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1 // start date after ref_start 
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
-                        const last_day = new Date(event[con_index].start_date).getDate() + 1
+                        const last_day = new Date(event[con_index].start_date).getDate() - 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
                             const newDate = await this.setDay(start_date)
@@ -141,11 +142,11 @@ export class EventService {
                     } else if (event[i].ref_end == 'after-last') {
                         const year = new Date(event[index].start_date).getFullYear()
                         const month = new Date(event[index].start_date).getMonth()
-                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
+                        const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)+ 1 // start date after ref_start 
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].end_date).getFullYear()
                         const last_month = new Date(event[con_index].end_date).getMonth()
-                        const last_day = new Date(event[con_index].end_date).getDate() + 1
+                        const last_day = new Date(event[con_index].end_date).getDate() - 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
                             const newDate = await this.setDay(start_date)
@@ -161,12 +162,12 @@ export class EventService {
                     //normal cas have only ref_start = after
                     const year = new Date(event[index].start_date).getFullYear()
                     const month = new Date(event[index].start_date).getMonth()
-                    const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
+                    const day = new Date(event[index].start_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1// start date after ref_start 
                     const start_date = new Date(year, month, day)
                     const setLastdate = (date) => {
                         const last_year = new Date(start_date).getFullYear()
                         const last_month = new Date(start_date).getMonth()
-                        const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
+                        const last_day = new Date(start_date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days) - 1
                         const end_date = new Date(last_year, last_month, last_day)
                         return end_date
                     }
@@ -183,7 +184,7 @@ export class EventService {
                     if (event[i].ref_end == 'before') {
                         const year = new Date(event[index].end_date).getFullYear()
                         const month = new Date(event[index].end_date).getMonth()
-                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after last day of ref_start
+                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)+ 1 // start date after last day of ref_start
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
@@ -200,11 +201,11 @@ export class EventService {
                     } else if (event[i].ref_end == 'after') {
                         const year = new Date(event[index].end_date).getFullYear()
                         const month = new Date(event[index].end_date).getMonth()
-                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after last day of ref_start
+                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1// start date after last day of ref_start
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].start_date).getFullYear()
                         const last_month = new Date(event[con_index].start_date).getMonth()
-                        const last_day = new Date(event[con_index].start_date).getDate() + 1 //end date before start date of ref_condition
+                        const last_day = new Date(event[con_index].start_date).getDate() - 1 //end date before start date of ref_condition
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
                             const newDate = await this.setDay(start_date)
@@ -218,11 +219,11 @@ export class EventService {
                     else if (event[i].ref_end == 'after-last') {
                         const year = new Date(event[index].end_date).getFullYear()
                         const month = new Date(event[index].end_date).getMonth()
-                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)// start date after last day of ref_start
+                        const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)+ 1// start date after last day of ref_start
                         const start_date = new Date(year, month, day)
                         const last_year = new Date(event[con_index].end_date).getFullYear()
                         const last_month = new Date(event[con_index].end_date).getMonth()
-                        const last_day = new Date(event[con_index].end_date).getDate() + 1
+                        const last_day = new Date(event[con_index].end_date).getDate() - 1
                         const end_date = new Date(last_year, last_month, last_day)
                         if (event[i].isAffair == true) {
                             const newDate = await this.setDay(start_date)
@@ -235,12 +236,12 @@ export class EventService {
                     }
                     const year = new Date(event[index].end_date).getFullYear()
                     const month = new Date(event[index].end_date).getMonth()
-                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) // start date after ref_start 
+                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1// start date after ref_start 
                     const start_date = new Date(year, month, day)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
                         const last_month = new Date(date).getMonth()
-                        const last_day = new Date(date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days)
+                        const last_day = new Date(date).getDate() + (event[i].duration_weeks * 7 + event[i].duration_days) - 1
                         const end_date = new Date(last_year, last_month, last_day)
                         return end_date
                     }

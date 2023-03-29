@@ -24,6 +24,8 @@ export class CalendarController {
     
     @Put('/update/holidayMockUp')
     async updateHolidayData(@Body() data){
+        console.log(data)
+
         return await this.calendarService.updateHolidayData(data)
     }
 
