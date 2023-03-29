@@ -236,7 +236,7 @@ export class EventService {
                     }
                     const year = new Date(event[index].end_date).getFullYear()
                     const month = new Date(event[index].end_date).getMonth()
-                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days) + 1// start date after ref_start 
+                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)// start date after ref_start 
                     const start_date = new Date(year, month, day)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
