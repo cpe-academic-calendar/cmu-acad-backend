@@ -67,6 +67,17 @@ export class CalendarService {
         return await this.calendarRepository.save(calendarData)
     }
 
+    async updateJsonData(data){
+        const jsonContent = JSON.stringify(data)
+        return fs.writeFileSync(`${process.cwd()}/src/asset/event.json`,jsonContent)
+    }
+
+    async updateHolidayData(data){
+        const jsonContent = JSON.stringify(data)
+        return fs.writeFileSync(`${process.cwd()}/src/asset/holiday.json`,jsonContent)
+    }
+
+
     async findByStatus(calendarStatus) {
         return await this.calendarRepository.find({
             where: {

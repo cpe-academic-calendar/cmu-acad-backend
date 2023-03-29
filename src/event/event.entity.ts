@@ -56,25 +56,25 @@ export class Event {
 
     @ApiProperty()
     @Column({
-        default: null
+        default: 0
     })
     num_weeks: number
 
     @ApiProperty()
     @Column({
-        default: null
+        default: 0
     })
     num_days: number
 
     @ApiProperty()
     @Column({
-        default: null
+        default: 0
     })
     duration_weeks: number
 
     @ApiProperty()
     @Column({
-        default: null
+        default: 0
     })
     duration_days: number
 

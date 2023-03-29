@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query,Headers } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { Calendar } from './calendar.entity';
 import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
@@ -13,7 +13,20 @@ import *  as fs from 'fs'
 export class CalendarController {
     constructor(
         private readonly calendarService: CalendarService,
-        private readonly eventService: EventService) {}
+        private readonly eventService: EventService) { }
+
+
+    @Put('/update/eventMockUp')
+    async updateJsonData(@Body() data) {
+        console.log(data)
+        return await this.calendarService.updateJsonData(data)
+    }
+    
+    @Put('/update/holidayMockUp')
+    async updateHolidayData(@Body() data){
+        return await this.calendarService.updateHolidayData(data)
+    }
+
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
@@ -22,35 +35,35 @@ export class CalendarController {
 
 
     @Get('findConditionData')
-    async findAllEvent(){
+    async findAllEvent() {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
-        for(let i in event){
+        for (let i in event) {
             let idx = event[i].reference_event
             let last_idx = event[i].reference_condition - 1
-            if(event[i].reference_condition){
+            if (event[i].reference_condition) {
                 event[i].reference_condition = event[last_idx].event_name
             }
-            if(event[i].reference_event){
+            if (event[i].reference_event) {
                 event[i].reference_event = event[idx].event_name
             }
-            if(event[i].reference_condition && event[i].reference_event){
+            if (event[i].reference_condition && event[i].reference_event) {
                 event[i].reference_condition = event[last_idx].event_name
                 event[i].reference_event = event[idx].event_name
             }
         }
         return event
-    } 
+    }
 
     @Get('findHolidayData')
-    async findAllHoliday(){
+    async findAllHoliday() {
         const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const holiday = JSON.parse(holidayEvent)
         return holiday
     }
 
     @Get('findCalendarByType')
-    async findCalendarByStatus(@Query('calendarStatus') queryType: string){
+    async findCalendarByStatus(@Query('calendarStatus') queryType: string) {
         return await this.calendarService.findByStatus(queryType)
     }
 
@@ -61,7 +74,7 @@ export class CalendarController {
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         return this.eventService.countWeek(arr)
     }
-    
+
 
     @Post('duplicate/:id')
     async duplicateCalendar(@Param() calendar_id: QueryCalendarDto, @Body() calendar: Calendar) {
@@ -74,19 +87,17 @@ export class CalendarController {
         eve.map((dt) => {
             arr.push(dt)
         })
-        console.log(calendar.start_semester)
-        console.log(newCalendar.start_semester)
         newCalendar.start_semester = calendar.start_semester
         newCalendar.events = [...arr]
         return await this.calendarService.duplicateCalendar(newCalendar)
-    }  
+    }
 
     @Get('/findCalendar')
-    async findQueryCalendar(@Query() calendar){
+    async findQueryCalendar(@Query() calendar) {
         return await this.calendarService.findByQuery(calendar)
     }
 
-    
+
     @Get('/findAll')
     async findCalendar() {
         return this.calendarService.findAll()
@@ -113,8 +124,8 @@ export class CalendarController {
     }
 
     @Get('/findByName')
-    async findName(@Query('query') query,@Query('type') type) {
-        return this.calendarService.findByName(query,type)
+    async findName(@Query('query') query, @Query('type') type) {
+        return this.calendarService.findByName(query, type)
     }
 
     @Get('/sort')
@@ -123,7 +134,7 @@ export class CalendarController {
     }
 
     @Get('/findDeleted')
-    async findDelete(@Query('name') name:QueryCalendarDto) {
+    async findDelete(@Query('name') name: QueryCalendarDto) {
         return this.calendarService.findDelete(name)
     }
 
@@ -166,19 +177,19 @@ export class CalendarController {
 
     @Get('exportHoliday/:id')
     @Header('Conten-Type', 'text/xlsx')
-    async exportHolidayFile(@Param() userId: QueryCalendarDto,@Res() res: Response){
+    async exportHolidayFile(@Param() userId: QueryCalendarDto, @Res() res: Response) {
         const data = await this.calendarService.exportHolidayData(userId.id)
         res.download(`${data}`)
     }
 
     @Get('exportStudy/:id')
-    @Header('Content-Type','text/xlsx')
-    async exportStudyFile(@Param() userId: QueryCalendarDto,@Res() res: Response){
+    @Header('Content-Type', 'text/xlsx')
+    async exportStudyFile(@Param() userId: QueryCalendarDto, @Res() res: Response) {
         const event = await this.calendarService.findEventById(userId.id)
         let arr = []
         event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         const dataWeek = await this.eventService.countWeek(arr)
-        const data = await this.calendarService.exportStudyData(userId.id,dataWeek)
+        const data = await this.calendarService.exportStudyData(userId.id, dataWeek)
         res.download(`${data}`)
         return data
     }
