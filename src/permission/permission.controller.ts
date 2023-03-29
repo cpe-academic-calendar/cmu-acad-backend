@@ -18,8 +18,6 @@ export class PermissionController {
         return await this.permissionService.findAll()
     }
 
-    @Roles(Role.Admin)
-    @UseGuards(RoleGuard)
     @Get('getAccessUser/:cmuitaccount')
     async getAcessUser(@Param() cmuaccount: CreatePermissionDto) {
         return await this.permissionService.findAcessUser(cmuaccount.cmuitaccount)
