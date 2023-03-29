@@ -4,13 +4,9 @@ import { CalendarService } from './calendar.service';
 import { EventService } from 'src/event/event.service';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryCalendarDto } from './calendar.dto';
-import { Header, Res, UseGuards } from '@nestjs/common/decorators';
+import { Header, Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
 import *  as fs from 'fs'
-import {  CustomLocalAuthGuard } from 'src/auth/auth.guards';
-import { RoleGuard } from 'src/auth/roles.guard';
-import { Role } from 'src/auth/role.enum';
-import { Roles } from 'src/auth/role.decorator';
 
 @ApiTags('Calendar')
 @Controller('calendar')

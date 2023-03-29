@@ -15,7 +15,7 @@
         "ref_start": "before",
         "num_days": 45,
         "num_weeks": 0,
-        "duration_days": 7 ,
+        "duration_days": 6,
         "duration_weeks": 0,
         "isOveride": false,
         "isAffair": true
@@ -516,7 +516,7 @@
         "num_weeks": 0,
         "reference_event": 36,
         "duration_days": 0,
-        "duration_weeks": 1,
+        "duration_weeks": 0,
         "type": "กิจกรรม",
         "color": "#FF5722",
         "isOveride": false

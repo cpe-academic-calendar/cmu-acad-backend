@@ -35,6 +35,10 @@ export class CalendarService {
             } else {
                 ev.event_name = ev.event_name
             }
+            ev.start_date.setUTCHours(0, 0, 0, 0)
+            ev.end_date.setUTCHours(0, 0, 0, 0);
+            ev.start_date = ev.start_date.toISOString();;
+            ev.end_date = ev.end_date.toISOString();;
             arr.push(ev)
         }));
         await jsonData.map((data, idx) => {
@@ -58,7 +62,6 @@ export class CalendarService {
             }
             arr.push(jsonData[idx])
         })
-
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
