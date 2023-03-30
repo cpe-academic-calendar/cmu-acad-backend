@@ -14,6 +14,238 @@ export class EventService {
         private readonly eventRepository: Repository<Event>,
     ) { }
 
+    async countWeek(event) {
+        let start = []
+        let end = []
+        let start2 = []
+        let end2 = []
+        let start3 = []
+        let end3 = []
+        let holiday = []
+        const evnetArr = event[0].map((edt) => edt)
+        for (let i in evnetArr) {
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน') {
+                start.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา') {
+                end.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 2') {
+                start2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 2') {
+                end2.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 3') {
+                start3.push(evnetArr[i])
+            }
+            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 3') {
+                end3.push(evnetArr[i])
+            }
+
+            if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
+                holiday.push(evnetArr[i].start_date)
+            }
+        }
+
+        const dateArr1 = eachDayOfInterval({
+            start: new Date(`${start[0].start_date}`),
+            end: new Date(`${end[0].start_date}`)
+        })
+
+        const dateArr2 = eachDayOfInterval({
+            start: new Date(`${start2[0].start_date}`),
+            end: new Date(`${end2[0].start_date}`)
+        })
+
+        const dateArr3 = eachDayOfInterval({
+            start: new Date(`${start3[0].start_date}`),
+            end: new Date(`${end3[0].start_date}`)
+        })
+
+        const arrDate = dateArr1.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+        const arrDate2 = dateArr2.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+        const arrDate3 = dateArr3.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+
+        const arrHoliday = holiday.map((date) => {
+            return date.toISOString().split('T')[0]
+        })
+
+        const countTerm1 = arrDate.filter(value => !arrHoliday.includes(value))
+        const countTerm2 = arrDate2.filter(value => !arrHoliday.includes(value))
+        const countTerm3 = arrDate3.filter(value => !arrHoliday.includes(value))
+
+        const returnCountWeek = (week: any[]) => {
+            const arr1 = { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0, }
+            for (let i in week) {
+                if (new Date(week[i]).getDay() == 1) {
+                    arr1["monday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 2) {
+                    arr1["tuesday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 3) {
+                    arr1["wednesday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 4) {
+                    arr1["thursday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 5) {
+                    arr1["friday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 6) {
+                    arr1["saturday"] += 1
+                }
+                if (new Date(week[i]).getDay() == 6) {
+                    arr1["sunday"] += 1
+                }
+            }
+            return arr1
+        }
+        const countArr = { term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)] }
+        return countArr
+    }
+
+    async findAll() {
+        return await this.eventRepository.find()
+    }
+
+    async createEvent(event) {
+        return await this.eventRepository.save(event)
+    }
+
+
+    async getEventByID(id: number) {
+        return await this.eventRepository.findOne({
+            where: {
+                id: id
+            }
+        })
+
+    }
+
+    async setDay(date) {
+        const dayOfweek = date.getDay()
+        if (dayOfweek != 1) {
+            return setDay(new Date(date), 2)
+        } else {
+            return date
+        }
+    }
+
+    async updateEvent(id, event) {
+        const eventData = await this.eventRepository.findOne({
+            where: {
+                id: id.id
+            },
+            select: {
+                calendar: {
+                    id
+                }
+            },
+            relations: {
+                calendar: true
+            }
+        })
+
+        const arr = await this.eventRepository.find({
+            where: {
+                type: 'กิจกรรม',
+                calendar: {
+                    id: eventData.calendar.id
+                },
+                event_name: Not('วันเปิดภาคเรียน')
+            }
+        })
+
+        const changEnd_date = new Date(event.end_date)
+        const oldEnd_date = new Date(eventData.end_date)
+        let diffTimeEnd = (changEnd_date.getTime() - oldEnd_date.getTime());
+        let diffDaysEnd = Math.ceil(diffTimeEnd / (1000 * 60 * 60 * 24));
+        const change_date = new Date(event.start_date)
+        const old_date = new Date(eventData.start_date)
+        let diffTime = (change_date.getTime() - old_date.getTime());
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if (event.event_name == 'วันเปิดภาคเรียน') {
+            event.start_date = new Date(event.start_date)
+            event.end_date = new Date(event.start_date)
+            this.eventRepository.update(id, event)
+            arr.map(async (data, idx) => {
+                if (arr[idx].isOveride == false) {
+                    const newEvent = new Event()
+                    const eventDate = new Date(arr[idx].start_date).getDate()
+                    const eventendDate = new Date(arr[idx].end_date).getDate()
+                    if (eventDate == eventendDate) {
+                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
+                    } else {
+                        console.log("dif",arr[idx])
+                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
+                    }
+                    await this.eventRepository.update(arr[idx].id, newEvent)
+                }
+            })
+
+        } else {
+            const newEvent = new Event()
+            const change_date = new Date(event.start_date)
+            const old_date = new Date(eventData.start_date)
+            let diffTime = (change_date.getTime() - old_date.getTime());
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const changeEnd_date = new Date(event.end_date)
+            const oldEnd_date = new Date(eventData.end_date)
+            let diffEndTime = (changeEnd_date.getTime() - oldEnd_date.getTime());
+            let diffEndDays = Math.ceil(diffEndTime / (1000 * 60 * 60 * 24));
+            const start = eventData.start_date.getDate()
+            const end = eventData.end_date.getDate()
+            if (diffDays && diffEndDays) {
+                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
+            }
+            if (diffDays && !diffDaysEnd) {
+                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end))
+            }
+            if (!diffDays && diffDaysEnd) {
+                newEvent.start_date = new Date(eventData.start_date.setDate(start))
+                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
+            }
+            // }
+            newEvent.isOveride = true
+            newEvent.event_name = event.event_name
+            newEvent.type = event.type
+            newEvent.color = event.color
+            return this.eventRepository.update(id, newEvent)
+        }
+
+    }
+
+    async deleteEvent(id: number) {
+        return await this.eventRepository.delete(id)
+    }
+
+    async createArr(event: Event[]) {
+        const createArr = event.map(async (entity: Event) => {
+            entity.id = null
+            const newEntity = this.eventRepository.create(entity);
+            return this.eventRepository.save(newEntity)
+        });
+
+        return Promise.all(createArr)
+    }
+
+    async createData(data) {
+        return await this.eventRepository.save(data)
+    }
+
+
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
@@ -258,234 +490,5 @@ export class EventService {
         }
         return event
     }
-    async countWeek(event) {
-        let start = []
-        let end = []
-        let start2 = []
-        let end2 = []
-        let start3 = []
-        let end3 = []
-        let holiday = []
-        const evnetArr = event[0].map((edt) => edt)
-        for (let i in evnetArr) {
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน') {
-                start.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา') {
-                end.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 2') {
-                start2.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 2') {
-                end2.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันเปิดภาคเรียน เทอม 3') {
-                start3.push(evnetArr[i])
-            }
-            if (evnetArr[i].event_name == 'วันสุดท้ายของการศึกษา เทอม 3') {
-                end3.push(evnetArr[i])
-            }
 
-            if (evnetArr[i].type == 'วันสอบ' || evnetArr[i].type == 'วันหยุด') {
-                holiday.push(evnetArr[i].start_date)
-            }
-        }
-
-        const dateArr1 = eachDayOfInterval({
-            start: new Date(`${start[0].start_date}`),
-            end: new Date(`${end[0].start_date}`)
-        })
-
-        const dateArr2 = eachDayOfInterval({
-            start: new Date(`${start2[0].start_date}`),
-            end: new Date(`${end2[0].start_date}`)
-        })
-
-        const dateArr3 = eachDayOfInterval({
-            start: new Date(`${start3[0].start_date}`),
-            end: new Date(`${end3[0].start_date}`)
-        })
-
-        const arrDate = dateArr1.map((date) => {
-            return date.toISOString().split('T')[0]
-        })
-        const arrDate2 = dateArr2.map((date) => {
-            return date.toISOString().split('T')[0]
-        })
-        const arrDate3 = dateArr3.map((date) => {
-            return date.toISOString().split('T')[0]
-        })
-
-        const arrHoliday = holiday.map((date) => {
-            return date.toISOString().split('T')[0]
-        })
-
-        const countTerm1 = arrDate.filter(value => !arrHoliday.includes(value))
-        const countTerm2 = arrDate2.filter(value => !arrHoliday.includes(value))
-        const countTerm3 = arrDate3.filter(value => !arrHoliday.includes(value))
-
-        const returnCountWeek = (week: any[]) => {
-            const arr1 = { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0, }
-            for (let i in week) {
-                if (new Date(week[i]).getDay() == 1) {
-                    arr1["monday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 2) {
-                    arr1["tuesday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 3) {
-                    arr1["wednesday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 4) {
-                    arr1["thursday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 5) {
-                    arr1["friday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 6) {
-                    arr1["saturday"] += 1
-                }
-                if (new Date(week[i]).getDay() == 6) {
-                    arr1["sunday"] += 1
-                }
-            }
-            return arr1
-        }
-        const countArr = { term1: [returnCountWeek(countTerm1)], term2: [returnCountWeek(countTerm2)], term3: [returnCountWeek(countTerm3)] }
-        return countArr
-    }
-
-    async findAll() {
-        return await this.eventRepository.find()
-    }
-
-    async createEvent(event) {
-        return await this.eventRepository.save(event)
-    }
-
-
-    async getEventByID(id: number) {
-        return await this.eventRepository.findOne({
-            where: {
-                id: id
-            }
-        })
-
-    }
-
-    async setDay(date) {
-        const dayOfweek = date.getDay()
-        if (dayOfweek != 1) {
-            return setDay(new Date(date), 2)
-        } else {
-            return date
-        }
-    }
-
-    async updateEvent(id, event) {
-        const eventData = await this.eventRepository.findOne({
-            where: {
-                id: id.id
-            },
-            select: {
-                calendar: {
-                    id
-                }
-            },
-            relations: {
-                calendar: true
-            }
-        })
-
-        const arr = await this.eventRepository.find({
-            where: {
-                type: 'กิจกรรม',
-                calendar: {
-                    id: eventData.calendar.id
-                },
-                event_name: Not('วันเปิดภาคเรียน')
-            }
-        })
-
-        const changEnd_date = new Date(event.end_date)
-        const oldEnd_date = new Date(eventData.end_date)
-        let diffTimeEnd = (changEnd_date.getTime() - oldEnd_date.getTime());
-        let diffDaysEnd = Math.ceil(diffTimeEnd / (1000 * 60 * 60 * 24));
-        const change_date = new Date(event.start_date)
-        const old_date = new Date(eventData.start_date)
-        let diffTime = (change_date.getTime() - old_date.getTime());
-        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (event.event_name == 'วันเปิดภาคเรียน') {
-            event.start_date = new Date(event.start_date)
-            event.end_date = new Date(event.start_date)
-            this.eventRepository.update(id, event)
-            arr.map(async (data, idx) => {
-                if (arr[idx].isOveride == false) {
-                    const newEvent = new Event()
-                    const eventDate = new Date(arr[idx].start_date).getDate()
-                    const eventendDate = new Date(arr[idx].end_date).getDate()
-                    if (eventDate == eventendDate) {
-                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
-                    } else {
-                        console.log("dif",arr[idx])
-                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
-                    }
-                    await this.eventRepository.update(arr[idx].id, newEvent)
-                }
-            })
-
-        } else {
-            const newEvent = new Event()
-            const change_date = new Date(event.start_date)
-            const old_date = new Date(eventData.start_date)
-            let diffTime = (change_date.getTime() - old_date.getTime());
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            const changeEnd_date = new Date(event.end_date)
-            const oldEnd_date = new Date(eventData.end_date)
-            let diffEndTime = (changeEnd_date.getTime() - oldEnd_date.getTime());
-            let diffEndDays = Math.ceil(diffEndTime / (1000 * 60 * 60 * 24));
-            const start = eventData.start_date.getDate()
-            const end = eventData.end_date.getDate()
-            if (diffDays && diffEndDays) {
-                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffEndDays))
-            }
-            if (diffDays && !diffDaysEnd) {
-                newEvent.start_date = new Date(eventData.start_date.setDate(start + diffDays))
-                newEvent.end_date = new Date(eventData.end_date.setDate(end))
-            }
-            if (!diffDays && diffDaysEnd) {
-                newEvent.start_date = new Date(eventData.start_date.setDate(start))
-                newEvent.end_date = new Date(eventData.end_date.setDate(end + diffDaysEnd))
-            }
-            // }
-            newEvent.isOveride = true
-            newEvent.event_name = event.event_name
-            newEvent.type = event.type
-            newEvent.color = event.color
-            return this.eventRepository.update(id, newEvent)
-        }
-
-    }
-
-    async deleteEvent(id: number) {
-        return await this.eventRepository.delete(id)
-    }
-
-    async createArr(event: Event[]) {
-        const createArr = event.map(async (entity: Event) => {
-            entity.id = null
-            const newEntity = this.eventRepository.create(entity);
-            return this.eventRepository.save(newEntity)
-        });
-
-        return Promise.all(createArr)
-    }
-
-    async createData(data) {
-        return await this.eventRepository.save(data)
-    }
 }

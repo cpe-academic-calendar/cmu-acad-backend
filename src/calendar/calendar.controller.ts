@@ -24,10 +24,9 @@ export class CalendarController {
     
     @Put('/update/holidayMockUp')
     async updateHolidayData(@Body() data){
-        console.log(data)
+        console.log("holiday",data)
         return await this.calendarService.updateHolidayData(data)
     }
-
 
     @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
