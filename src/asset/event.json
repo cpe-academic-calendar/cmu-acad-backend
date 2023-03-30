@@ -987,9 +987,9 @@
     {
         "id": 75,
         "event_name": "วันสุดท้ายของการศึกษา เทอม 3",
-        "num_days": 7,
+        "num_days": 0,
         "ref_start": "after-last",
-        "num_weeks": 0,
+        "num_weeks": 6,
         "reference_event": 61,
         "duration_days": 1,
         "duration_weeks": 0,
@@ -1046,7 +1046,7 @@
         "reference_event": 61,
         "duration_days": 1,
         "duration_weeks": 0,
-        "type": "วันปิดภาคเรียน",
+        "type": "กิจกรรม",
         "color": "#F57F17",
         "isOveride": false
     },
