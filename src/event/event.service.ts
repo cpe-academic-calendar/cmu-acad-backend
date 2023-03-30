@@ -252,6 +252,7 @@ export class EventService {
         start_semester = new Date(start_semester).setUTCHours(0, 0, 0, 0)
         event[0].start_date = new Date(start_semester)
         event[0].end_date = new Date(start_semester)
+        console.log(event[0])
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
