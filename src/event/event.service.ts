@@ -48,6 +48,8 @@ export class EventService {
             }
         }
 
+        console.log(start3)
+        console.log(end3)
         const dateArr1 = eachDayOfInterval({
             start: new Date(`${start[0].start_date}`),
             end: new Date(`${end[0].start_date}`)

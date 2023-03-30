@@ -18,7 +18,6 @@ export class CalendarController {
 
     @Put('/update/eventMockUp')
     async updateJsonData(@Body() data) {
-        console.log(data)
         return await this.calendarService.updateJsonData(data)
     }
     
@@ -71,7 +70,7 @@ export class CalendarController {
     async getStudyWeek(@Param() id: QueryCalendarDto) {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
-        event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
+        await event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
         return this.eventService.countWeek(arr)
     }
 
