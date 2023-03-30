@@ -618,7 +618,9 @@
         "duration_weeks": 10,
         "duration_days": 4,
         "isOveride": false,
-        "isAffair": true
+        "isAffair": true,
+        "color": "#DD2C00"
+
     },
     {
         "id": 48,
