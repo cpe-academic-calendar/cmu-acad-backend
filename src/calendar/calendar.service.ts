@@ -25,6 +25,7 @@ export class CalendarService {
     async createCalendar(calendar: Calendar) {
         const data = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
         const jsonData = JSON.parse(data)
+        console.log(calendar.start_semester)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
         const calendarData = await this.calendarRepository.create(calendar)
