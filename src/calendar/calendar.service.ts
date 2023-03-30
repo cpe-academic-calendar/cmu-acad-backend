@@ -65,6 +65,7 @@ export class CalendarService {
             data.id = null
             arr.push(jsonData[idx])
         })
+        console.log(arr)
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
