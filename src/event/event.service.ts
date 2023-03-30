@@ -427,10 +427,11 @@ export class EventService {
                     const eventendDate = new Date(arr[idx].end_date).getDate()
                     if (eventDate == eventendDate) {
                         newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
-                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
-                    } else {
-                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
                         newEvent.end_date = new Date(arr[idx].end_date.setDate(eventDate + diffDays))
+                    } else {
+                        console.log("dif",arr[idx])
+                        newEvent.start_date = new Date(arr[idx].start_date.setDate(eventDate + diffDays))
+                        newEvent.end_date = new Date(arr[idx].end_date.setDate(eventendDate + diffDays))
                     }
                     await this.eventRepository.update(arr[idx].id, newEvent)
                 }
