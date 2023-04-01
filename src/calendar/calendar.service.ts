@@ -63,9 +63,14 @@ export class CalendarService {
             data.id = null
             arr.push(jsonData[idx])
         })
+        arr.map(ev=> {
+            new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
+            new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
+            ev.start_date = new Date(ev.start_date)
+            ev.end_date = new Date(ev.end_date)
+        })
         await this.eventRepository.insert(arr)
         calendarData.events = [...arr]
-        console.log(calendarData)
         return await this.calendarRepository.save(calendarData)
     }
 
