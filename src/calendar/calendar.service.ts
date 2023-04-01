@@ -64,8 +64,8 @@ export class CalendarService {
             arr.push(jsonData[idx])
         })
         arr.map(ev=> {
-            new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
-            new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
+            const start = new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
+            const end = new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
             ev.start_date = new Date(ev.start_date)
             ev.end_date = new Date(ev.end_date)
         })
@@ -73,6 +73,12 @@ export class CalendarService {
         const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
         calendarData.start_semester = new Date(start_semester)
         calendarData.events = [...arr]
+        calendarData.events.map((event)=>{
+            const start = new Date(event.start_date).setUTCHours(0, 0, 0, 0)
+            const end = new Date(event.end_date).setUTCHours(0, 0, 0, 0);
+            event.start_date = new Date(start)
+            event.end_date = new Date(end)
+        })
         return await this.calendarRepository.save(calendarData)
     }
 

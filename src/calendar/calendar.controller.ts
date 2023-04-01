@@ -76,7 +76,16 @@ export class CalendarController {
 
     @Get('findEventById/:id')
     async findEventByCalendar(@Param() id: QueryCalendarDto) {
-        return this.calendarService.findEventById(id.id)
+        const event = await this.calendarService.findEventById(id.id)
+        const mapEvent = event.map(ev=>{
+            ev.events.map(date=>{
+                const start = new Date(date.start_date).setUTCHours(0, 0, 0, 0)
+                const end = new Date(date.end_date).setUTCHours(0, 0, 0, 0);
+                date.start_date = new Date(start)
+                date.end_date = new Date(end)
+            })
+        })
+        return mapEvent
     }
 
     @Get('findHoliday/:id')
