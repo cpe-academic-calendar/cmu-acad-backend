@@ -70,6 +70,8 @@ export class CalendarService {
             ev.end_date = new Date(ev.end_date)
         })
         await this.eventRepository.insert(arr)
+        const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
+        calendarData.start_semester = new Date(start_semester)
         calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
     }
