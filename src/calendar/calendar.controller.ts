@@ -32,35 +32,6 @@ export class CalendarController {
         return await this.calendarService.createCalendar(calendar)
     }
 
-
-    @Get('findConditionData')
-    async findAllEvent() {
-        const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
-        const event = JSON.parse(dataEvent)
-        for (let i in event) {
-            let last_idx = event[i].reference_condition - 1
-            if (event[i].reference_condition && !event[i].reference_event) {
-                event[i].reference_condition = event[last_idx].event_name
-            }
-            if (event[i].reference_event && ! event[i].ref_condition) {
-                event[i].reference_event = event[event[i].reference_event - 1].event_name
-            }
-            if (event[i].reference_condition && event[i].reference_event) {
-                event[i].reference_event = event[last_idx].event_name
-                event[i].reference_condition = event[last_idx].event_name
-            }
-        }
-        return event
-    }
-
-    @Get('findHolidayData')
-    async findAllHoliday() {
-        const holidayEvent = fs.readFileSync(process.cwd() + '/src/asset/holiday.json', 'utf-8')
-        const holiday = JSON.parse(holidayEvent)
-        console.log(holiday)
-        return holiday
-    }
-
     @Get('findCalendarByType')
     async findCalendarByStatus(@Query('calendarStatus') queryType: string) {
         return await this.calendarService.findByStatus(queryType)
@@ -71,6 +42,7 @@ export class CalendarController {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
         await event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
+        console.log(arr)
         return this.eventService.countWeek(arr)
     }
 

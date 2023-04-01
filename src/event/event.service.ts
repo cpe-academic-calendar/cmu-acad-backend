@@ -6,12 +6,15 @@ import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { Not } from 'typeorm';
 import { setDay } from 'date-fns'
+import { MockUpEvent } from './mockup.entity';
 
 @Injectable()
 export class EventService {
     constructor(
         @InjectRepository(Event)
         private readonly eventRepository: Repository<Event>,
+        @InjectRepository(MockUpEvent)
+        private readonly mockUpRepository: Repository<MockUpEvent>
     ) { }
 
     async countWeek(event) {
@@ -48,8 +51,6 @@ export class EventService {
             }
         }
 
-        console.log(start3)
-        console.log(end3)
         const dateArr1 = eachDayOfInterval({
             start: new Date(`${start[0].start_date}`),
             end: new Date(`${end[0].start_date}`)
@@ -492,6 +493,26 @@ export class EventService {
             }
         }
         return event
+    }
+
+    async mockData(data){
+        return await this.mockUpRepository.save(data)
+    }
+
+    async findHoldayMockData(){
+        return await this.mockUpRepository.find()
+    }
+
+    async updateholidayMockData(id,data){
+        return await this.mockUpRepository.update(id,data)
+    }
+
+    async addholidayMockData(data){
+        return await this.mockUpRepository.create(data)
+    }
+
+    async removeHolidayMockData(id){
+        return await this.mockUpRepository.delete(id)
     }
 
 }

@@ -39,10 +39,10 @@
         "event_name": "วันประกาศผลการลงทะเบียนล่วงหน้า",
         "type": "กิจกรรม",
         "color": "#EC407A",
-        "reference_event": 1,
-        "ref_start": "before",
+        "reference_event": 3,
+        "ref_start": "after-last",
         "num_weeks": 0,
-        "num_days": 3,
+        "num_days": 2,
         "duration_weeks": 0,
         "duration_days": 1,
         "isOveride": false
@@ -551,11 +551,8 @@
         "num_days": 2,
         "duration_weeks": 2,
         "duration_days": 0,
-        "isOveride": false,
-        "color": "#FFA726"
-
+        "isOveride": false
     },
-    
     {
         "id": 43,
         "event_name": "วันชําระเงินค่าธรรมเนียมการศึกษา เทอม 2",
@@ -621,9 +618,7 @@
         "duration_weeks": 10,
         "duration_days": 4,
         "isOveride": false,
-        "isAffair": true,
-        "color": "#DD2C00"
-
+        "isAffair": true
     },
     {
         "id": 48,
