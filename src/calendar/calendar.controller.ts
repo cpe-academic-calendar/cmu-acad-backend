@@ -83,6 +83,7 @@ export class CalendarController {
             event[i].events[i].start_date = new Date(start)
             event[i].events[i].end_date = new Date(end)
         }
+        console.log(event)
         return event
     }
 
