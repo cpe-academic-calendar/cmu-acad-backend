@@ -252,7 +252,7 @@ export class EventService {
     async autoGenerate(start_semester) {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
-        start_semester = new Date(start_semester).setUTCHours(0, 0, 0, 0)
+        start_semester = new Date(start_semester).setHours(0, 0, 0, 0)
         event[0].start_date = new Date(start_semester)
         event[0].end_date = new Date(start_semester)
         console.log(event[0])

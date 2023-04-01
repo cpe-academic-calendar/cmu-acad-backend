@@ -34,12 +34,12 @@ export class EventController {
             }
             if (data.isNextYear == true) {
                 const year = setDate(setYear + 1)
-                const setTime = new Date(year).setUTCHours(0,0,0,0)
+                const setTime = new Date(year).setHours(0,0,0,0)
                 data.start_date = new Date(setTime)
                 data.event_name = setEventName(year)
             } else {
                 const year = setDate(setYear)
-                 const setTime = new Date(year).setUTCHours(0,0,0,0)
+                 const setTime = new Date(year).setHours(0,0,0,0)
                  data.start_date = new Date(setTime)
                  data.event_name = setEventName(setTime)
             }

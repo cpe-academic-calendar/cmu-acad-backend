@@ -35,8 +35,8 @@ export class CalendarService {
             } else {
                 ev.event_name = ev.event_name
             }
-            ev.start_date.setUTCHours(0, 0, 0, 0)
-            ev.end_date.setUTCHours(0, 0, 0, 0);
+            ev.start_date.setHours(0, 0, 0, 0)
+            ev.end_date.setHours(0, 0, 0, 0);
             ev.start_date = ev.start_date.toISOString();
             ev.end_date = ev.end_date.toISOString();
             arr.push(ev)
@@ -64,18 +64,18 @@ export class CalendarService {
             arr.push(jsonData[idx])
         })
         arr.map(ev=> {
-            const start = new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
-            const end = new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
-            ev.start_date = new Date(ev.start_date)
-            ev.end_date = new Date(ev.end_date)
+            const start = new Date(ev.start_date).setHours(0, 0, 0, 0)
+            const end = new Date(ev.end_date).setHours(0, 0, 0, 0);
+            ev.start_date = new Date(start)
+            ev.end_date = new Date(end)
         })
         await this.eventRepository.insert(arr)
-        const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
+        const start_semester = new Date(calendar.start_semester).setHours(0,0,0,0)
         calendarData.start_semester = new Date(start_semester)
         calendarData.events = [...arr]
         calendarData.events.map((event)=>{
-            const start = new Date(event.start_date).setUTCHours(0, 0, 0, 0)
-            const end = new Date(event.end_date).setUTCHours(0, 0, 0, 0);
+            const start = new Date(event.start_date).setHours(0, 0, 0, 0)
+            const end = new Date(event.end_date).setHours(0, 0, 0, 0);
             event.start_date = new Date(start)
             event.end_date = new Date(end)
         })
