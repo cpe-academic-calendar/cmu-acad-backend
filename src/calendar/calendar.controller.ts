@@ -20,10 +20,10 @@ export class CalendarController {
     async updateJsonData(@Body() data) {
         return await this.calendarService.updateJsonData(data)
     }
-    
+
     @Put('/update/holidayMockUp')
-    async updateHolidayData(@Body() data){
-        console.log("holiday",data)
+    async updateHolidayData(@Body() data) {
+        console.log("holiday", data)
         return await this.calendarService.updateHolidayData(data)
     }
 
@@ -77,15 +77,13 @@ export class CalendarController {
     @Get('findEventById/:id')
     async findEventByCalendar(@Param() id: QueryCalendarDto) {
         const event = await this.calendarService.findEventById(id.id)
-        const mapEvent = event.map(ev=>{
-            ev.events.map(date=>{
-                const start = new Date(date.start_date).setUTCHours(0, 0, 0, 0)
-                const end = new Date(date.end_date).setUTCHours(0, 0, 0, 0);
-                date.start_date = new Date(start)
-                date.end_date = new Date(end)
-            })
-        })
-        return mapEvent
+        for(let i in event){
+            const start = new Date(event[i].events[i].start_date).setUTCHours(0, 0, 0, 0)
+            const end = new Date(event[i].events[i].end_date).setUTCHours(0, 0, 0, 0);
+            event[i].events[i].start_date = new Date(start)
+            event[i].events[i].end_date = new Date(end)
+        }
+        return event
     }
 
     @Get('findHoliday/:id')
