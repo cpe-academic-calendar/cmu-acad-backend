@@ -64,9 +64,9 @@ export class CalendarService {
             arr.push(jsonData[idx])
         })
         await this.eventRepository.insert(arr)
-        const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
+        const start_semester = new Date(calendar.start_semester).setHours(0,0,0,0)
         calendarData.start_semester = new Date(start_semester)
-        calendarData.events = [...arr]        
+        calendarData.events = [...arr]              
         return await this.calendarRepository.save(calendarData)
     }
 
