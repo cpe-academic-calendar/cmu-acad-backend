@@ -257,8 +257,8 @@ export class EventService {
         setStart.setUTCHours(0,0,0,0)
         setStart.setDate(setStart.getDate()+1)
         setStart.setUTCHours(0,0,0,0)
-        event[0].start_date = new Date(start_semester)
-        event[0].end_date = new Date(start_semester)
+        event[0].start_date = setStart
+        event[0].end_date = setStart
         for (let i in event) {
             if (event[i].reference_event) {
                 const index = event[i].reference_event - 1
