@@ -42,7 +42,6 @@ export class CalendarController {
         const event = await this.calendarService.findEventById(id.id)
         let arr = []
         await event.map((edt) => { arr.push(edt.events.map((ev) => { return ev })) })
-        console.log(arr)
         return this.eventService.countWeek(arr)
     }
 

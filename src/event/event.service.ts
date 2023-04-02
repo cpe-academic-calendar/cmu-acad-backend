@@ -105,7 +105,7 @@ export class EventService {
                 if (new Date(week[i]).getDay() == 6) {
                     arr1["saturday"] += 1
                 }
-                if (new Date(week[i]).getDay() == 6) {
+                if (new Date(week[i]).getDay() == 0) {
                     arr1["sunday"] += 1
                 }
             }
@@ -318,13 +318,16 @@ export class EventService {
                     //normal case have only ref_start = before
                     const year = new Date(event[index].start_date).getFullYear()
                     const month = new Date(event[index].start_date).getMonth()
-                    const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days) + 1
-                    const start_date = new Date(year, month, day)
+                    const day = new Date(event[index].start_date).getDate() - (event[i].num_weeks * 7 + event[i].num_days) 
+                    const start_date = new Date(year,month,day)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
                         const last_month = new Date(date).getMonth()
-                        const last_day = new Date(date).getDate() + ((event[i].duration_weeks * 7 + event[i].duration_days)) -1
-                        const end_date = new Date(last_year, last_month, last_day)
+                        const last_day = new Date(date).getDate() + ((event[i].duration_weeks * 7 + event[i].duration_days)) 
+                        const end = new Date(last_year, last_month, last_day)
+                        end.setDate(end.getDate() -1 )
+                        end.setHours(0,0,0,0)
+                        const end_date = end
                         return end_date
                     }
                     if (event[i].isAffair == true) {
@@ -333,10 +336,13 @@ export class EventService {
                         event[i].end_date = setLastdate(newDate)
 
                     } else {
+                        start_date.setDate(start_date.getDate())
+                        start_date.setHours(0,0,0,0)
+                        console.log("start",start_date)
                         event[i].start_date = start_date
                         event[i].end_date = setLastdate(start_date)
                     }
-
+                    
                 }
                 if (event[i].ref_start == 'after') {
                     if (event[i].ref_end == 'before') {
@@ -471,7 +477,7 @@ export class EventService {
                     }
                     const year = new Date(event[index].end_date).getFullYear()
                     const month = new Date(event[index].end_date).getMonth()
-                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)+ 1// start date after ref_start 
+                    const day = new Date(event[index].end_date).getDate() + (event[i].num_weeks * 7 + event[i].num_days)// start date after ref_start 
                     const start_date = new Date(year, month, day)
                     const setLastdate = (date) => {
                         const last_year = new Date(date).getFullYear()
