@@ -75,11 +75,14 @@ export class CalendarController {
 
     @Get('findEventById/:id')
     async findEventByCalendar(@Param() id: QueryCalendarDto) {
-        const event = await this.calendarService.findEventById(id.id) 
-        event[0].events[0].start_date.setDate(event[0].events[0].start_date.getDate())
-        event[0].events[0].start_date.setUTCHours(0,0,0,0)
-        event[0].events[0].end_date.setDate(event[0].events[0].end_date.getDate() )
-        event[0].events[0].end_date.setUTCHours(0,0,0,0)
+        const event = await this.calendarService.findEventById(id.id)
+        for(let i  in  event[0].events){
+            event[0].events[i].start_date.setDate(event[0].events[i].start_date.getDate())
+            event[0].events[i].start_date.setUTCHours(0,0,0,0)
+            event[0].events[i].end_date.setDate(event[0].events[i].end_date.getDate())
+            event[0].events[i].end_date.setUTCHours(0,0,0,0)
+        } 
+      
         return event   
     }
 
