@@ -27,7 +27,7 @@ export class CalendarService {
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
-        const calendarData = await this.calendarRepository.create(calendar)
+        const calendarData =  this.calendarRepository.create(calendar)
         await Promise.all(eventData.map(async (ev) => {
             ev.id = null;
             if (ev.isSetYear == true) {
@@ -35,8 +35,8 @@ export class CalendarService {
             } else {
                 ev.event_name = ev.event_name
             }
-            ev.start_date.setHours(0, 0, 0, 0)
-            ev.end_date.setHours(0, 0, 0, 0);
+            ev.start_date.setUTCHours(0, 0, 0, 0)
+            ev.end_date.setUTCHours(0, 0, 0, 0);
             ev.start_date = ev.start_date.toISOString();
             ev.end_date = ev.end_date.toISOString();
             arr.push(ev)
@@ -63,13 +63,6 @@ export class CalendarService {
             data.id = null
             arr.push(jsonData[idx])
         })
-        arr.map(ev=> {
-            const start = new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
-            const end = new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
-            ev.start_date = new Date(start)
-            ev.end_date = new Date(end)
-        })
-        console.log(arr)
         await this.eventRepository.insert(arr)
         const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
         calendarData.start_semester = new Date(start_semester)

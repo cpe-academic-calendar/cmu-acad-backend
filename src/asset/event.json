@@ -551,7 +551,9 @@
         "num_days": 2,
         "duration_weeks": 2,
         "duration_days": 0,
-        "isOveride": false
+        "isOveride": false,
+        "type": "กิจกรรม",
+        "color": "#FFA726"
     },
     {
         "id": 43,
@@ -618,7 +620,9 @@
         "duration_weeks": 10,
         "duration_days": 4,
         "isOveride": false,
-        "isAffair": true
+        "isAffair": true,
+        "type": "กิจกรรม",
+        "color": "#FFA726"
     },
     {
         "id": 48,
