@@ -253,10 +253,6 @@ export class EventService {
         const dataEvent = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
         const event = JSON.parse(dataEvent)
         const setStart = new Date(start_semester)
-        setStart.setDate(setStart.getDate())
-        setStart.setUTCHours(0,0,0,0)
-        setStart.setDate(setStart.getDate())
-        setStart.setUTCHours(0,0,0,0)
         event[0].start_date = setStart
         event[0].end_date = setStart
         console.log(event[0])
@@ -502,9 +498,7 @@ export class EventService {
                 }
             }
         }
-        console.log(event.map((et)=>{
-            return et.start_date
-        }))
+        console.log(event)
         return event
     }
 
