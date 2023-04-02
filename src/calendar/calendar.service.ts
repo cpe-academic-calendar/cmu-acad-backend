@@ -64,21 +64,16 @@ export class CalendarService {
             arr.push(jsonData[idx])
         })
         arr.map(ev=> {
-            const start = new Date(ev.start_date).setHours(0, 0, 0, 0)
-            const end = new Date(ev.end_date).setHours(0, 0, 0, 0);
+            const start = new Date(ev.start_date).setUTCHours(0, 0, 0, 0)
+            const end = new Date(ev.end_date).setUTCHours(0, 0, 0, 0);
             ev.start_date = new Date(start)
             ev.end_date = new Date(end)
         })
+        console.log(arr)
         await this.eventRepository.insert(arr)
-        const start_semester = new Date(calendar.start_semester).setHours(0,0,0,0)
+        const start_semester = new Date(calendar.start_semester).setUTCHours(0,0,0,0)
         calendarData.start_semester = new Date(start_semester)
-        calendarData.events = [...arr]
-        calendarData.events.map((event)=>{
-            const start = new Date(event.start_date).setHours(0, 0, 0, 0)
-            const end = new Date(event.end_date).setHours(0, 0, 0, 0);
-            event.start_date = new Date(start)
-            event.end_date = new Date(end)
-        })
+        calendarData.events = [...arr]        
         return await this.calendarRepository.save(calendarData)
     }
 
@@ -119,6 +114,15 @@ export class CalendarService {
             }
         })
     }
+
+    async findEventData(calendar_id: number){
+        return await this.calendarRepository.createQueryBuilder('calendar')
+        .innerJoinAndSelect('calendar.events','event')
+        .where('event.calendar = :calendar',{calendar: `${calendar_id}`})
+        .select(['event.id','event_name','start_date','end_date','color','type'])
+        .getRawMany()
+    }
+
 
     async findByQuery(query){
         return await this.calendarRepository.find({
