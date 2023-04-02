@@ -502,6 +502,9 @@ export class EventService {
                 }
             }
         }
+        console.log(event.map((et)=>{
+            return et.start_date
+        }))
         return event
     }
 

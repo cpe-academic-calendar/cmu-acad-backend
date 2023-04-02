@@ -31,7 +31,7 @@ import { MockUpEvent } from './event/mockup.entity';
           username: configService.get('database.username'),
           password: configService.get('database.password'),
           database: configService.get('database.database'),
-          timezone: 'Asia/Bangkok',
+          timezone: 'UTC',
           entities: [Calendar,Event,User,PermissionSchema,MockUpEvent],
           synchronize: true,
           autoLoadEntities: true

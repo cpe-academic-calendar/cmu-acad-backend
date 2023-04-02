@@ -76,20 +76,14 @@ export class CalendarController {
     @Get('findEventById/:id')
     async findEventByCalendar(@Param() id: QueryCalendarDto) {
         const event = await this.calendarService.findEventById(id.id) 
-        return event.map((ev)=>{
-            ev.events.map((et)=>{
-                et.start_date.setDate(et.start_date.getDate() -1)
-                et.start_date.setUTCHours(0,0,0,0)
-                et.end_date.setDate(et.end_date.getDate() -1)
-                et.end_date.setUTCHours(0,0,0,0)
-                et.start_date = et.start_date
-                et.end_date = et.end_date
-            })
-            return ev
-        })
+        event[0].events[0].start_date.setDate(event[0].events[0].start_date.getDate())
+        event[0].events[0].start_date.setUTCHours(0,0,0,0)
+        event[0].events[0].end_date.setDate(event[0].events[0].end_date.getDate() )
+        event[0].events[0].end_date.setUTCHours(0,0,0,0)
+        return event   
     }
 
-    @Get('caleenedarEvent')
+    @Get('calenedarEvent')
     async findCalendarEvent(@Param() id: QueryCalendarDto) {
         const evnet = await this.calendarService.findEventData(id.id)
         const event = await evnet.map((ed,idx)=>{
