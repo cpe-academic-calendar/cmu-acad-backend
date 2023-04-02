@@ -76,17 +76,18 @@ export class CalendarController {
     @Get('findEventById/:id')
     async findEventByCalendar(@Param() id: QueryCalendarDto) {
         const event = await this.calendarService.findEventById(id.id)
-        for(let i  in  event[0].events){
-            event[0].events[0].start_date.setDate(event[0].events[0].start_date.getDate())
-            event[0].events[0].start_date.setUTCHours(0,0,0,0)
-            event[0].events[0].end_date.setDate(event[0].events[0].end_date.getDate())
-            event[0].events[0].end_date.setUTCHours(0,0,0,0)
-            event[0].events[i+1].start_date.setDate(event[0].events[i+1].start_date.getDate())
-            event[0].events[i+1].start_date.setUTCHours(0,0,0,0)
-            event[0].events[i+1].end_date.setDate(event[0].events[i+1].end_date.getDate())
-            event[0].events[i+1].end_date.setUTCHours(0,0,0,0)
-        } 
-
+        event.map((ed)=>{
+            return ed.events.map((evt)=>{
+                evt.start_date.setDate(evt.start_date.getDate()-1)
+                evt.start_date.setUTCHours(0,0,0,0)
+                evt.end_date.setDate(evt.end_date.getDate()-1)
+                evt.end_date.setUTCHours(0,0,0,0)
+            })
+        })
+        event[0].events[0].start_date.setDate(event[0].events[0].start_date.getDate()+1)
+        event[0].events[0].start_date.setUTCHours(0,0,0,0)
+        event[0].events[0].end_date.setDate(event[0].events[0].end_date.getDate()+1)
+        event[0].events[0].end_date.setUTCHours(0,0,0,0)
         return event   
     }
 
