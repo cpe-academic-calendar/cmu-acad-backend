@@ -47,22 +47,22 @@ export class EventController {
         return this.eventService.mockData(holiday)
     }
 
-    @Get('/findHolidayMockUp')
+    @Get('/findHolidayData')
     async findHolidayMockData(){
         return this.eventService.findHoldayMockData()
     }
 
-    @Put('/updateHolidayMockUp')
+    @Put('/updateHolidayData')
     async UpdateHolidayMockUp(@Param() id: number,@Body() mockData: MockUpEvent){       
         return this.eventService.updateholidayMockData(id,mockData)
     }
 
-    @Post('/addHolidayMockUp')
+    @Post('/addHolidayData')
     async addHoldayMockUp(@Body() mockData){
         return this.eventService.addholidayMockData(mockData)
     }
 
-    @Delete('/removeHolidayMockUp/:id')
+    @Delete('/removeHolidayData/:id')
     async removeHoldayMockUp(@Param() id){
         return this.eventService.removeHolidayMockData(id)
     }
