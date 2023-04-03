@@ -15,7 +15,8 @@ import { PermissionModule } from './permission/permission.module';
 import { PermissionSchema } from './permission/permission.entity';
 import databaseConfig from './config/database.config';
 import authenConfig from './config/authen.config';
-import { MockUpEvent } from './event/mockup.entity';
+import { HolidayMock } from './event/holidaymockup.entity';
+import { EventMock } from './event/eventmockup.entity';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { MockUpEvent } from './event/mockup.entity';
           password: configService.get('database.password'),
           database: configService.get('database.database'),
           timezone: 'Asia/Bangkok',
-          entities: [Calendar,Event,User,PermissionSchema,MockUpEvent],
+          entities: [Calendar,Event,User,PermissionSchema,HolidayMock,EventMock],
           synchronize: true,
           autoLoadEntities: true
         }),

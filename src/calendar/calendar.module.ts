@@ -7,10 +7,11 @@ import { Event } from 'src/event/event.entity';
 import { EventModule } from 'src/event/event.module';
 import { EventService } from 'src/event/event.service';
 import { PermissionModule } from 'src/permission/permission.module';
-import { MockUpEvent } from 'src/event/mockup.entity';
+import { HolidayMock } from 'src/event/holidaymockup.entity';
+import { EventMock } from 'src/event/eventmockup.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Calendar]), TypeOrmModule.forFeature([MockUpEvent]), EventModule,
+  imports: [TypeOrmModule.forFeature([Calendar]), TypeOrmModule.forFeature([HolidayMock]), EventModule,TypeOrmModule.forFeature([EventMock]),
   TypeOrmModule.forFeature([Event]), PermissionModule,
   ],
   providers: [CalendarService, EventService],

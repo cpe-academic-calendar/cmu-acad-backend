@@ -15,19 +15,7 @@ export class CalendarController {
         private readonly calendarService: CalendarService,
         private readonly eventService: EventService) { }
 
-
-    @Put('/update/eventMockUp')
-    async updateJsonData(@Body() data) {
-        return await this.calendarService.updateJsonData(data)
-    }
-
-    @Put('/update/holidayMockUp')
-    async updateHolidayData(@Body() data) {
-        console.log("holiday", data)
-        return await this.calendarService.updateHolidayData(data)
-    }
-
-    @Post('/create')
+        @Post('/create')
     async createCalendar(@Body() calendar: Calendar) {
         return await this.calendarService.createCalendar(calendar)
     }

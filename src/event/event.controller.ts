@@ -4,7 +4,7 @@ import { Event } from '../event/event.entity'
 import { EventDto, QueryEventDto, UpdateEventDto } from './event.dto';
 import { ApiTags } from '@nestjs/swagger/dist';
 import *  as fs from 'fs'
-import { MockUpEvent } from './mockup.entity';
+import { HolidayMock } from './holidaymockup.entity';
 
 
 @ApiTags('Event')
@@ -47,13 +47,24 @@ export class EventController {
         return this.eventService.mockData(holiday)
     }
 
+    @Post('/mockEventData')
+    async mockEventData(){
+        const holidayData = fs.readFileSync(process.cwd() + '/src/asset/event.json', 'utf-8')
+        const holiday = JSON.parse(holidayData)
+        console.log(holiday)
+    }
+
+
+
+
+
     @Get('/findHolidayData')
     async findHolidayMockData(){
         return this.eventService.findHoldayMockData()
     }
 
     @Put('/updateHolidayData')
-    async UpdateHolidayMockUp(@Param() id: number,@Body() mockData: MockUpEvent){       
+    async UpdateHolidayMockUp(@Param() id: number,@Body() mockData: HolidayMock){       
         return this.eventService.updateholidayMockData(id,mockData)
     }
 

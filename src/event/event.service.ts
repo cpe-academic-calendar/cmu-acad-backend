@@ -6,15 +6,18 @@ import *  as fs from 'fs'
 import { eachDayOfInterval } from 'date-fns'
 import { Not } from 'typeorm';
 import { setDay } from 'date-fns'
-import { MockUpEvent } from './mockup.entity';
+import { HolidayMock } from './holidaymockup.entity';
+import { EventMock } from './eventmockup.entity';
 
 @Injectable()
 export class EventService {
     constructor(
         @InjectRepository(Event)
         private readonly eventRepository: Repository<Event>,
-        @InjectRepository(MockUpEvent)
-        private readonly mockUpRepository: Repository<MockUpEvent>
+        @InjectRepository(HolidayMock)
+        private readonly mockUpRepository: Repository<HolidayMock>,
+        @InjectRepository(EventMock)
+        private readonly eventMockUpRepository: Repository<EventMock>
     ) { }
 
     async countWeek(event) {
