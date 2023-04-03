@@ -459,7 +459,7 @@ export class CalendarService {
             weekday: 'long',
         })}  `
 
-        console.log("date",ts1[0].events)
+        
 
         sheet.getCell('B1').alignment = { horizontal: 'center', vertical: 'middle' };
         sheet.getCell('C2').value = Math.floor(Number(studyweek))
@@ -478,7 +478,10 @@ export class CalendarService {
             start: ts1[0].events[3].start_date,
             end: ts1[0].events[3].end_date
         }).days+1)/7)
-        sheet.getCell('E4').value = Math.floor(Number(ts1[0].events[4].duration_weeks))
+        sheet.getCell('E4').value = `${Math.floor((intervalToDuration({
+            start: ts1[0].events[4].start_date,
+            end: ts1[0].events[4].end_date
+        }).days))} วัน`
         sheet.getCell('F2').value = (await dataWeek).term1[0].monday
         sheet.getCell('G2').value = (await dataWeek).term1[0].tuesday
         sheet.getCell('H2').value = (await dataWeek).term1[0].wednesday
@@ -490,11 +493,10 @@ export class CalendarService {
         sheet.getCell('I3').value = (await dataWeek).term2[0].thursday
         sheet.getCell('J3').value = (await dataWeek).term2[0].friday
         sheet.getCell('F4').value = (await dataWeek).term3[0].monday
-        sheet.getCell('E4').value = (await dataWeek).term3[0].tuesday
+        sheet.getCell('G4').value = (await dataWeek).term3[0].tuesday
         sheet.getCell('H4').value = (await dataWeek).term3[0].wednesday
         sheet.getCell('I4').value = (await dataWeek).term3[0].thursday
         sheet.getCell('J4').value = (await dataWeek).term3[0].friday
-
         sheet.getCell('A6').value = 'วันหยุดของภาคเรียนที่ 1'
         sheet.getCell('B6').value = 'ชื่อวัน'
 
