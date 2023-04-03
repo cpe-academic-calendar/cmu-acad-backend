@@ -18,8 +18,8 @@ export class CalendarService {
         @InjectRepository(Calendar) private readonly calendarRepository: Repository<Calendar>,
         @InjectRepository(Event) private readonly eventRepository: Repository<Event>,
         @Inject(EventService) private readonly eventService: EventService
-    ) { 
-    
+    ) {
+
     }
 
     async createCalendar(calendar: Calendar) {
@@ -27,7 +27,7 @@ export class CalendarService {
         const jsonData = JSON.parse(data)
         const eventData = await this.eventService.autoGenerate(calendar.start_semester)
         let arr = []
-        const calendarData =  this.calendarRepository.create(calendar)
+        const calendarData = this.calendarRepository.create(calendar)
         await Promise.all(eventData.map(async (ev) => {
             ev.id = null;
             if (ev.isSetYear == true) {
@@ -64,20 +64,20 @@ export class CalendarService {
             arr.push(jsonData[idx])
         })
         await this.eventRepository.insert(arr)
-        const start_semester = new Date(calendar.start_semester).setHours(0,0,0,0)
+        const start_semester = new Date(calendar.start_semester).setHours(0, 0, 0, 0)
         calendarData.start_semester = new Date(start_semester)
-        calendarData.events = [...arr]              
+        calendarData.events = [...arr]
         return await this.calendarRepository.save(calendarData)
     }
 
-    async updateJsonData(data){
+    async updateJsonData(data) {
         const jsonContent = JSON.stringify(data)
-        return fs.writeFileSync(`${process.cwd()}/src/asset/event.json`,jsonContent)
+        return fs.writeFileSync(`${process.cwd()}/src/asset/event.json`, jsonContent)
     }
 
-    async updateHolidayData(data){
+    async updateHolidayData(data) {
         const jsonContent = JSON.stringify(data)
-        return fs.writeFileSync(`${process.cwd()}/src/asset/holiday.json`,jsonContent)
+        return fs.writeFileSync(`${process.cwd()}/src/asset/holiday.json`, jsonContent)
     }
 
 
@@ -108,22 +108,22 @@ export class CalendarService {
         })
     }
 
-    async findEventData(calendar_id: number){
+    async findEventData(calendar_id: number) {
         return await this.calendarRepository.createQueryBuilder('calendar')
-        .innerJoinAndSelect('calendar.events','event')
-        .where('event.calendar = :calendar',{calendar: `${calendar_id}`})
-        .select(['event.id','event_name','start_date','end_date','color','type'])
-        .getRawMany()
+            .innerJoinAndSelect('calendar.events', 'event')
+            .where('event.calendar = :calendar', { calendar: `${calendar_id}` })
+            .select(['event.id', 'event_name', 'start_date', 'end_date', 'color', 'type'])
+            .getRawMany()
     }
 
 
-    async findByQuery(query){
+    async findByQuery(query) {
         return await this.calendarRepository.find({
-            where:{
+            where: {
                 'name': ILike(`%${query}%`),
-                
+
             },
-            order:{
+            order: {
                 'create_at': `${query.createType}`
             }
         })
@@ -226,10 +226,10 @@ export class CalendarService {
 
     async findDelete(name) {
         return await this.calendarRepository.find({
-            withDeleted: true ,         
+            withDeleted: true,
             where: {
-                'name':  ILike(`%${name}%`),
-                },
+                'name': ILike(`%${name}%`),
+            },
         })
     }
 
@@ -271,7 +271,6 @@ export class CalendarService {
             relations: ['events']
         })
 
-
         const ex1 = await this.calendarRepository.find({
             where: {
                 id: id,
@@ -283,8 +282,8 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             },
@@ -302,8 +301,8 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             },
@@ -321,11 +320,11 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
-            },relations: ['events']
+            }, relations: ['events']
         })
 
         const holiday = await this.calendarRepository.find({
@@ -340,12 +339,12 @@ export class CalendarService {
                         type: 'วันหยุด'
                     }
                 ]
-            }, 
-            order:{
-                events:{
+            },
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
-            },relations: ['events']
+            }, relations: ['events']
         })
 
         const holiday2 = await this.calendarRepository.find({
@@ -361,8 +360,8 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             }, relations: ['events']
@@ -381,8 +380,8 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             }, relations: ['events']
@@ -471,14 +470,25 @@ export class CalendarService {
             weekday: 'long',
         })}  `
 
+        console.log("date",ts1[0].events)
+
         sheet.getCell('B1').alignment = { horizontal: 'center', vertical: 'middle' };
         sheet.getCell('C2').value = Math.floor(Number(studyweek))
         sheet.getCell('C3').value = Math.floor(Number(studyweek2))
         sheet.getCell('C4').value = Math.floor(Number(studyweek3))
         sheet.getCell('D2').value = Math.floor(Number(ts1[0].events[0].duration_weeks))
-        sheet.getCell('D3').value = Math.floor(Number(ts1[0].events[1].duration_weeks))
-        sheet.getCell('E2').value = Math.floor(Number(ts1[0].events[2].duration_weeks))
-        sheet.getCell('E3').value = Math.floor(Number(ts1[0].events[3].duration_weeks))
+        sheet.getCell('D3').value = Math.floor((intervalToDuration({
+            start: ts1[0].events[2].start_date,
+            end: ts1[0].events[2].end_date
+        }).days+1)/7)
+        sheet.getCell('E2').value = Math.floor((intervalToDuration({
+            start: ts1[0].events[1].start_date,
+            end: ts1[0].events[1].end_date
+        }).days+1)/7)
+        sheet.getCell('E3').value = Math.floor((intervalToDuration({
+            start: ts1[0].events[3].start_date,
+            end: ts1[0].events[3].end_date
+        }).days+1)/7)
         sheet.getCell('E4').value = Math.floor(Number(ts1[0].events[4].duration_weeks))
         sheet.getCell('F2').value = (await dataWeek).term1[0].monday
         sheet.getCell('G2').value = (await dataWeek).term1[0].tuesday
@@ -543,7 +553,7 @@ export class CalendarService {
 
 
         let File = await new Promise((resolve, reject) => {
-            tmp.file({ discardDescriptor: true, prefix: 'ร่างปฏิทิน', postfix: '.xlsx' },
+            tmp.file({ discardDescriptor: true, prefix: 'สรุปวันเรียน', postfix: '.xlsx' },
                 async (err, file) => {
                     if (err)
                         throw new BadRequestException(err);
@@ -583,8 +593,8 @@ export class CalendarService {
                     }
                 ],
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             },
@@ -677,8 +687,8 @@ export class CalendarService {
                     }
                 ]
             },
-            order:{
-                events:{
+            order: {
+                events: {
                     start_date: 'ASC'
                 }
             },
